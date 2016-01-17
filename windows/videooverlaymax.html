@@ -1,0 +1,60 @@
+<style media="screen">
+body{padding: 0;margin: 0;}
+</style>
+<video width="2100" height="1300" controls="controls" src="" ></video>
+<script type="text/javascript">
+  const clipboard = require('electron').clipboard;
+  const ipcRenderer = require('electron').ipcRenderer;
+  const remote = require('electron').remote;
+  const shell = require('electron').shell;
+  const BrowserWindow = remote.BrowserWindow;
+  const Core = remote.require('./app/corelib');
+
+
+var desktopCapturer = require('electron').desktopCapturer;
+
+desktopCapturer.getSources({types: ['window', 'screen']}, function(error, sources) {
+  if (error) throw error;
+
+
+  navigator.webkitGetUserMedia({
+        audio: false,
+        video: {
+          mandatory: {
+            chromeMediaSource: 'desktop',
+            chromeMediaSourceId: sources[0].id,
+            minWidth: 100,
+            maxWidth: 1280,
+            minHeight: 100,
+            maxHeight: 720
+          }
+        }
+      }, gotStream, getUserMediaError);
+});
+
+function gotStream(stream) {
+  document.querySelector('video').src = URL.createObjectURL(stream);
+}
+
+function getUserMediaError(e) {
+  console.log('getUserMediaError');
+}
+
+
+var robot = remote.require("robotjs");
+
+
+function Render(){
+
+//Get mouse position.
+  var mouse = robot.getMousePos();
+  var hex = robot.getPixelColor(mouse.x, mouse.y);
+  console.log(mouse, "#" + hex + " at x:" + mouse.x + " y:" + mouse.y);
+  document.querySelector('.drag').innerHTML = "#" + hex + " at x:" + mouse.x + " y:" + mouse.y
+}
+
+
+
+
+    //setInterval(Render,1)
+</script>

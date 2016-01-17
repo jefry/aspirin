@@ -1,0 +1,32 @@
+<html>
+<head>
+<style type="text/css">
+  #time {
+    color:white;
+    font-size: 50px;
+    color: white;
+  }  
+
+</style>
+</head>
+<body>
+<div style=" -webkit-app-region: drag;">
+  <h1 id="time"> 14 : 88 </h1>
+  <h3 id="shit"> 5999 min </h1>
+</div>
+
+  <script type="text/javascript">
+    var cw = require('electron').remote.getCurrentWindow()
+
+    function render(){
+        var d = new Date();
+        document.getElementById('time').innerHTML = "" +d.toString();
+
+    }
+
+    cw.setSize(700,75);
+    setInterval(render, 50)
+  </script>
+
+</body>
+</html>

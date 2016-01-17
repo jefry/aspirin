@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Electron boilerplate</title>
+		<link rel="stylesheet" href="index.css">
+	</head>
+	<body>
+		<script type="text/javascript" src="resources/p5.js"></script>
+		<script type="text/javascript" src="source/MainAska.js"></script>
+		<script type="text/javascript">
+			const clipboard = require('electron').clipboard;
+			const ipcRenderer = require('electron').ipcRenderer;
+			const remote = require('electron').remote;
+			const shell = require('electron').shell;
+			const BrowserWindow = remote.BrowserWindow;
+			const Core = remote.require('./app/corelib');
+
+
+
+
+
+			// function showAllwindows(){
+
+			// 	var out = [];
+			//  	var winManeger = BrowserWindow.getAllWindows();
+			//  	winManeger.forEach(function(W){
+			//   		out.push([W.getTitle(), W.getPosition(), W.getURL()])
+			//   		out.
+			//  	 })
+
+			//  	console.table(out);
+
+			// 	document.querySelector('.allwindows').innerText = JSON.stringify(out,null,2);
+			// }
+
+			// function remoteTest(){
+			// 	var file = document.querySelector('.allwindows').innerText = remote.dialog.showOpenDialog({ properties: [ 'openFile' ]})
+			// 	shell.openItem('file://'+file);
+			// 	// var win = new BrowserWindow({ width: 800, height: 600 });
+			// 	// win.loadURL('https://github.com');
+			// }
+
+			// ipcRenderer.on('asynchronous-reply', function(event, arg) {
+			//   console.log(arg); // prints "pong"
+			// });
+			// ipcRenderer.send('asynchronous-message', 'ping');
+
+
+
+		</script>
+		<div class="container">
+			<pre class="drag">Hold her for drag</pre>
+			<button onclick="vo_min()">mini</button>
+			<button onclick="vo_1_1()">1:1</button>
+			<button onclick="vo_max()">max</button>
+			<button onclick="aska_test_001()">Aska_Test_001</button>
+			<button onclick="aska_test_002()">Aska_Test_002</button>
+			<button onclick="aska_test_003()">Aska_Test_003</button>
+			<pre class="allwindows" ><a href="http://google.com">Google</a></pre>
+
+
+		</div>
+		<script type="text/javascript">
+		function vo_min() {
+			Core.newTransparentWindow('file:///C:/Users/YaEby/Desktop/AskaNode/windows/videooverlaymin.html');
+		}
+		function vo_1_1() {
+				Core.newTransparentWindow('file:///C:/Users/YaEby/Desktop/AskaNode/windows/videooverlay.html')
+		}
+		function vo_max() {
+			Core.newTransparentWindow('file:///C:/Users/YaEby/Desktop/AskaNode/windows/videooverlaymax.html')
+		}
+		function aska_test_001() {
+			Core.newTransparentWindow('file:///C:/Users/YaEby/Desktop/AskaNode/windows/aska_test.html')
+		}
+		function aska_test_002() {
+			Core.newTransparentWindow('file:///C:/Users/YaEby/Desktop/AskaNode/windows/aska_test02.html')
+		}
+		function aska_test_003() {
+			Core.newTransparentWindow('file:///C:/Users/YaEby/Desktop/AskaNode/windows/aska_test03.html')
+		}
+
+		</script>
+
+	</body>
+</html>

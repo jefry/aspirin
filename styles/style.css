@@ -1,0 +1,108 @@
+body {
+    margin: 0;
+    padding: 0;
+    /*margin-top: 5px;*/
+    /*overflow: hidden;*/
+}
+
+button {
+    margin: 0;
+}
+
+#result {
+    margin: 0px 0px 0px 29px;
+    padding: 0 0 0 10px;
+    color: #cccccc;
+    background: #333333;
+    border-left: #91a327 1px solid;
+}
+
+#result .evalerror {
+    color: #ff391e;
+}
+
+.toolbar-shiftleft {
+    padding-left: 80px;
+}
+
+.CodeMirror {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    /*min-height:100%;*/
+}
+
+.CodeMirror-scroll {
+    height: auto;
+}
+
+.toolbar {
+    border: none;
+    box-shadow: none;
+    background: rgba(41, 120, 177, 0.5);
+    position: absolute;
+    z-index: 1000;
+    top: 0px;
+    /*height: 23px;*/
+    left: 0;
+    right: 0;
+}
+
+.toolbar-mini {
+    -webkit-app-region: drag;
+    margin: 0;
+    padding: 2px 0;
+    line-height: 1em;
+}
+
+.toolbar-mini .btn {
+    /*background: rgba(255, 140, 0, 0.5);*/
+    padding: 0px 5px;
+    border: none;
+    height: 18px;
+}
+
+.toolbar-mini .btn .icon {
+    color: #444;
+    height: 18px;
+    margin: 0;
+
+    font-size: 17px;
+    line-height: 1em;
+}
+
+.toolbar-mini .btn.active .icon {
+    color: #ddd;
+    font-size: 18px;
+
+}
+
+.toolbar-mini .btn.active {
+    background-color: rgb(0, 127, 255);
+}
+
+#editor {
+    margin-top: 22px;
+    /*position: absolute;
+    top: 23px;
+    bottom: 0;
+    left: 0;
+    right: 0;*/
+    background: #262626;
+}
+
+.info {
+    font-family: monospace;
+    white-space: nowrap;
+    position: absolute;
+    bottom: 0;
+    background: #eee;
+    padding: 2px;
+    line-height: 10px;
+    left: 0;
+    right: 0;
+}
+
+.info label {
+    font-weight: bold;
+}

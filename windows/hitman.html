@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Electron boilerplate</title>
+	</head>
+<body style="padding:0;margin:0;overflow:hidden;">
+<div id="toolkit" style="background:rgba(255,0,0,0.1);-webkit-app-region: drag; -webkit-user-select: none;">
+<a id="cifr" >^^^^^^</a>
+</div>
+<div id='output'>
+  <spab style="background: aliceblue">_-_-__-_-_-__-_-</span>
+  <pre id="pre_out0" style="background: aliceblue">
+    -0-0-0-0-0-0-
+  </pre>
+  <pre id="pre_out1" style="background: aliceblue">
+    -1-1-1-1-1-1-
+  </pre>
+</div>
+<script type="text/javascript" src="file:///C:/Users/YaEby/Desktop/AskaNode/resources/p5.js"></script>
+<script type="text/javascript" src="file:///C:/Users/YaEby/Desktop/AskaNode/resources/p5.sound.js"></script>
+<script>
+const remote = require('electron').remote;
+const shell = require('electron').shell;
+const BrowserWindow = remote.BrowserWindow;
+const Core = remote.require('./experiments/utils');
+
+var otext = ['nothing here'];
+var out = {ddsd:75765,ncv:'affsdf'}
+var robot = remote.require("robotjs");
+
+
+var cw = remote.getCurrentWindow();
+var s_cwb = cw.getBounds();
+var lastfw = false;
+// debugger
+function setup() {
+  createCanvas(200, 200);
+  background(0, 255, 0);
+
+  textAlign(CENTER);
+  text('+ new Window ', width/2, height/2);
+
+  //mySound.setVolume(1.0);
+}
+
+function prinWin(w){
+    if(!w) return '\r-dnone-\r\r';
+       //out.w = w
+        return [
+        `#${(w.id+"   ").slice(0,4)}@ ${(w.getUrl() +"                     ").slice(0,78)}`.italics(),
+        `     $ ${(w.getTitle() +"                     ").slice(0,78)}`.bold(),
+        `     ~ ${JSON.stringify(w.getBounds())}
+        `
+        ].join('\r\n')
+    }
+
+function trackFocusedWindow(){
+
+  var fw = BrowserWindow.getFocusedWindow();
+    if(!fw && !lastfw){
+      return false;
+    }
+    if(!fw && lastfw){
+      //cw.setResizable(true);
+      //  cw.hide();
+       cw.setBounds(s_cwb)
+       document.getElementById('output').style.visibility = 'visible';
+       cw.setAlwaysOnTop(false);
+       lastfw = false;
+       //cw.showInactive();
+       return false;
+    }
+
+    if(fw.id == cw.id){
+        //  document.getElementById('output').hidden = false
+
+
+         return 'curentWindow'
+    }else{
+
+    if(!lastfw){
+      s_cwb = cw.getBounds();
+    }
+
+    lastfw = fw;
+
+    document.getElementById('output').style.visibility = 'hidden';
+
+    cw.setAlwaysOnTop(true);
+    cw.setResizable(false);
+    var fwb = fw.getBounds();
+
+    cw.setSize(25,25);
+    cw.setPosition(fwb.x-25, fwb.y-25);
+
+    }
+}
+cw.on('move',function(){
+  //console.log(lastfw)
+    if(lastfw){
+         var cwb = cw.getBounds()
+         lastfw.setPosition(cwb.x+25, cwb.y+25)
+    }
+
+})
+
+
+runVasyaRun = function(){
+    out._FOCUS = trackFocusedWindow()
+    out.lastfw = lastfw
+    //out.nesmark = new Date()
+    otext = BrowserWindow.getAllWindows().map(prinWin)
+
+    otext.unshift('<hr/>')
+    otext.unshift(prinWin(BrowserWindow.getFocusedWindow()))
+
+
+
+
+
+}
+
+
+function Render(){
+//
+//Get mouse position.
+  var mouse = robot.getMousePos();
+  var hex = robot.getPixelColor(mouse.x, mouse.y);
+  var skl = (mouse, "#" + hex + " at x:" + mouse.x + " y:" + mouse.y);
+  document.getElementById('cifr').innerHTML = `|${hex}\n |x:${mouse.x} \n |y:${mouse.y} \n ______`
+  document.getElementById('cifr').style.backgroundColor =`#${hex}`;
+  document.getElementById('toolkit').style.backgroundColor =`#${hex}`;
+
+}
+
+setInterval(function(){
+  runVasyaRun()
+  document.getElementById('pre_out0').innerHTML = otext.join('\r\n');
+  document.getElementById('pre_out1').innerText = JSON.stringify(out, null, 2);
+	Render()
+
+}, 10);
+</script>
+</body>
+</html>

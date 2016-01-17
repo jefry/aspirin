@@ -1,0 +1,21 @@
+{
+  "name": "Aspirin",
+  "version": "0.1.0",
+  "main": "main.js",
+  "dependencies": {
+    "codemirror": "^5.10.0",
+    "electron-debug": "^0.5.1",
+    "x-ray": "^2.0.2"
+  },
+  "devDependencies": {
+    "electron-prebuilt": "^0.36.2",
+    "electron-rebuild": "^1.0.2",
+    "electron-window-manager": "^1.0.1",
+    "robotjs": "^0.3.7"
+  },
+  "scripts": {
+    "start": "./node_modules/.bin/electron .",
+    "build": "./node_modules/.bin/electron-rebuild",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

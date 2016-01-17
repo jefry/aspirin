@@ -1,0 +1,38 @@
+<body style="background:orange;">
+  444
+<script type="text/javascript">
+  
+		var remote = require('electron').remote;
+    var cw = remote.getCurrentWindow()
+
+		var crwin = remote.getCurrentWindow();
+  //thisw._events.move = [];
+  
+	//  g-webkit-app-region: drag;
+  //thisw.on('move',function(){
+  var y = 0;
+
+
+  document.body.onmousewheel = function(me){
+
+      var cb = crwin.getBounds();
+      y = cb.y + me.wheelDeltaY/3|0;
+
+      crwin.setPosition(cb.x, y) 
+
+      var upwin = remote.BrowserWindow.fromId(crwin.id+1)
+      var dowin = remote.BrowserWindow.fromId(crwin.id-1)
+
+      if(upwin){
+        var ub = upwin.getBounds();
+        upwin.setPosition(cb.x, y - ub.height)
+      }
+      if(dowin){
+        var db = dowin.getBounds();
+        dowin.setPosition(cb.x, y + cb.height)
+      }
+  }
+    cw.setSize(70,70);
+
+  </script>
+</body>

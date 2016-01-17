@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="index.css">
+<script type="text/javascript" src="file:///C:/Users/YaEby/Desktop/AskaNode/resources/p5.js"></script>
+<script type="text/javascript" src="file:///C:/Users/YaEby/Desktop/AskaNode/resources/p5.sound.js"></script>
+<script type="text/javascript" src="file:///C:/Users/YaEby/Desktop/AskaNode/resources/p5.gif.js"></script>
+<script type="text/javascript">
+  const clipboard = require('electron').clipboard;
+  const ipcRenderer = require('electron').ipcRenderer;
+  const remote = require('electron').remote;
+  const shell = require('electron').shell;
+  const BrowserWindow = remote.BrowserWindow;
+  const Core = remote.require('./app/corelib');
+  var robot = remote.require("robotjs");
+
+  var sound, amplitude, cnv, gif;
+
+
+
+ function preload() {
+  sound = loadSound('./sound/Coyote Kisses - Acid Wolfpack.mp3');
+  gif = loadGif('file:///C:/Users/YaEby/Desktop/v3_by_xdreamshardsx-d8h2c12.gif');
+ }
+ function setup() {
+  cnv = createCanvas(1920,1080);
+  //background(0,255,122);
+  //soundsetInput(p5sound,0.9);
+  textAlign(CENTER);
+  text('+ new Window ', width/2, height/2);
+  amplitude = new p5.Amplitude(0.91);
+
+
+  cnv.mouseClicked(function() {
+    if (mouseX < width && mouseY < height && mouseX > 0 && mouseY > 0) {
+    if (sound.isPlaying()){
+      sound.stop();
+    } else {
+      sound.setVolume(0.5)
+      sound.play();
+    }
+  }
+})
+};
+function draw() {
+  clear();
+  //background(0);
+  //fill(0,0,0,0);
+  var level = amplitude.getLevel();
+  var size = map(level, 0, 1, 0, 50);
+  image(gif, 0, 0, gif.width*(size/4), gif.height*(size/4));
+  //ellipse(width/2, height/2, size*4, size*4);
+}
+
+</script>

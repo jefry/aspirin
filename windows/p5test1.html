@@ -1,0 +1,40 @@
+<html>
+<head>
+  <script type="text/javascript" src="p5.js" ></script>
+  <script type="text/javascript">
+    var max_distance;
+
+    function setup() {
+      createCanvas(1920, 1100);
+      blendMode(OVERLAY)
+      noStroke();
+      max_distance = dist(0, 0, width, height)/15;
+    }
+
+    function draw() {
+      clear();
+      //background(0,0,0);
+
+
+      c = color(230, 230, 230, 100);  // Define color 'c'
+      fill(c);
+      //blendMode(OVERLAY)
+
+      for(var i = 0; i <= width; i += 30) {
+        for(var j = 0; j <= height; j += 30) {
+
+          var size = dist(mouseX, mouseY, i, j);
+          size = size/max_distance * 36;
+          ellipse(i, j, size, size);
+        }
+      }
+    }
+
+  </script>
+
+</head>
+<body style="background:transparent!important;">
+  <!-- <h1>JustDoIt</h1> -->
+</body>
+</html>
+
