@@ -37,6 +37,7 @@ function justSource(e, str) {
   return str
 }
 
+var bozid = false;
 function justTest(vt) {
 
 
@@ -82,9 +83,11 @@ function justMoveUpwin(e, db) { // from down window
   cw.setPosition(db.x, db.y - cb.height);
 
   cb = cw.getBounds();
-  var uw = windowManager.get('bozon_'+(cw.id - 1)).content();
-  if (uw)
-    uw.send('justMoveUpwin', cb);
+  if (bozid > 0) {
+    var uw = windowManager.get('bozon_' + (bozid - 1))
+    if (uw)
+      uw.content().send('justMoveUpwin', cb);
+  }
 }
 
 function justMoveDowin(e, ub) { // from upper window
@@ -92,9 +95,9 @@ function justMoveDowin(e, ub) { // from upper window
   cw.setPosition(ub.x, ub.y + ub.height);
 
   cb = cw.getBounds();
-  var dw = windowManager.get('bozon_'+(cw.id + 1)).content();
+  var dw = windowManager.get('bozon_' + (bozid + 1))
   if (dw)
-    dw.send('justMoveDowin', cb);
+    dw.content().send('justMoveDowin', cb);
 
 }
 
@@ -105,15 +108,17 @@ function justScrollAll(xy) {
     cb.y += me.wheelDeltaY / 3 | 0;
 
     cw.setPosition(cb.x, cb.y)
+    if (bozid > 0) {
 
-    var uw = windowManager.get('bozon_'+(cw.id - 1)).content();
+      var uw = windowManager.get('bozon_' + (bozid - 1))
 
-    if (uw)
-      uw.send('justMoveUpwin', cb);
+      if (uw)
+        uw.content().send('justMoveUpwin', cb);
+    }
 
-    var dw = windowManager.get('bozon_'+(cw.id + 1)).content();
+    var dw = windowManager.get('bozon_' + (bozid + 1))
     if (dw)
-      dw.send('justMoveDowin', cb);
+      dw.content().send('justMoveDowin', cb);
 
 
   }
