@@ -1,22 +1,26 @@
-var app = require('app');  // Module to control application life.
+const app = require('app');  // Module to control application life.
+const BrowserWindow = require('browser-window');
 var windowManager = require('electron-window-manager');
-var BrowserWindow = require('browser-window');  // Module to create native browser window.
 
-var mainWindow = null;
 
-// Quit when all windows are closed.
-app.on('window-all-closed', function () {
-  // if (process.platform != 'darwin')
-  app.quit();
-});
+//
+//app.on('window-all-closed', function () {
+//  // if (process.platform != 'darwin')
+//  app.quit();
+//});
 
-// This method will be called when Electron has done everything
-// initialization and ready for creating browser windows.
 app.on('ready', function () {
-  // Create the browser window.
+  windowManager.init({
+    //'layouts': {
+    //  'default': '/layouts/default.html',  // The "/" at the start will be replaced with the 'appBase' value
+    //  'secondary': '/layouts/secondary.html'
+    //},
+
+    'devMode': false
+  });
 
   windowManager.setDefaultSetup({
-    position: 'right',
+    position: 'center',
     width: 680,
     height: 240,
     //x:650,y:420,
@@ -39,6 +43,7 @@ app.on('ready', function () {
     }
   });
 
-  windowManager.open('main', 'Main', 'file://' + __dirname + '/index.html');
+  windowManager.open('editor', 'Editor', 'file://' + __dirname + '/editor/index.html');
+  windowManager.open('bozon', 'Bozon', 'file://' + __dirname + '/bozon/index.html');
 
 });

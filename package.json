@@ -5,6 +5,7 @@
   "dependencies": {
     "codemirror": "^5.10.0",
     "electron-debug": "^0.5.1",
+    "epipebomb": "^0.1.1",
     "x-ray": "^2.0.2"
   },
   "devDependencies": {
