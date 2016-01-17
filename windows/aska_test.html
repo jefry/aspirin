@@ -1,0 +1,116 @@
+<link rel="stylesheet" href="index.css">
+
+<!-- <div>
+	<p ><img id="aska" class="aska_load_gif" onclick="aska_load_gif()"></p><p>Open</p>
+	<p ><img id="aska" class="aska_load_gif" onclick="aska_load_gif()"></p><p>Open</p>
+ <span>ASKA neon genesis</span>
+</div> -->
+<!-- <video width="200" height="200" controls="controls" src="" ></video> -->
+<script type="text/javascript" src="file:///C:/Users/YaEby/Desktop/AskaNode/resources/p5.js"></script>
+<script type="text/javascript" src="file:///C:/Users/YaEby/Desktop/AskaNode/resources/p5.sound.js"></script>
+<script type="text/javascript">
+  const clipboard = require('electron').clipboard;
+  const ipcRenderer = require('electron').ipcRenderer;
+  const remote = require('electron').remote;
+  const shell = require('electron').shell;
+  const BrowserWindow = remote.BrowserWindow;
+  const Core = remote.require('./app/corelib');
+
+// var desktopCapturer = require('electron').desktopCapturer;
+//
+// desktopCapturer.getSources({types: ['window', 'screen']}, function(error, sources) {
+//   if (error) throw error;
+//
+//
+//   navigator.webkitGetUserMedia({
+//         audio: false,
+//         video: {
+//           mandatory: {
+//             chromeMediaSource: 'desktop',
+//             chromeMediaSourceId: sources[0].id,
+//             minWidth: 100,
+//             maxWidth: 1280,
+//             minHeight: 100,
+//             maxHeight: 720
+//           }
+//         }
+//       }, gotStream, getUserMediaError);
+// });
+
+// function gotStream(stream) {
+//   document.querySelector('video').src = URL.createObjectURL(stream);
+// }
+//
+// function getUserMediaError(e) {
+//   console.log('getUserMediaError');
+// }
+
+
+var robot = remote.require("robotjs");
+//var sound = remote.require("p5soundjs");
+// function Render(){
+// //
+// Get mouse position.
+//   var mouse = robot.getMousePos();
+//   var hex = robot.getPixelColor(mouse.x, mouse.y);
+//   console.log(mouse, "#" + hex + " at x:" + mouse.x + " y:" + mouse.y);
+//   document.querySelector('.drag').innerHTML = "#" + hex + " at x:" + mouse.x + " y:" + mouse.y
+// }
+var song;
+
+// function setup() {
+//   song = loadSound('./sound/OpenAskaWindow.mp3');
+//   createCanvas(720, 200);
+//   background(255,0,0);
+// }
+function preload() {
+  mySound = loadSound('./sound/OpenAskaWindow.mp3');
+}
+
+function setup() {
+  createCanvas(100, 100);
+  background(0, 255, 0);
+
+  textAlign(CENTER);
+  text('+ new Window ', width/2, height/2);
+
+  mySound.setVolume(1.0);
+}
+
+// play sound on mouse press over canvas
+function mousePressed() {
+  if (mouseX < width && mouseY < height && mouseX > 0 && mouseY > 0) {
+    mySound.play();
+		var	f = Core.newTransparentWindow(clipboard.readText());
+   	remote.BrowserWindow.getFocusedWindow.hasOwnProperty(document.getElementById('aska').src = (clipboard.readText()));
+  }
+}
+// function mousePressed() {
+//   if ( song.isPlaying() ) { // .isPlaying() returns a boolean
+//     song.stop();
+//     background(255,0,0);
+//   } else {
+//     song.play();
+//     background(0,255,0);
+//   }
+// }
+
+//  function aska_load_gif() {
+// 	//var mySound = loadSound('/Oscillator Z - Goodbye.mp3');
+// 	  //song.play();
+//     var	f = Core.newTransparentWindow(clipboard.readText());
+//    	remote.BrowserWindow.getFocusedWindow.hasOwnProperty(document.getElementById('aska').src = (clipboard.readText()));
+// 		//mySound.play()
+// };
+ 	//Core.newTransparentWindow('file://' + __dirname + '/aska_test.html');
+
+		//var cl = Core.genDataHtmlUrl(clipboard.readText());
+	//	Core.newTransparentWindow(Core.genDataHtmlUrl(clipboard.readText()));
+	//document.querySelector('img').src = (cl);
+	//document.querySelector('img').src = cl;
+	//Core.newTransparentWindow();
+  //document.getElementById('pre_out0').innerHTML = otext.join('\r\n');
+
+
+    //setInterval(Render,1)
+</script>
