@@ -60,9 +60,21 @@ function justSendSource(vt) {
 
 }
 
+function justShowResult(result, isHTML) {
+  var resEl = document.getElementById('result');
+  isHTML
+    ? resEl.innerHTML = result
+    : resEl.innerText = result;
+}
+
 
 function justInfo() {
-  windowManager.getCurrent()
+  var re = [
+    `id: ${cw.id}, name: ${windowManager.getCurrent().name}`
+  ];
+
+  justShowResult(re);
+  syncSizeLines()
 }
 
 function justAutoRestore() {
@@ -295,13 +307,6 @@ function handleSaveButton() {
     });
     // console.log(sf);
   }
-}
-
-function justShowResult(result, isHTML) {
-  var resEl = document.getElementById('result');
-  isHTML
-    ? resEl.innerHTML = result
-    : resEl.innerText = result;
 }
 
 
