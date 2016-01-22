@@ -58,24 +58,24 @@ app.on('ready', function () {
   we1.move('right');
   we1.execute('justUpdate()');
 
-  //wb = windowManager.get('bozon')
-  s = String(fs.readFileSync('bozon/bozon.js'))
-  cpath = 'file://' + app.getAppPath() + '/bozon/index.html';
-
-  as = s.split('\n\n').forEach(load)
-  function load(v, i) {
-    var w = windowManager.createNew('bozon_' + i, 'Bozon', cpath);
-    w.open()
-    w.set('frame', false);
-    w.execute('bozid = ' + i + ';')
-    w.onReady(true, function (w) {
-
-      w.content().send('justSource', v)
-      w.execute('syncSizeLines()')
-      w.content().send('justScrollAll')
-    });
-
-
-  }
+  ////wb = windowManager.get('bozon')
+  //s = String(fs.readFileSync('bozon/bozon.js'))
+  //cpath = 'file://' + app.getAppPath() + '/bozon/index.html';
+  //
+  //as = s.split('\n\n').forEach(load)
+  //function load(v, i) {
+  //  var w = windowManager.createNew('bozon_' + i, 'Bozon', cpath);
+  //  w.open()
+  //  w.set('frame', false);
+  //  w.execute('bozid = ' + i + ';')
+  //  w.onReady(true, function (w) {
+  //
+  //    w.content().send('justSource', v)
+  //    w.execute('syncSizeLines()')
+  //    w.content().send('justScrollAll')
+  //  });
+  //
+  //
+  //}
 
 });

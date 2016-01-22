@@ -17,6 +17,16 @@ var windowManager = remote.require('electron-window-manager');
 var CodeMirror = require('codemirror');
 
 
+var runed = {};
+
+function once(name, func){
+  if(!runed[name]){
+    func();
+  }
+  runed[name] = true;
+}
+
+
 localStorage.Knows = localStorage.Knows || "[]";
 
 var justData = currentKnows();
@@ -34,6 +44,22 @@ require('electron').ipcRenderer.on('justUpdate', justUpdate);
 require('electron').ipcRenderer.on('justScrollAll', justScrollAll);
 require('electron').ipcRenderer.on('justMoveUpwin', justMoveUpwin);
 require('electron').ipcRenderer.on('justMoveDowin', justMoveDowin);
+require('electron').ipcRenderer.on('justSource', justSource);
+//require('electron').ipcRenderer.on('justTest', justTest);
+
+
+function justSource(e, str) {
+  editor.setValue(str);
+  return str
+}
+
+var bozid = false;
+
+function justSendSource(vt) {
+  document.getElementById('source').innerText
+
+}
+
 
 
 function justRestore(el) {
@@ -264,13 +290,21 @@ function handleRunButton() {
 
   try {
     var result = eval(code);
-    if (result && typeof result == "object")
-      result = JSON.stringify(result, null, 2);
+    //document.querySelector('header').style.background = 'rgba(41, 120, 177, 0.5)';
+    document.querySelector('header').style.background = 'rgba(84, 193, 23, 0.7)';
+    if (result && typeof result == "object") {
+      resEl.innerText = JSON.stringify(result, null, 2);
+    }else{
+      resEl.innerText = result;
+    }
+
   } catch (e) {
-    var result = `<span class="evalerror"> ${e.name}: ${e.message}</span>`;
+    document.querySelector('header').style.background = 'rgba(225, 60, 47, 1)';
+
+    resEl.innerHTML = `<span class="evalerror"> ${e.name}: ${e.message}</span>`;
   }
 
-  resEl.innerHTML = result;
+
   syncSizeLines();
 
 

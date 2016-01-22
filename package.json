@@ -1,6 +1,6 @@
 {
   "name": "Aspirin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "main.js",
   "dependencies": {
     "codemirror": "^5.10.0",

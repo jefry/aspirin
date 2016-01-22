@@ -10,6 +10,8 @@ button {
 }
 
 #result {
+    /*-webkit-user-drag: text;*/
+    -webkit-user-select: text;
     margin: 0px 0px 0px 29px;
     padding: 0 0 0 10px;
     color: #cccccc;
@@ -34,6 +36,10 @@ button {
 
 .CodeMirror-scroll {
     height: auto;
+}
+
+.CodeMirror-code {
+
 }
 
 .toolbar {

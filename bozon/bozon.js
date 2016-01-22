@@ -11,6 +11,15 @@ var windowManager = remote.require('electron-window-manager');
 var CodeMirror = require('codemirror');
 
 
+var runed = {};
+
+function once(name, func) {
+  if (!runed[name]) {
+    func();
+  }
+  runed[name] = true;
+}
+
 localStorage.Knows = localStorage.Knows || "[]";
 
 var justData = currentKnows();
@@ -29,17 +38,20 @@ require('electron').ipcRenderer.on('justScrollAll', justScrollAll);
 require('electron').ipcRenderer.on('justMoveUpwin', justMoveUpwin);
 require('electron').ipcRenderer.on('justMoveDowin', justMoveDowin);
 require('electron').ipcRenderer.on('justSource', justSource);
-require('electron').ipcRenderer.on('justTest', justTest);
+//require('electron').ipcRenderer.on('justTest', justTest);
 
 
-function justSource(e, str) {
-  document.getElementById('source').innerHTML = str;
+function justSource(e, str, force) {
+  if (force || !cw.isFocused())
+    document.getElementById('source').innerHTML = str;
   return str
 }
 
 var bozid = false;
-function justTest(vt) {
 
+function justSendSource(vt) {
+  if (!cw.isFocused())
+    document.getElementById('source').innerText
 
 }
 
@@ -168,5 +180,5 @@ syncSizeLines = function () {
   remote.getCurrentWindow().setSize(containerWidth, height + resultsHeight);
 
 }
-
+JSON.stringify()
 
