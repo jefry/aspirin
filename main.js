@@ -50,13 +50,13 @@ app.on('ready', function () {
   we.open();
   we.move('right');
   we.execute('justUpdate()');
-
-  windowManager.createNew('bozon', 'Bozon', 'file://' + __dirname + '/bozon/index.html').open();
-
-  we1 = windowManager.createNew('Editor2', 'Editor', 'file://' + __dirname + '/editor/index.html');
-  we1.open();
-  we1.move('right');
-  we1.execute('justUpdate()');
+  //
+  //windowManager.createNew('bozon', 'Bozon', 'file://' + __dirname + '/bozon/index.html').open();
+  //
+  //we1 = windowManager.createNew('Editor2', 'Editor', 'file://' + __dirname + '/editor/index.html');
+  //we1.open();
+  //we1.move('right');
+  //we1.execute('justUpdate()');
 
   ////wb = windowManager.get('bozon')
   //s = String(fs.readFileSync('bozon/bozon.js'))

@@ -9,7 +9,12 @@ button {
     margin: 0;
 }
 
+.result_wraper {
+
+}
+
 #result {
+    max-height: 2000px;
     /*-webkit-user-drag: text;*/
     -webkit-user-select: text;
     margin: 0px 0px 0px 29px;
@@ -72,7 +77,7 @@ button {
     color: #444;
     height: 18px;
     margin: 0;
-
+    width: auto;
     font-size: 17px;
     line-height: 1em;
 }

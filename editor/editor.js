@@ -19,8 +19,8 @@ var CodeMirror = require('codemirror');
 
 var runed = {};
 
-function once(name, func){
-  if(!runed[name]){
+function once(name, func) {
+  if (!runed[name]) {
     func();
   }
   runed[name] = true;
@@ -32,7 +32,7 @@ localStorage.Knows = localStorage.Knows || "[]";
 var justData = currentKnows();
 
 function currentKnows(data) {
-  var dk = JSON.parse(localStorage.Knows)
+  var dk = JSON.parse(localStorage.Knows);
   if (data) {
     dk[cw.id] = data;
     localStorage.Knows = JSON.stringify(dk)
@@ -61,10 +61,19 @@ function justSendSource(vt) {
 }
 
 
+function justInfo() {
+  windowManager.getCurrent()
+}
+
+function justAutoRestore() {
+
+}
 
 function justRestore(el) {
   var dk = JSON.parse(localStorage.Knows);
+  //.filter(filt)
   cw.webContents.send('justScrollAll');
+
   function startKnows(know, id) {
     if (id < 2) return;
 
@@ -78,6 +87,10 @@ function justRestore(el) {
         win.webContents.send('justScrollAll');
       })
     }
+  }
+
+  function filt(v) {
+    return v || false;
   }
 
   dk.forEach(startKnows)
@@ -284,24 +297,31 @@ function handleSaveButton() {
   }
 }
 
+function justShowResult(result, isHTML) {
+  var resEl = document.getElementById('result');
+  isHTML
+    ? resEl.innerHTML = result
+    : resEl.innerText = result;
+}
+
+
 function handleRunButton() {
   var code = editor.getValue();
-  var resEl = document.getElementById('result');
 
   try {
     var result = eval(code);
     //document.querySelector('header').style.background = 'rgba(41, 120, 177, 0.5)';
     document.querySelector('header').style.background = 'rgba(84, 193, 23, 0.7)';
     if (result && typeof result == "object") {
-      resEl.innerText = JSON.stringify(result, null, 2);
-    }else{
-      resEl.innerText = result;
+      justShowResult(JSON.stringify(result, null, 2));
+    } else {
+      justShowResult(result);
     }
 
   } catch (e) {
     document.querySelector('header').style.background = 'rgba(225, 60, 47, 1)';
 
-    resEl.innerHTML = `<span class="evalerror"> ${e.name}: ${e.message}</span>`;
+    justShowResult(`<span class="evalerror"> ${e.name}: ${e.message}</span>`, true);
   }
 
 
@@ -402,6 +422,11 @@ onload = function () {
 onresize = function () {
 };
 
+onResultsScroll = function (e) {
+  e.stopImmediatePropagation();
+
+}
+
 syncSizeLines = function () {
   var container = document.getElementById('editor');
   var results = document.getElementById('result');
@@ -409,6 +434,15 @@ syncSizeLines = function () {
   var containerHeight = container.offsetHeight;
   var resultsHeight = results.offsetHeight;
 
+  if (resultsHeight >= 2000) {
+    resultsHeight = 2000;
+    results.onmousewheel = onResultsScroll;
+
+  } else {
+    results.onmousewheel = false;
+
+
+  }
   // console.log(containerHeight, editor.lineCount())
 
   var height = 16 * editor.lineCount();
