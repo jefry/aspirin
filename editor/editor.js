@@ -61,9 +61,16 @@ function justInfo() {
 function justAutoRestore() {
 
 }
-
+var isAutoRuned = false;
 function justAutoRun() {
-  document.getElementById('autorun').classList.toggle('active')
+  if (!isAutoRuned) {
+    isAutoRuned = setInterval(handleRunButton, 100);
+  } else {
+    clearInterval(isAutoRuned);
+    isAutoRuned = false;
+  }
+
+  document.getElementById('autorun').classList.toggle('active', isAutoRuned);
 }
 
 function justRestore(el) {
