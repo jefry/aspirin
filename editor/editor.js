@@ -21,6 +21,7 @@ function currentKnows(data) {
 
   return dk[cw.id] || {};
 }
+
 require('electron').ipcRenderer.on('justUpdate', justUpdate);
 require('electron').ipcRenderer.on('justScrollAll', justScrollAll);
 require('electron').ipcRenderer.on('justMoveUpwin', justMoveUpwin);
@@ -35,6 +36,11 @@ function justSource(e, str) {
 }
 
 var bozid = false;
+
+function justSendgggSource(vt) {
+  document.getElementById('source').innerText;
+
+}
 
 function justSendSource(vt) {
   document.getElementById('source').innerText;

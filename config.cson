@@ -1,0 +1,51 @@
+# Comments!!!
+
+# An Array with no commas!
+greatDocumentaries: [
+  'earthlings.com'
+  'forksoverknives.com'
+  'cowspiracy.com'
+]
+
+# An Object without braces!
+defaultWindowSetup:
+  width: 680
+  height: 240
+  transparent: true
+  acceptFirstMouse: true
+  enableLargerThanScreen: true
+  alwaysOnTop: false
+  webSecurity: false
+  zoomFactor: 1
+  titleBarStyle: "hidden"
+  show: true
+  resizable: true
+  plugins: true
+  frame: true
+  "web-preferences":
+    "experimental-features": true
+    "experimental-canvas-features": true
+    "subpixel-font-scaling": true
+    "overlay-scrollbars": true
+# An Object without braces!
+noNodeWindowSetup:
+  width: 680
+  height: 240
+  transparent: true
+  acceptFirstMouse: true
+  enableLargerThanScreen: true
+  alwaysOnTop: false
+  webSecurity: false
+  zoomFactor: 1
+  preload: "/Users/rainerg/ajr/Aspirin/source/inject2"
+  titleBarStyle: "hidden"
+  show: true
+  resizable: true
+  plugins: true
+  frame: true
+  "web-preferences":
+    "nodeIntegration": false
+    "experimental-features": true
+    "experimental-canvas-features": true
+    "subpixel-font-scaling": true
+    "overlay-scrollbars": true

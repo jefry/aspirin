@@ -1,3 +1,1 @@
-/**
- * Created by rainerg on 22.01.16.
- */
+//const {app, BrowserWindow} = require('electron')
