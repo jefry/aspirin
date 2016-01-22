@@ -64,7 +64,7 @@ function justAutoRestore() {
 var isAutoRuned = false;
 function justAutoRun() {
   if (!isAutoRuned) {
-    isAutoRuned = setInterval(handleRunButton, 100);
+    isAutoRuned = setInterval(handleRunButton);
   } else {
     clearInterval(isAutoRuned);
     isAutoRuned = false;
