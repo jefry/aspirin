@@ -56,7 +56,7 @@ function justSource(e, str) {
 var bozid = false;
 
 function justSendSource(vt) {
-  document.getElementById('source').innerText
+  document.getElementById('source').innerText;
 
 }
 
