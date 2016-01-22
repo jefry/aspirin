@@ -1,24 +1,3 @@
-var remote = require('remote');
-var Menu = remote.require('menu');
-var MenuItem = remote.require('menu-item');
-var dialog = remote.require('dialog');
-var fs = require("fs");
-var clipboard = require('clipboard');
-var cw = remote.getCurrentWindow();
-var path = remote.app.getAppPath() + '/experiments/utils';
-var utils = remote.require(path);
-var windowManager = remote.require('electron-window-manager');
-var CodeMirror = require('codemirror');
-
-
-var runed = {};
-
-function once(name, func) {
-  if (!runed[name]) {
-    func();
-  }
-  runed[name] = true;
-}
 
 localStorage.Knows = localStorage.Knows || "[]";
 

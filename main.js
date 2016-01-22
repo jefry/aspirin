@@ -29,7 +29,7 @@ app.on('ready', function () {
       transparent: true,
       acceptFirstMouse: true,
       enableLargerThanScreen: true,
-      alwaysOnTop: false,
+      alwaysOnTop: !false,
       webSecurity: false,
       zoomFactor: 1,
       titleBarStyle: 'hidden',

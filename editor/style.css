@@ -82,13 +82,17 @@ button {
     line-height: 1em;
 }
 
-.toolbar-mini .btn.active .icon {
-    color: #ddd;
+.toolbar-mini .btn.btn-warning.active {
+    background: #151515;
+}
+
+.toolbar-mini .btn.btn-warning.active .icon {
+    color: #FF5E00;
     font-size: 18px;
 
 }
 
-.toolbar-mini .btn.active {
+.toolbar-mini .btsn.active {
     background-color: rgb(0, 127, 255);
 }
 

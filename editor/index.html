@@ -4,6 +4,7 @@
     <title>Aspirine</title>
 
     <!--<script src="zepto.min.js"></script>-->
+    <script type="text/javascript" src="../app/super.js" ></script>
     <script src="editor.js"></script>
 
     <script src="../node_modules/codemirror/mode/css/css.js"></script>
@@ -45,6 +46,13 @@
         <button id="run" class="btn btn-mini btn-warning">
             <span class="icon icon-text">[</span>
             <span class="icon icon-rocket icon-text"></span>
+            <span class="icon icon-text">]</span>
+
+        </button>
+
+        <button id="autorun" class="btn btn-mini btn-warning" onclick="justAutoRun(this)">
+            <span class="icon icon-text">[</span>
+            <span class="icon icon-shareable icon-text"></span>
             <span class="icon icon-text">]</span>
 
         </button>
