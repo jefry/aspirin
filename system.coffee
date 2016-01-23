@@ -32,15 +32,15 @@ app.on 'ready', ->
   #
   #windowManager.createNew('bozon', 'Bozon', 'file://' + __dirname + '/bozon/index.html').open();
   #
-  we1 = windowManager.createNew('Editor2', 'Editor', 'file://' + __dirname + '/editor/index.html');
-  we1.open();
-  we1.move('right');
-  we1.execute('justUpdate()');
-
-  we2 = windowManager.createNew('Editor3', 'Editor', 'file://' + __dirname + '/editor/index.html');
-  we2.open();
-  we2.move('right');
-  we2.execute('justUpdate()');
+#  we1 = windowManager.createNew('Editor2', 'Editor', 'file://' + __dirname + '/editor/index.html');
+#  we1.open();
+#  we1.move('right');
+#  we1.execute('justUpdate()');
+#
+#  we2 = windowManager.createNew('Editor3', 'Editor', 'file://' + __dirname + '/editor/index.html');
+#  we2.open();
+#  we2.move('right');
+#  we2.execute('justUpdate()');
   #//wb = windowManager.get('bozon')
   #s = String(fs.readFileSync('bozon/bozon.js'))
   #cpath = 'file://' + app.getAppPath() + '/bozon/index.html';

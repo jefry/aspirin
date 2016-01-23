@@ -27,10 +27,10 @@ function someInjectedFunk() {
 util.inherits(someInjectedFunk, events.EventEmitter);
 exports.someInjectedFunk = someInjectedFunk;
 
-function syncSizeLines() {
+function syncSizeLines(h) {
   var container = document.body;
   var containerWidth = 1000; //container.offsetWidth;
-  var containerHeight = container.offsetHeight;
+  var containerHeight = h || container.offsetHeight;
   remote.getCurrentWindow().setSize(containerWidth, containerHeight);
 
 }
