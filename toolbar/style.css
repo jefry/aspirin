@@ -1,0 +1,28 @@
+html, body {
+    padding: 0;
+    margin: 0;
+}
+body {
+    background: rgba(37, 37, 37, 0.71);
+    color: #ddd;
+}
+
+.t-header {
+    height: 20px;
+    background: rgba(28, 71, 82, 0.72);
+    text-align: center;
+    color: #fff;
+}
+.tool {
+    background: #444444;
+    margin: 3px;
+    padding: 3px;
+    border-radius: 2px;
+    height: 54px;
+}
+.tool:hover {
+    background: #555555;
+
+
+}
+

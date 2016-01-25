@@ -7,13 +7,17 @@
     "cson": "^3.0.2",
     "cson-config": "^0.1.12",
     "electron-debug": "^0.5.1",
+    "electron-prebuilt": "^0.36.4",
+    "electron-rebuild": "^1.0.2",
     "epipebomb": "^0.1.1",
+    "fs-jetpack": "^0.7.1",
+    "json-fs": "^1.1.1",
+    "md5": "^2.0.0",
+    "nedb": "^1.7.1",
     "require-cson": "^0.1.0",
     "x-ray": "^2.0.2"
   },
   "devDependencies": {
-    "electron-prebuilt": "^0.36.2",
-    "electron-rebuild": "^1.0.2",
     "electron-window-manager": "^1.0.1",
     "robotjs": "^0.3.7"
   },

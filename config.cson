@@ -14,20 +14,103 @@ defaultWindowSetup:
   transparent: true
   acceptFirstMouse: true
   enableLargerThanScreen: true
-  alwaysOnTop: false
+  alwaysOnTop: true
   webSecurity: false
   zoomFactor: 1
   titleBarStyle: "hidden"
   show: true
   resizable: true
   plugins: true
+  frame: false
+  "web-preferences":
+    "experimental-features": true
+    "experimental-canvas-features": true
+    "subpixel-font-scaling": true
+    "overlay-scrollbars": true
+
+toolbarWindowSetup:
+  width: 60
+  height: 300
+  transparent: true
+  acceptFirstMouse: true
+  enableLargerThanScreen: true
+  alwaysOnTop: true
+  webSecurity: false
+  zoomFactor: 1
+  titleBarStyle: "hidden"
+  show: true
+  resizable: true
+  plugins: true
+  frame: false
+  "web-preferences":
+    "experimental-features": true
+    "experimental-canvas-features": true
+    "subpixel-font-scaling": true
+    "overlay-scrollbars": true
+
+minWindowSetup:
+  width: 100
+  height: 100
+  transparent: true
+  acceptFirstMouse: true
+  enableLargerThanScreen: true
+  alwaysOnTop: true
+  webSecurity: false
+  zoomFactor: 1
+  titleBarStyle: "hidden"
+  show: true
+  backgroundColor:false
+  resizable: true
+  plugins: true
+  frame: false
+  "web-preferences":
+    "experimental-features": true
+    "experimental-canvas-features": true
+    "subpixel-font-scaling": true
+    "overlay-scrollbars": true
+
+browserWindowSetup:
+  width: 640
+  height: 480
+  transparent: true
+  acceptFirstMouse: true
+  enableLargerThanScreen: true
+  alwaysOnTop: true
+  webSecurity: false
+  zoomFactor: 0.86
+  titleBarStyle: "hidden"
+  show: true
+  resizable: true
+  plugins: true
   frame: true
+  "web-preferences":
+    preload: "/Users/rainerg/ajr/Aspirin/source/inject2"
+    "experimental-features": true
+    "experimental-canvas-features": true
+    "subpixel-font-scaling": true
+    "overlay-scrollbars": true
+
+noFrameWindowSetup:
+  width: 680
+  height: 240
+  transparent: true
+  acceptFirstMouse: true
+  enableLargerThanScreen: true
+  alwaysOnTop: true
+  webSecurity: false
+  zoomFactor: 1
+  titleBarStyle: "hidden"
+  show: true
+  resizable: true
+  plugins: true
+  frame: false
   "web-preferences":
     "experimental-features": true
     "experimental-canvas-features": true
     "subpixel-font-scaling": true
     "overlay-scrollbars": true
 # An Object without braces!
+
 noNodeWindowSetup:
   width: 680
   height: 240
@@ -37,13 +120,13 @@ noNodeWindowSetup:
   alwaysOnTop: false
   webSecurity: false
   zoomFactor: 1
-  preload: "/Users/rainerg/ajr/Aspirin/source/inject2"
   titleBarStyle: "hidden"
   show: true
   resizable: true
   plugins: true
   frame: true
   "web-preferences":
+    preload: "/Users/rainerg/ajr/Aspirin/source/inject2"
     "nodeIntegration": false
     "experimental-features": true
     "experimental-canvas-features": true

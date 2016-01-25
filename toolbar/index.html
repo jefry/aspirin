@@ -3,79 +3,36 @@
 <head>
     <title>Toolbar</title>
 
-    <script type="text/javascript" src="../app/super.js" ></script>
-    <script type="text/javascript" src="toolbar.js" ></script>
+    <!--<script type="text/javascript" src="../app/super.js" ></script>-->
+    <script type="text/javascript" src="toolbar.js"></script>
 
     <link rel="stylesheet" href="../styles/photon.css">
 
 
-    <link rel="stylesheet" href="style.css">
+    <!--<link rel="stylesheet" href="style.css">-->
 
 </head>
 <body>
-<header class="toolbar toolbar-header toolbar-shiftleft">
 
+<div class="window">
+    <!-- .toolbar-header sits at the top of your app -->
+    <header class="toolbar toolbar-header">
+        <h1 class="title">Photon</h1>
+    </header>
 
-    <div class="toolbar-mini">
-        <div class="btn-group">
-        <button id="restore" class="btn btn-mini btn-default" onclick="justRestore(this)">
-            <span class="icon icon-export"></span>
-        </button>
+    <!-- Your app's content goes inside .window-content -->
+    <div class="window-content">
+        <div class="padded-more">
+            <h1>Welcome to Photon</h1>
+
+            <p>
+                Thanks for downloading Photon. This is an example HTML page that's linked up to compiled Photon CSS, has
+                the proper meta tags
+                and the HTML structure.
+            </p>
         </div>
-        <div class="btn-group">
-            <button id="new" class="btn btn-mini btn-default">
-                <span class="icon icon-plus"></span>
-            </button>
-            <button id="open" class="btn btn-mini btn-default">
-                <span class="icon icon-folder"></span>
-            </button>
-            <button id="save" class="btn btn-mini btn-default ">
-                <span class="icon icon-floppy"></span>
-            </button>
-
-        </div>
-
-        <button id="run" class="btn btn-mini btn-warning">
-            <span class="icon icon-text">[</span>
-            <span class="icon icon-rocket icon-text"></span>
-            <span class="icon icon-text">]</span>
-
-        </button>
-
-        <button id="autorun" class="btn btn-mini btn-warning" onclick="justAutoRun(this)">
-            <span class="icon icon-text">[</span>
-            <span class="icon icon-shareable icon-text"></span>
-            <span class="icon icon-text">]</span>
-
-        </button>
-
-        <div class="pull-right">
-            <button id="wsx" class="btn btn-mini btn-primary" onclick="justScrollAll(this)">
-                <span class="icon icon-flow-parallel"></span>
-            </button>
-            <button id="update" class="btn btn-mini btn-default" onclick="justUpdate(this)">
-                <span class="icon icon-magnet icon-text">  </span>
-            </button>
-            <button class="btn btn-mini btn-positive" onclick="justInfo(this)">
-                <span class="icon icon-window icon-text"></span>
-                <span id="wid" class="icon icon-text"></span>
-            </button>
-            <button class="btn btn-mini " onclick="runFile(this)">
-                <span class="icon icon-flow-cascade icon-text">  </span>
-                <span id="title"></span>
-            </button>
-            <button class="btn btn-mini btn-default">
-                <span class="icon icon-code icon-text">  </span>
-                <span id="mode"></span>
-            </button>
-        </div>
-
     </div>
-</header>
-
-<div id="editor"></div>
-<div class="result_wraper">
-  <pre id="result"></pre>
 </div>
+
 </body>
 </html>

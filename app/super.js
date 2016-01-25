@@ -8,6 +8,7 @@ var cw = remote.getCurrentWindow();
 var appPath = remote.app.getAppPath();
 var utils = remote.require(appPath + '/experiments/utils');
 var windowManager = remote.require('electron-window-manager');
+var md5 = require('md5');
 
 
 var appRoot = remote.app.getAppPath();
@@ -32,16 +33,34 @@ function once(name, func) {
 
 var _wpaths = {
   bozon: 'file://' + appRoot + '/bozon/index.html',
+  min: 'file://' + appRoot + '/bozon/min.html',
   editor: 'file://' + appRoot + '/editor/index.html'
 
 };
 
 
+function getWin(name) {
+  return windowManager.get(name);
+}
 function createBozon() {
   windowManager.createNew('bozon', 'Bozon', _wpaths.bozon).open();
 }
 
+var n = 0;
+function createBrowser(url) {
+  var w = windowManager.createNew('bro_' + n++, 'Bro', url, 'bro');
+  w.open();
+  return w;
+}
 
+
+var nm = 0;
+function createMin(name) {
+  name = name || 'min_' + nm++;
+  var w = windowManager.createNew(name, 'Min', _wpaths.min, 'min');
+  w.open();
+  return w;
+}
 function createEditor() {
   windowManager.createNew('editor', 'Bozon', _wpaths.editor).open();
 }

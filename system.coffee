@@ -1,19 +1,35 @@
 app = require('app')
 # Module to control application life.
 fs = require('fs')
+
 BrowserWindow = require('browser-window')
 windowManager = require('electron-window-manager')
 #const {app, BrowserWindow} = require('electron')
 #var testcc = require('cson-config').load();
+
+require('cson-config').load('config.cson')
+
 config = global['config'] = require('config.cson')
+
+
+
+Datastore = require('nedb')
+app.db = new Datastore filename: 'data/datafile.json', autoload: true
+
+
 app.on 'window-all-closed', ->
 # if (process.platform != 'darwin')
   app.quit()
   return
+
 app.on 'before-quit', ->
   app.quit()
   return
+
 app.on 'ready', ->
+  PrimaryDisplay = require('screen').getPrimaryDisplay()
+
+
   windowManager.init
     'devMode': false
     'appBase': __dirname
@@ -23,24 +39,27 @@ app.on 'ready', ->
       'p5': '/windows/p5test1.html'
 
   windowManager.setDefaultSetup config.defaultWindowSetup
+  windowManager.templates.set 'bro', config.browserWindowSetup
+  windowManager.templates.set 'min', config.minWindowSetup
   windowManager.templates.set 'nonode', config.noNodeWindowSetup
+  windowManager.templates.set 'toolbar', config.toolbarWindowSetup
 
   we = windowManager.createNew('Editor', 'Editor', 'file://' + __dirname + '/editor/index.html')
   we.open()
   we.move 'right'
   we.execute 'justUpdate()'
   #
-  #windowManager.createNew('bozon', 'Bozon', 'file://' + __dirname + '/bozon/index.html').open();
+  windowManager.createNew('bozon', 'Bozon', 'file://' + __dirname + '/bozon/index.html').open();
   #
-#  we1 = windowManager.createNew('Editor2', 'Editor', 'file://' + __dirname + '/editor/index.html');
-#  we1.open();
-#  we1.move('right');
+  we1 = windowManager.createNew('toolbar', 'Toolbar', 'file://' + __dirname + '/toolbar/toolbar.html', 'toolbar');
+  we1.open();
+  we1.move(PrimaryDisplay.bounds.width-70,50);
 #  we1.execute('justUpdate()');
-#
-#  we2 = windowManager.createNew('Editor3', 'Editor', 'file://' + __dirname + '/editor/index.html');
-#  we2.open();
-#  we2.move('right');
-#  we2.execute('justUpdate()');
+  #
+  #  we2 = windowManager.createNew('Editor3', 'Editor', 'file://' + __dirname + '/editor/index.html');
+  #  we2.open();
+  #  we2.move('right');
+  #  we2.execute('justUpdate()');
   #//wb = windowManager.get('bozon')
   #s = String(fs.readFileSync('bozon/bozon.js'))
   #cpath = 'file://' + app.getAppPath() + '/bozon/index.html';
