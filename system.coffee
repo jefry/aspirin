@@ -12,7 +12,6 @@ require('cson-config').load('config.cson')
 config = global['config'] = require('config.cson')
 
 
-
 Datastore = require('nedb')
 app.db = new Datastore filename: 'data/datafile.json', autoload: true
 
@@ -44,17 +43,22 @@ app.on 'ready', ->
   windowManager.templates.set 'nonode', config.noNodeWindowSetup
   windowManager.templates.set 'toolbar', config.toolbarWindowSetup
 
+
   we = windowManager.createNew('Editor', 'Editor', 'file://' + __dirname + '/editor/index.html')
   we.open()
-  we.move 'right'
+  we.move 'bottomRight'
   we.execute 'justUpdate()'
   #
-  windowManager.createNew('bozon', 'Bozon', 'file://' + __dirname + '/bozon/index.html').open();
+  wb = windowManager.createNew('bozon', 'Bozon', 'file://' + __dirname + '/bozon/index.html')
+  wb.open();
+  wb.move PrimaryDisplay.bounds.width - 470, PrimaryDisplay.bounds.height - 50
   #
   we1 = windowManager.createNew('toolbar', 'Toolbar', 'file://' + __dirname + '/toolbar/toolbar.html', 'toolbar');
   we1.open();
-  we1.move(PrimaryDisplay.bounds.width-70,50);
-#  we1.execute('justUpdate()');
+  we1.move(PrimaryDisplay.bounds.width - 70, 50);
+
+
+  #  we1.execute('justUpdate()');
   #
   #  we2 = windowManager.createNew('Editor3', 'Editor', 'file://' + __dirname + '/editor/index.html');
   #  we2.open();

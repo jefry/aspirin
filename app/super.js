@@ -9,8 +9,8 @@ var appPath = remote.app.getAppPath();
 var utils = remote.require(appPath + '/experiments/utils');
 var windowManager = remote.require('electron-window-manager');
 var md5 = require('md5');
-
-
+var jetpack = require('fs-jetpack');
+var coffee = require('coffee-script/register');
 var appRoot = remote.app.getAppPath();
 
 //UTILS
@@ -59,6 +59,7 @@ function createMin(name) {
   name = name || 'min_' + nm++;
   var w = windowManager.createNew(name, 'Min', _wpaths.min, 'min');
   w.open();
+  w.execute(`document.querySelector('.boz-header').innerText = '${name}'`);
   return w;
 }
 function createEditor() {

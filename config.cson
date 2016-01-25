@@ -22,6 +22,7 @@ defaultWindowSetup:
   resizable: true
   plugins: true
   frame: false
+  hasShadow: false
   "web-preferences":
     "experimental-features": true
     "experimental-canvas-features": true
@@ -42,6 +43,7 @@ toolbarWindowSetup:
   resizable: true
   plugins: true
   frame: false
+  hasShadow: false
   "web-preferences":
     "experimental-features": true
     "experimental-canvas-features": true
@@ -59,10 +61,11 @@ minWindowSetup:
   zoomFactor: 1
   titleBarStyle: "hidden"
   show: true
-  backgroundColor:false
+#  backgroundColor:false
   resizable: true
   plugins: true
   frame: false
+  hasShadow: false
   "web-preferences":
     "experimental-features": true
     "experimental-canvas-features": true
@@ -83,6 +86,7 @@ browserWindowSetup:
   resizable: true
   plugins: true
   frame: true
+  hasShadow: false
   "web-preferences":
     preload: "/Users/rainerg/ajr/Aspirin/source/inject2"
     "experimental-features": true
@@ -104,6 +108,7 @@ noFrameWindowSetup:
   resizable: true
   plugins: true
   frame: false
+  hasShadow: false
   "web-preferences":
     "experimental-features": true
     "experimental-canvas-features": true
@@ -125,6 +130,7 @@ noNodeWindowSetup:
   resizable: true
   plugins: true
   frame: true
+  hasShadow: false
   "web-preferences":
     preload: "/Users/rainerg/ajr/Aspirin/source/inject2"
     "nodeIntegration": false
