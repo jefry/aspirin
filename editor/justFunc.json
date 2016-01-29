@@ -1,0 +1,13 @@
+{
+  "add": "\ntpl = `\n<div class=\"btn-group\">\n<button class=\"btn btn-mini btn-default act-back\">\n<span class=\"icon icon-left-open-big\"></span>\n</button>\n<button class=\"btn btn-mini btn-default act-save\">\n<span class=\"icon icon-check\"></span>\n</button>\n</div>\n<div class=\"btn-group\">\n<input type=\"text\" class=\"form-control form-control-mini\" \nplaceholder=\"enter name\">\n</div>\n`;\n\nel = $(tpl);\n\n$('#second_toolbar').html(el)\nel.find('.act-back').click(just.render);\nel.find('.act-save').click(function(){\n\tvar nn = el.find('input').val().trim();\n  if(nn && nn != ''){\n\t  just.setName(nn);\n  \tjust.render()\n  }\n});\n",
+  "edit": "just.run2 = just.run; \njust.run = just.edit;\n\n$('#second_toolbar').addClass('act-edit')\n",
+  "save": "if(just.name){\n\tjust.set(just.name, editor.getValue())\n}else{\n  just.run('add');\n}\njust.save();\n",
+  "load": "just.load();\n just.render();\n",
+  "lsjust": "justShowResult(van_dump(Object.keys(just)), true)\n",
+  "sJ1": "var res = _(jetpack.read(just.file, 'json')).chain()\n  .mapObject(function(v, k){\n    return '//<big>' + k + '</big>\\n<code>' + _.escape(v.trim()) + '</code>\\n' \n  })\n  .values()\n  .value()\n  .join('\\n')\njustShowResult(res, true)\n",
+  "sJ2": "var res = _(jetpack.read(just.file, 'json')).chain()\n  .mapObject(function(v, k){\n    var tpl = `<div class=\"toolbar bar result\">\n<pre> <big>${k}</big>\t\n\n   <code>${_.escape(v.trim())}</code>\n</pre></div>`\n    return tpl;\n  })\n  .values()\n  .value()\n  .join('<hr/>\\n')\n\n$('#composite').html(res);\nsyncSizeLines()",
+  "clr": "//createBrowser('http://gooogle.com')\n$('#composite').html('');\n$('body').css('backgroundColor','transparent');\njustShowResult(null)\n",
+  "lswin": "justShowResult(van_dump(Object.keys(windowManager.windows)), true)\n",
+  "test": "\njustShowResult(_.now(), true)\n",
+  "color": "\n//justShowResult(van_dump(arguments))\nif(arguments[1]){\n  arguments[1].classList.toggle('btn-default');\n  arguments[1].classList.toggle('btn-warning');\n}\nif(typeof colorRotate == 'undefined' || !colorRotate){\n//  n=0;\n  colorRotate = setInterval(function(){\n    n = n%359;\n    clr = `hsla(${n++},82%,52%,0.5)`;\n    $('body').css('backgroundColor',clr);\n    //justShowResult(n)\n  },50);\n}else{\n  clearInterval(colorRotate);\n  colorRotate = false;\n}\n\n"
+}

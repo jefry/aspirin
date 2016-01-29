@@ -1,213 +1,4 @@
-var newButton, openButton, saveButton, runButton;
 var editor;
-var menu;
-var fileEntry;
-var hasWriteAccess;
-
-
-var CodeMirror = require('codemirror');
-
-
-localStorage.Knows = localStorage.Knows || "[]";
-
-var justData = currentKnows();
-
-function currentKnows(data) {
-  var dk = JSON.parse(localStorage.Knows);
-  if (data) {
-    dk[cw.id] = data;
-    localStorage.Knows = JSON.stringify(dk)
-  }
-
-  return dk[cw.id] || {};
-}
-
-require('electron').ipcRenderer.on('justUpdate', justUpdate);
-require('electron').ipcRenderer.on('justScrollAll', justScrollAll);
-require('electron').ipcRenderer.on('justMoveUpwin', justMoveUpwin);
-require('electron').ipcRenderer.on('justMoveDowin', justMoveDowin);
-require('electron').ipcRenderer.on('justSource', justSource);
-//require('electron').ipcRenderer.on('justTest', justTest);
-
-
-function justSource(e, str) {
-  editor.setValue(str);
-  return str
-}
-
-var bozid = false;
-
-function justSendgggSource(vt) {
-  document.getElementById('source').innerText;
-
-}
-
-function justSendSource(vt) {
-  document.getElementById('source').innerText;
-
-}
-
-function justShowResult(result, isHTML) {
-  var resEl = document.getElementById('result');
-  isHTML
-    ? resEl.innerHTML = result
-    : resEl.innerText = result;
-}
-
-
-function justInfo() {
-  var re = [
-    `id: ${cw.id}, name: ${windowManager.getCurrent().name}`
-  ];
-
-  justShowResult(re);
-  syncSizeLines()
-}
-
-function justAutoRestore() {
-
-}
-var isAutoRuned = false;
-function justAutoRun() {
-  if (!isAutoRuned) {
-    isAutoRuned = setInterval(handleRunButton);
-  } else {
-    clearInterval(isAutoRuned);
-    isAutoRuned = false;
-  }
-
-  document.getElementById('autorun').classList.toggle('active', isAutoRuned);
-}
-
-function justRestore(el) {
-  var dk = JSON.parse(localStorage.Knows);
-  //.filter(filt)
-  cw.webContents.send('justScrollAll');
-
-  function startKnows(know, id) {
-    if (id < 2) return;
-
-    windowManager.open(null, 'Editor', 'file://' + __dirname + '/index.html');
-    var win = remote.BrowserWindow.fromId(id);
-
-    if (win) {
-
-      win.webContents.on("did-finish-load", function () {
-        win.webContents.send('justUpdate');
-        win.webContents.send('justScrollAll');
-      })
-    }
-  }
-
-  function filt(v) {
-    return v || false;
-  }
-
-  dk.forEach(startKnows)
-
-
-}
-
-function justUpdate(el) {
-
-  var ed = editor.getValue();
-
-  if (ed.trim()) {
-    justData.sourceText = ed;
-  }
-
-  editor.setValue(currentKnows(justData).sourceText);
-}
-
-function justMoveUpwin(e, db) { // from down window
-  var cb = cw.getBounds();
-  cw.setPosition(db.x, db.y - cb.height);
-
-  cb = cw.getBounds();
-  var uw = remote.BrowserWindow.fromId(cw.id + 1)
-  if (uw)
-    uw.webContents.send('justMoveUpwin', cb);
-}
-
-function justMoveDowin(e, ub) { // from upper window
-  var cb = cw.getBounds();
-  cw.setPosition(ub.x, ub.y + ub.height);
-
-  cb = cw.getBounds();
-  var dw = remote.BrowserWindow.fromId(cw.id - 1)
-  if (dw)
-    dw.webContents.send('justMoveDowin', cb);
-
-}
-
-function justScrollAll(xy) {
-
-  document.body.onmousewheel = function (me) {
-    var cb = cw.getBounds();
-    cb.y += me.wheelDeltaY / 3 | 0;
-
-    cw.setPosition(cb.x, cb.y)
-
-    var uw = remote.BrowserWindow.fromId(cw.id + 1)
-    if (uw)
-      uw.webContents.send('justMoveUpwin', cb);
-
-    var dw = remote.BrowserWindow.fromId(cw.id - 1)
-    if (dw)
-      dw.webContents.send('justMoveDowin', cb);
-
-
-  }
-}
-
-
-var justResultWindow = false;
-function runFile(el) {
-  el.classList.add('btn-warning');
-
-  //handleSaveButton()
-  if (fileEntry) {
-
-    if (justResultWindow && !justResultWindow.closed) {
-      remote.BrowserWindow.fromId(justResultWindow.guestId).reloadIgnoringCache();
-    } else {
-      justResultWindow = utils.newTransparentWindow('file://' + fileEntry);
-    }
-  } else {
-    justResultWindow = utils.newTransparentWindow(utils.genDataHtmlUrl(editor.getValue()))
-  }
-}
-
-//
-// cw.webContents.on('new-window',function (event, url, frameName){
-//     //event.preventDefault();
-//     //
-//
-//     var wb = cw.getBounds()
-//
-//     // cw.setSize(100,100);
-//     // cw.setPosition(wb.x-105, wb.y+25)
-//     options.x = wb.x
-//     options.y = wb.y
-//     //
-//     var nw = newTransparentWindow(url, options);
-//     // nw.on('move',function(){
-//     //
-//     //   var nwb = nw.getBounds()
-//     //   cw.setPosition(nwb.x-105, nwb.y+25)
-//     // })
-//     // nw.on('closed',function(){
-//     //
-//     //   cw.setBounds(wb)
-//     // })
-//     // cw.on('closed',function(){
-//     //   nw.off('closed')
-//     // })
-//
-//
-//   })
-
-
 function handleDocumentChange(title) {
   var mode = "javascript";
   var modeName = "JavaScript";
@@ -226,10 +17,10 @@ function handleDocumentChange(title) {
       modeName = "CSS";
     }
   } else {
-    document.getElementById("title").innerHTML = "[no document loaded]";
+    document.getElementById("title").innerHTML = "[x]";
   }
   editor.setOption("mode", mode);
-  document.getElementById("mode").innerHTML = modeName;
+  //document.getElementById("mode").innerHTML = modeName;
 }
 
 function newFile() {
@@ -307,18 +98,20 @@ function handleSaveButton() {
   }
 }
 
-
+var isresultHTML = false;
 function handleRunButton() {
   var code = editor.getValue();
-
+  isCallShowResult = false;
   try {
     var result = eval(code);
     //document.querySelector('header').style.background = 'rgba(41, 120, 177, 0.5)';
     document.querySelector('header').style.background = 'rgba(84, 193, 23, 0.7)';
-    if (result && typeof result == "object") {
-      justShowResult(JSON.stringify(result, null, 2));
-    } else {
-      justShowResult(result);
+    if (!isCallShowResult) {
+      if (result && typeof result == "object") {
+        justShowResult(JSON.stringify(result, null, 2));
+      } else {
+        justShowResult(result, isresultHTML);
+      }
     }
 
   } catch (e) {
@@ -413,6 +206,10 @@ onload = function () {
     });
 
 
+  if (just.options.isBarActive) {
+    justToggleBar('#just');
+  }
+
   // onChosenFileToOpen(remote.app.getAppPath()+'/experiments/testRun3.js');
   newFile();
   editor.on("change", function () {
@@ -425,34 +222,92 @@ onload = function () {
 onresize = function () {
 };
 
-onResultsScroll = function (e) {
+var display;
+
+var sign = function (x) {
+  return 1 / x === 1 / Math.abs(x);
+}
+
+var _scrl = function (e) {
+  //var el = e.currentTarget;
+  //
+  //if (((el.scrollHeight - el.scrollTop - el.offsetHeight) == 0)
+  //  || (el.scrollTop == 0)) {
+  //  return false;
+  //}
+
   e.stopImmediatePropagation();
 
 }
+var ss_scrl = function (e) {
+
+  if (!e.currentTarget) {
+    //
+    return false;
+  }
+
+  var el = e.currentTarget;
+  //console.log(e.deltaY,e.wheelDeltaY)
+  //if (e.wheelDeltaY == 0) {
+  //  e.stopImmediatePropagation();
+  //  return false;
+  //} else
+  if (sign(e.deltaY)
+    && ((el.offsetTop + window.screenTop) < 60)
+    && (el.scrollHeight - el.scrollTop - el.offsetHeight) == 0) { //up
+
+    e.stopImmediatePropagation();
+    return true;
+  } else if (!sign(e.deltaY)
+    && (screen.height - (el.offsetHeight + el.offsetTop + window.screenTop)) < 60
+    && (el.scrollTop > 0)) { //down
+
+    e.stopImmediatePropagation();
+    return true;
+  }
+  return false;
+
+}
+
+//_scrl = _.throttle(_scrl, 100);
+
 
 syncSizeLines = function () {
+  //--------------?
+  display = remote.screen.getPrimaryDisplay().bounds;
+  //--------------?
   var container = document.getElementById('editor');
   var results = document.getElementById('result');
-  var containerWidth = 680;// container.offsetWidth;
-  var containerHeight = container.offsetHeight;
+  var composite = document.getElementById('composite');
+  var totalWidth = 680;// container.offsetWidth;
+  var upHeight = results.offsetTop - container.offsetHeight;
   var resultsHeight = results.offsetHeight;
 
   if (resultsHeight >= 2000) {
     resultsHeight = 2000;
-    results.onmousewheel = onResultsScroll;
+    results.onmousewheel = _scrl;
 
   } else {
     results.onmousewheel = false;
-
-
   }
-  // console.log(containerHeight, editor.lineCount())
-
-  var height = 16 * editor.lineCount();
 
 
-  remote.getCurrentWindow().setSize(containerWidth, height + 32 + resultsHeight);
-  editor.setSize(containerWidth, height + 10);
+  if (composite.offsetHeight >= 2000) {
+    composite.style.maxHeight = '2000px';
+    //resultsHeight = 200;
+    composite.onmousewheel = _scrl;
+  } else {
+    composite.onmousewheel = false;
+  }
+
+
+  var editorHeight = 10 + 16 * editor.lineCount();
+
+  var totalHeight = editorHeight + upHeight + resultsHeight;
+
+  editor.setSize(totalWidth, editorHeight);
+
+  remote.getCurrentWindow().setSize(totalWidth, totalHeight);
 
   // var scrollerElement = editor.getScrollerElement();
   // scrollerElement.style.width = containerWidth + 'px';

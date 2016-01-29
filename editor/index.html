@@ -3,8 +3,11 @@
 <head>
     <title>Aspirine</title>
 
+    <meta charset="UTF-8">
+
     <!--<script src="zepto.min.js"></script>-->
-    <script type="text/javascript" src="../app/super.js" ></script>
+    <script type="text/javascript" src="../app/super.js"></script>
+    <script src="just.js"></script>
     <script src="editor.js"></script>
 
     <script src="../node_modules/codemirror/mode/css/css.js"></script>
@@ -21,14 +24,22 @@
 
 </head>
 <body>
+<div class="header-text pull-left">
+    <span class="icon icon-key"></span>
+    <span class="justName icon icon-text"><b style="color: #581713;"> ∆ </b> </span>
+</div>
+
 <header class="toolbar toolbar-header toolbar-shiftleft">
-
-
     <div class="toolbar-mini">
         <div class="btn-group">
-        <button id="restore" class="btn btn-mini btn-default" onclick="justRestore(this)">
-            <span class="icon icon-export"></span>
-        </button>
+            <button class="btn btn-mini btn-primary" onclick="justToggleMeta(this)">
+                <span class="icon icon-text">&nbsp;</span>
+                <span class="icon icon-flow-cascade"></span>
+                <span class="icon icon-text">&nbsp;</span>
+            </button>
+            <button id="just" class="btn btn-mini btn-default " onclick="justToggleBar(this)">
+                <span class="icon icon-code"></span>
+            </button>
         </div>
         <div class="btn-group">
             <button id="new" class="btn btn-mini btn-default">
@@ -72,18 +83,20 @@
                 <span class="icon icon-flow-cascade icon-text">  </span>
                 <span id="title"></span>
             </button>
-            <button class="btn btn-mini btn-default">
-                <span class="icon icon-code icon-text">  </span>
-                <span id="mode"></span>
-            </button>
         </div>
 
     </div>
 </header>
-
+<div id="meta_toolbar" class="toolbar .toolbar-mini toolbar-shiftleft bar meta hide"></div>
+<div id="second_toolbar" class="toolbar .toolbar-mini toolbar-shiftleft bar hide"></div>
 <div id="editor"></div>
-<div class="result_wraper">
-  <pre id="result"></pre>
+<div id="composite">
+    <div class="toolbar bar meta shide">a</div>
+    <div class="toolbar bar shide">b</div>
+</div>
+
+<div class="result_wraper result">
+    <pre id="result"></pre>
 </div>
 </body>
 </html>

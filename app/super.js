@@ -1,4 +1,4 @@
-var remote = require('remote');
+const remote = require('remote');
 var Menu = remote.require('menu');
 var MenuItem = remote.require('menu-item');
 var dialog = remote.require('dialog');
@@ -9,9 +9,11 @@ var appPath = remote.app.getAppPath();
 var utils = remote.require(appPath + '/experiments/utils');
 var windowManager = remote.require('electron-window-manager');
 var md5 = require('md5');
+var _ = require('underscore');
 var jetpack = require('fs-jetpack');
 var coffee = require('coffee-script/register');
 var appRoot = remote.app.getAppPath();
+
 
 //UTILS
 
@@ -19,6 +21,23 @@ function van_dump(sval) {
   //arguments
   return JSON.stringify(sval, null, 2);
 }
+
+
+
+function setContent(value) {
+  document.getElementById('content').innerHTML = value;
+}
+
+
+onload = function () {
+  setContent('ss'+cw.id);
+
+}
+
+
+
+
+
 
 
 var runed = {};
@@ -39,9 +58,14 @@ var _wpaths = {
 };
 
 
+function genPath(part) {
+  return 'file://' + appRoot + part;
+}
+
 function getWin(name) {
   return windowManager.get(name);
 }
+
 function createBozon() {
   windowManager.createNew('bozon', 'Bozon', _wpaths.bozon).open();
 }
@@ -59,9 +83,10 @@ function createMin(name) {
   name = name || 'min_' + nm++;
   var w = windowManager.createNew(name, 'Min', _wpaths.min, 'min');
   w.open();
-  w.execute(`document.querySelector('.boz-header').innerText = '${name}'`);
+  w.execute(`document.querySelector('.boz-header .param').innerText = '${name}'`);
   return w;
 }
+
 function createEditor() {
   windowManager.createNew('editor', 'Bozon', _wpaths.editor).open();
 }

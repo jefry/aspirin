@@ -13,6 +13,12 @@ button {
 
 }
 
+.header-text {
+    padding: 0 5px;
+    color: whitesmoke;
+    text-shadow: 1px 1px 1px #222;
+}
+
 #result {
     max-height: 2000px;
     /*-webkit-user-drag: text;*/
@@ -24,12 +30,74 @@ button {
     border-left: #91a327 1px solid;
 }
 
-#result .evalerror {
+#composite {
+    margin: 0px 0 0px 29px;
+    overflow: scroll;
+}
+
+.result big {
+    font-size: 2em;
+    color: #f3f3f3;
+}
+
+.result code {
+    padding: 2px 0px;
+    background: #191919;
+    color: #fcfcfc;
+}
+
+.result .evalerror {
     color: #ff391e;
 }
 
-.toolbar-shiftleft {
-    padding-left: 80px;
+.toolbar.toolbar-shiftleft {
+    padding-left: 30px;
+    /*border: none;*/
+    /*border-left: 30px solid #444444;*/
+}
+
+.toolbar.bar {
+    padding: 5px 10px;
+    background: rgba(77, 77, 77, 0.8);
+    /*background: rgba(41, 120, 177, 0.5);*/
+    color: #dedede;
+}
+
+.toolbar.bar .btn.btn-mini {
+    padding: 2px 4px;
+}
+.toolbar.bar input {
+    color: #222222;
+}
+
+.toolbar.bar.meta {
+    /*background: rgba(77, 77, 77, 0.8);*/
+    /*background: rgba(57, 68, 76, 0.9);*/
+}
+
+#composite .toolbar {
+    /*margin-left: 29px;*/
+    border-left: #20E9E9 1px solid;
+
+}
+
+#composite > hr {
+    margin: 3px 0px 3px 30px;
+    overflow: hidden;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgb(135, 157, 44);
+    /*border-bottom: 1px solid rgba(205, 220, 57, 0.51);*/
+}
+
+.form-control.form-control-mini {
+    padding: 0 5px;
+    box-shadow: none;
+    min-height: 0;
+}
+
+.hide {
+    display: none;
 }
 
 .CodeMirror {
@@ -51,23 +119,28 @@ button {
     border: none;
     box-shadow: none;
     background: rgba(41, 120, 177, 0.5);
-    position: absolute;
+    /*position: absolute;*/
     z-index: 1000;
     top: 0px;
     /*height: 23px;*/
     left: 0;
     right: 0;
+    -webkit-app-region: drag;
 }
 
 .toolbar-mini {
-    -webkit-app-region: drag;
+
     margin: 0;
     padding: 2px 0;
     line-height: 1em;
 }
 
+.toolbar.act-edit .btn .icon {
+    /*background: #FFC72E;*/
+    color: #ff602a;
+}
+
 .toolbar-mini .btn {
-    /*background: rgba(255, 140, 0, 0.5);*/
     padding: 0px 5px;
     border: none;
     height: 18px;
@@ -82,22 +155,49 @@ button {
     line-height: 1em;
 }
 
-.toolbar-mini .btn.btn-warning.active {
+.toolbar .btn .icon.icon-text {
+    width: auto;
+}
+
+.toolbar .btn.btn-warning.active {
     background: #151515;
+}
+
+.toolbar .btn.btn-warning.active .icon {
+    color: #FF5E00;
 }
 
 .toolbar-mini .btn.btn-warning.active .icon {
     color: #FF5E00;
     font-size: 18px;
+}
+
+.toolbar .btn.btn-primary.active {
+    background: #151515;
+}
+
+.toolbar .btn.btn-primary.active .icon {
+    color: rgb(0, 127, 255);
+    font-size: 18px;
 
 }
 
-.toolbar-mini .btsn.active {
+.toolbar .btn.btn-default.active {
+    background: #323232;
+}
+
+.toolbar-mini .btn.btn-default.active .icon {
+    color: rgb(249, 249, 249);
+    font-size: 18px;
+
+}
+
+.toolbar .btsn.active {
     background-color: rgb(0, 127, 255);
 }
 
 #editor {
-    margin-top: 22px;
+    /*margin-top: 22px;*/
     /*position: absolute;
     top: 23px;
     bottom: 0;

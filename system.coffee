@@ -15,6 +15,8 @@ config = global['config'] = require('config.cson')
 Datastore = require('nedb')
 app.db = new Datastore filename: 'data/datafile.json', autoload: true
 
+#app.commandLine.appendSwitch "js-flags", "--harmony_proxies --harmony_collections"
+#app.commandLine.appendSwitch "--disable-renderer-backgrounding"
 
 app.on 'window-all-closed', ->
 # if (process.platform != 'darwin')
