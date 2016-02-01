@@ -121,8 +121,8 @@ function duality(EL_BUTTON, autostart, quant){
                     document.querySelector('#prelog').textContent += d.data.char },
     y36:function(d){d.speed.x=1; d.speed.y=0;},
     
-    x50y36:function(d){d.speed.x=0; d.speed.y=-1;},
-    x50y5:function(d){d.speed.x=0; d.speed.y=0;},
+    x50y36:function(d){d.speed.x=0; d.speed.y=-3;},
+    x50y2:function(d){d.speed.x=0; d.speed.y=0;},
     
     x7y14:function(d){d.speed.x=2; d.speed.y=1;}
   };
@@ -262,7 +262,7 @@ search.onkeypress = function(event){
  	}
 }
 
-buildWave('ГУБА ЛОХ ПИДР')
+buildWave('matrix CODE sample')
 
 </script>
 `;

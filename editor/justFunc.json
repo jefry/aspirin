@@ -9,5 +9,6 @@
   "clr": "//createBrowser('http://gooogle.com')\n$('#composite').html('');\n$('body').css('backgroundColor','transparent');\njustShowResult(null)\n",
   "lswin": "justShowResult(van_dump(Object.keys(windowManager.windows)), true)\n",
   "test": "\njustShowResult(_.now(), true)\n",
-  "color": "\n//justShowResult(van_dump(arguments))\nif(arguments[1]){\n  arguments[1].classList.toggle('btn-default');\n  arguments[1].classList.toggle('btn-warning');\n}\nif(typeof colorRotate == 'undefined' || !colorRotate){\n//  n=0;\n  colorRotate = setInterval(function(){\n    n = n%359;\n    clr = `hsla(${n++},82%,52%,0.5)`;\n    $('body').css('backgroundColor',clr);\n    //justShowResult(n)\n  },50);\n}else{\n  clearInterval(colorRotate);\n  colorRotate = false;\n}\n\n"
+  "color": "\n//justShowResult(van_dump(arguments))\nif(arguments[1]){\n  arguments[1].classList.toggle('btn-default');\n  arguments[1].classList.toggle('btn-warning');\n}\nif(typeof colorRotate == 'undefined' || !colorRotate){\n//  n=0;\n  colorRotate = setInterval(function(){\n    n = n%359;\n    clr = `hsla(${n++},82%,52%,0.5)`;\n    $('body').css('backgroundColor',clr);\n    //justShowResult(n)\n  },50);\n}else{\n  clearInterval(colorRotate);\n  colorRotate = false;\n}\n\n",
+  "npl": "cw.setAlwaysOnTop(false)"
 }

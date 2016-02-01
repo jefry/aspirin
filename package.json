@@ -1,8 +1,9 @@
 {
   "name": "Aspirin",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "main.js",
   "dependencies": {
+    "algorithms": "^0.9.1",
     "codemirror": "^5.10.0",
     "cson": "^3.0.2",
     "cson-config": "^0.1.12",
