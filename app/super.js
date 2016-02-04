@@ -13,6 +13,7 @@ var _ = require('underscore');
 var jetpack = require('fs-jetpack');
 var coffee = require('coffee-script/register');
 var appRoot = remote.app.getAppPath();
+var Knows = require(appRoot + '/system/knows');
 
 
 //UTILS

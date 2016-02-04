@@ -292,8 +292,8 @@ syncSizeLines = function () {
   }
 
 
-  if (composite.offsetHeight >= 2000) {
-    composite.style.maxHeight = '2000px';
+  if (composite.offsetHeight >= 3000) {
+    composite.style.maxHeight = '3000px';
     //resultsHeight = 200;
     composite.onmousewheel = _scrl;
   } else {
@@ -303,7 +303,7 @@ syncSizeLines = function () {
 
   var editorHeight = 10 + 16 * editor.lineCount();
 
-  var totalHeight = editorHeight + upHeight + resultsHeight;
+  var totalHeight = 22 + editorHeight + upHeight + resultsHeight;
 
   editor.setSize(totalWidth, editorHeight);
 

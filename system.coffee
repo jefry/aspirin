@@ -1,4 +1,7 @@
-app = require('app')
+app = require 'app'
+
+app.knows = require __dirname + '/system/knows'
+
 # Module to control application life.
 fs = require('fs')
 
@@ -11,9 +14,6 @@ require('cson-config').load('config.cson')
 
 config = global['config'] = require('config.cson')
 
-
-Datastore = require('nedb')
-app.db = new Datastore filename: 'data/datafile.json', autoload: true
 
 #app.commandLine.appendSwitch "js-flags", "--harmony_proxies --harmony_collections"
 #app.commandLine.appendSwitch "--disable-renderer-backgrounding"

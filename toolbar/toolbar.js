@@ -32,8 +32,9 @@ Toolbar.createKnows = function () {
 
 Toolbar.listKnows = function () {
   var dw, name;
-  name = 'listKnows';
+  name = 'listknows';
   dw = giveWindow(name);
+  dw.execute(`Knows.run('${name}')`)
   dw.object.setBounds({
     "x": 1455,
     "y": 55,

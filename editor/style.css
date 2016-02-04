@@ -19,6 +19,24 @@ button {
     text-shadow: 1px 1px 1px #222;
 }
 
+#main {
+    height: 100%;
+    position: relative;
+}
+
+#main .pane {
+    overflow: hidden;
+    border: none;
+}
+
+#main .pane-meta {
+    width: 100px;
+    flex: none;
+    background: rgba(77, 77, 77, 0.8);
+    /*background: rgba(41, 120, 177, 0.5);*/
+    color: #dedede;
+}
+
 #result {
     max-height: 2000px;
     /*-webkit-user-drag: text;*/
@@ -28,6 +46,10 @@ button {
     color: #cccccc;
     background: #333333;
     border-left: #91a327 1px solid;
+}
+
+#composite.joinY .bar {
+    max-height: 50px;
 }
 
 #composite {
@@ -63,9 +85,23 @@ button {
     color: #dedede;
 }
 
-.toolbar.bar .btn.btn-mini {
-    padding: 2px 4px;
+.meta-section {
+    padding: 5px 10px;
+    background: rgba(77, 77, 77, 0.8);
+    color: #dedede;
+
 }
+
+.toolbar.bar .btn.btn-mini {
+    padding: 2px 2px;
+}
+
+.toolbar.bar .btn-default {
+    -webkit-filter: contrast(2) invert(85%);
+    border-left-color: #999;
+    border-right-color: #999;
+}
+
 .toolbar.bar input {
     color: #222222;
 }
@@ -76,13 +112,13 @@ button {
 }
 
 #composite .toolbar {
-    /*margin-left: 29px;*/
+    margin: 2px 0;
     border-left: #20E9E9 1px solid;
 
 }
 
 #composite > hr {
-    margin: 3px 0px 3px 30px;
+    margin: 2px 0px 2px 0px;
     overflow: hidden;
     background: transparent;
     border: 0;
@@ -97,7 +133,17 @@ button {
 }
 
 .hide {
-    display: none;
+    display: none !important;
+}
+
+.floped.fliped {
+    perspective: 700px;
+    transform-style: preserve-3d;
+}
+
+.floped.fliped .CodeMirror {
+    transform: translate3d(60px, 0px, 400px) rotateY(-50deg);
+    transform-origin: right;
 }
 
 .CodeMirror {
@@ -126,6 +172,7 @@ button {
     left: 0;
     right: 0;
     -webkit-app-region: drag;
+    position: relative;
 }
 
 .toolbar-mini {
@@ -194,16 +241,6 @@ button {
 
 .toolbar .btsn.active {
     background-color: rgb(0, 127, 255);
-}
-
-#editor {
-    /*margin-top: 22px;*/
-    /*position: absolute;
-    top: 23px;
-    bottom: 0;
-    left: 0;
-    right: 0;*/
-    background: #262626;
 }
 
 .info {

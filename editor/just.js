@@ -60,14 +60,14 @@ just.set = function (name, func) {
 just.makeBtn = function (name) {
   var tpl = `
 <button class="btn btn-mini btn-default" onclick="just.run('${name}', this)">
-  <span class="icon icon-star-empty"></span>
-  <span class="icon icon-text">${name}</span>
+  <!--<span class="icon icon-star-empty"></span>-->
+  <span class="icon icon-star-empty icon-text">${name}</span>
 </button>`;
   return tpl;
 };
 
 just.render = function () {
-  var text = '<div class="btn-group">'
+  var text = '<div class="btns-group">'
     + Object.keys(just.funcs).map(just.makeBtn).join('\n')
     + '</div>';
   $('#second_toolbar').html(text);
@@ -141,7 +141,8 @@ function justToggleBar(elButton) {
 
 meta = {};
 meta.render = function () {
-  $('#meta_toolbar').html('sddsd');
+
+  $('#meta_toolbar .print').html('sddsd');
 };
 
 //-----------
@@ -150,7 +151,7 @@ function justToggleMeta(elButton) {
   isMetaActive = !isMetaActive;
 
   $(elButton).toggleClass('active', isMetaActive)
-
+  //$('#main .pane-meta').toggleClass('hide', !isMetaActive)
   $('#meta_toolbar').toggleClass('hide', !isMetaActive)
 
   if (isMetaActive) {
@@ -333,6 +334,10 @@ function runFile(el) {
     justResultWindow = utils.newTransparentWindow(utils.genDataHtmlUrl(editor.getValue()))
   }
 }
+
+
+Knows.run('editor');
+
 
 //
 // cw.webContents.on('new-window',function (event, url, frameName){
