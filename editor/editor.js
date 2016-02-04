@@ -75,7 +75,7 @@ function handleNewButton() {
     newFile();
     editor.setValue("");
   } else {
-    windowManager.open(null, 'Editor', 'file://' + __dirname + '/index.html');
+    createEditor();
   }
 }
 
@@ -217,6 +217,9 @@ onload = function () {
     syncSizeLines();
   })
   syncSizeLines();
+
+  Knows.run('editor');
+
 };
 
 onresize = function () {
@@ -280,7 +283,7 @@ syncSizeLines = function () {
   var results = document.getElementById('result');
   var composite = document.getElementById('composite');
   var totalWidth = 680;// container.offsetWidth;
-  var upHeight = results.offsetTop - container.offsetHeight;
+  var upHeight = results.offsetTop - container.offsetHeight + 22;
   var resultsHeight = results.offsetHeight;
 
   if (resultsHeight >= 2000) {
@@ -292,7 +295,7 @@ syncSizeLines = function () {
   }
 
 
-  if (composite.offsetHeight >= 3000) {
+  if (composite.offsetHeight >= 2500) {
     composite.style.maxHeight = '3000px';
     //resultsHeight = 200;
     composite.onmousewheel = _scrl;
@@ -300,10 +303,10 @@ syncSizeLines = function () {
     composite.onmousewheel = false;
   }
 
+  console.log(editor)
+  var editorHeight = 8 + 16 * editor.lineCount();
 
-  var editorHeight = 10 + 16 * editor.lineCount();
-
-  var totalHeight = 22 + editorHeight + upHeight + resultsHeight;
+  var totalHeight = editorHeight + upHeight + resultsHeight;
 
   editor.setSize(totalWidth, editorHeight);
 

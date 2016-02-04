@@ -88,8 +88,13 @@ function createMin(name) {
   return w;
 }
 
-function createEditor() {
-  windowManager.createNew('editor', 'Bozon', _wpaths.editor).open();
+
+function createEditor(name) {
+  name = name || 'editor_' + remote.app._enm++;
+  var w = windowManager.createNew(name, 'Editor', _wpaths.editor);
+  w.open();
+  w.execute(`document.querySelector('.boz-header .param').innerText = '${name}'`);
+  return w;
 }
 
 function createWindow(name, url) {

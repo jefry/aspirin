@@ -2,6 +2,7 @@ app = require 'app'
 
 app.knows = require __dirname + '/system/knows'
 
+app._enm = 0;
 # Module to control application life.
 fs = require('fs')
 
@@ -46,8 +47,9 @@ app.on 'ready', ->
   windowManager.templates.set 'toolbar', config.toolbarWindowSetup
 
 
-  we = windowManager.createNew('Editor', 'Editor', 'file://' + __dirname + '/editor/index.html')
+  we = windowManager.createNew('editor', 'Editor', 'file://' + __dirname + '/editor/index.html')
   we.open()
+#  we.toggleDevTools()
   we.move 'bottomRight'
   we.execute 'justUpdate()'
   #

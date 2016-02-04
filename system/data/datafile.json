@@ -1,21 +1,10 @@
-{"key":"listknows","source":"\ndocument.getElementById('content').innerText = 'dsdsfsdf'\n\n","_id":"2qtFnq044XlVGeJ1"}
+{"key":"listknows","source":"document.body.style.background = '#222'\ndocument.getElementById('content').innerText = 'aaa'\n\n","_id":"2qtFnq044XlVGeJ1"}
 {"name":"selfsave","md5":"d52d53479595e8ad450f257edee15929","source":"ecode = document.querySelector('.CodeMirror-code')\necode.style.fontSize = '17.5px'; // 13px\nfp = 'file:///Users/rainerg/ajr/Aspirin/node_modules/cson/docs/index.html';\n\nObject.keys(fs)\nObject.keys(windowManager.windows)\n\nsource = editor.getValue();\nhash = md5(source)\n\nremote.app.db.insert({name:'selfsave',md5:hash,source:source})\n\n","_id":"70KNI543N6F0N0Lo"}
 {"key":"init","source":"\njustShowResult(van_dump(cw.getBounds()))\n","_id":"SPAGZ2lckr5CC7mF"}
-{"key":"ksave","source":"if(just.name){\n\tKnows.save(just.name, editor.getValue())\n}else{\n  just.run('add');\n}\ngetWin('listknows').execute(\"Knows.run('listknows')\")\njustShowResult('<b style=\"color:green;\">Saved and Updated</b>', true)","_id":"TqjUpnaDV4qjE7yy"}
-{"key":"editor","source":"cb = cw.getBounds()\njustShowResult(`x=${cb.x} y=${cb.y} width=${cb.width} height=${cb.height} `)\n","_id":"URTolNNsRssn4zUP"}
+{"key":"ksave","source":"if(just.name){\n\tKnows.save(just.name, editor.getValue())\n  if(w = getWin(just.name)){\n  \tw.execute(\"Knows.run('\"+just.name+\"')\")\n  \tjustShowResult('<b style=\"color:green;\">Saved and Updated window \"'+just.name+'\"</b>', true)\n  } \n}else{\n  just.run('add');\n}\n\n","_id":"TqjUpnaDV4qjE7yy"}
+{"key":"editor","source":"\njustShowResult('-')\ncb = cw.getBounds()\njustShowResult(`x=${cb.x} y=${cb.y} width=${cb.width} height=${cb.height} `)\n//syncSizeLines()","_id":"URTolNNsRssn4zUP"}
 {"key":"toggletop","source":"_(windowManager.windows)\n  .reduce(function(memo, v, k, i){\n  \tv.execute(\"just.run('top');\"); \n  \tvar row = memo.length-1+memo[memo.length-1].length/70|0;\n  \tif(!memo[row])memo[row]='';\n  \t//memo[row] = memo[row]+' L'+ memo[row].length +'R'+row+'&'+k;\n  \tmemo[row] += ' #'+k;\n    return memo\n\t},['']).join('\\n')\n","_id":"XecKL7EzLILByK6J"}
+{"key":"bozon","source":"\ndocument.getElementById('source').innerText = 'bozontest'\n\n","_id":"gJmK1r1aGMhyyOeX"}
 {"key":"idnames","source":"\na = _(windowManager.windows)\n  .chain()\n  .map(function(v,k){return [v.object.id, k]})\n\t.object()\n\t.value()\n\n","_id":"gQ5ORe5L8NTKiQ3q"}
 {"key":"getfocuswin","source":"warr = _(windowManager.windows)\n  .chain()\n  .map(function(v,k){return [v.object.id, k]})\n\t.object()\n\t.value()\n\nremote.app.once('browser-window-focus', function(e, w){\n\tjustShowResult('<b style=\"color:green;\">'+w.id +' : '+ warr[w.id]+'</b>', true)\n});\njustShowResult('<b style=\"color:blue;\">Waiting for focus on any window</b>', true)\n","_id":"rtXcJj99XC3KqVZ3"}
-{"key":"bozon","source":"\ndocument.getElementById('source').innerText = 'bozontest'\n\n","_id":"gJmK1r1aGMhyyOeX"}
-{"key":"bozon","source":"\ndocument.getElementById('source').innerText = 'bozontest'\n\n","_id":"gJmK1r1aGMhyyOeX"}
-{"key":"bozon","source":"\ndocument.getElementById('source').innerText = 'bozontest'\n\n","_id":"gJmK1r1aGMhyyOeX"}
-{"key":"listknows","source":"\ndocument.getElementById('content').innerText = 'aaa'\n\n","_id":"2qtFnq044XlVGeJ1"}
-{"key":"listknows","source":"document.body.style.background = '#222'\ndocument.getElementById('content').innerText = 'aaa'\n\n","_id":"2qtFnq044XlVGeJ1"}
-{"key":"bozon","source":"\ndocument.getElementById('source').innerText = 'bozontest'\n\n","_id":"gJmK1r1aGMhyyOeX"}
-{"key":"bozon","source":"\ndocument.getElementById('source').innerText = 'bozontest'\nalert(1)\n","_id":"gJmK1r1aGMhyyOeX"}
-{"key":"bozon","source":"alert(1)\ndocument.getElementById('source').innerText = 'bozontest'\n\n","_id":"gJmK1r1aGMhyyOeX"}
-{"key":"bozon","source":"\nalert(1)\n//document.getElementById('source').innerText = 'bozontest'\n\n","_id":"gJmK1r1aGMhyyOeX"}
-{"key":"ksave","source":"if(just.name){\n\tKnows.save(just.name, editor.getValue())\n  if(w = getWin(just.name)){\n  \tw.execute(\"Knows.run('\"+just.name+\"')\")\n  \tjustShowResult('<b style=\"color:green;\">Saved and Updated window \"'+just.name+'\"</b>', true)\n  } \n}else{\n  just.run('add');\n}\n\n","_id":"TqjUpnaDV4qjE7yy"}
-{"key":"bozon","source":"\nalert(1)\n//document.getElementById('source').innerText = 'bozontest'\n\n","_id":"gJmK1r1aGMhyyOeX"}
-{"key":"getfocuswin","source":"warr = _(windowManager.windows)\n  .chain()\n  .map(function(v,k){return [v.object.id, k]})\n\t.object()\n\t.value()\n\nremote.app.once('browser-window-focus', function(e, w){\n\tjustShowResult('<b style=\"color:green;\">'+w.id +' : '+ warr[w.id]+'</b>', true)\n});\njustShowResult('<b style=\"color:blue;\">Waiting for focus on any window</b>', true)\n","_id":"rtXcJj99XC3KqVZ3"}
-{"key":"bozon","source":"\ndocument.getElementById('source').innerText = 'bozontest'\n\n","_id":"gJmK1r1aGMhyyOeX"}
+{"key":"listknows","source":"document.body.style.background = '#222'\ndocument.getElementById('content').innerText = 'gfdhtcjcjc'\n\n","_id":"2qtFnq044XlVGeJ1"}

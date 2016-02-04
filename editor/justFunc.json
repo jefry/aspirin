@@ -6,7 +6,7 @@
   "ls": "justShowResult(van_dump(Object.keys(windowManager.windows)), true)\n",
   "color": "\n//justShowResult(van_dump(arguments))\nif(arguments[1]){\n  arguments[1].classList.toggle('btn-default');\n  arguments[1].classList.toggle('btn-warning');\n}\nif(typeof colorRotate == 'undefined' || !colorRotate){\n//  n=0;\n  colorRotate = setInterval(function(){\n    n = n%359;\n    clr = `hsla(${n++},82%,52%,0.5)`;\n    $('body').css('backgroundColor',clr);\n    //justShowResult(n)\n  },50);\n}else{\n  clearInterval(colorRotate);\n  colorRotate = false;\n}\n\n",
   "top": "cw.setAlwaysOnTop(!cw.isAlwaysOnTop())",
-  "clr": "//createBrowser('http://gooogle.com')\n$('#composite').html('');\n$('body').css('backgroundColor','transparent');\njustShowResult(null)\n",
+  "clr": "//createBrowser('http://gooogle.com')\n$('#composite').html('');\n$('body').css('backgroundColor','transparent');\njustShowResult(null)\ndocument.querySelector('header').style.background = 'rgba(41, 120, 177, 0.5)';\n",
   "md5": "hash = md5(editor.getValue())\njustShowResult(van_dump(hash))\n",
   "ksave": "if(just.name){\n\tKnows.save(just.name, editor.getValue())\n  if(w = getWin(just.name)){\n  \tw.execute(\"Knows.run('\"+just.name+\"')\")\n  \tjustShowResult('<b style=\"color:orange;\">Saved code and Updated window {'+just.name+'}</b>', true)\n  }else{\n    justShowResult('<b style=\"color:green;\">Only saved code</b>', true)\n  }\n}else{\n  just.run('add');\n}\n'wait'\n",
   "krun": "\nKnows.run('editor');\n\n",

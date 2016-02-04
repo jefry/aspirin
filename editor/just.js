@@ -298,13 +298,9 @@ function justMoveDowin(e, ub) { // from upper window
 }
 
 function justScrollAll(xy) {
+  var cb;
 
-  document.body.onmousewheel = function (me) {
-    var cb = cw.getBounds();
-    cb.y += me.wheelDeltaY / 3 | 0;
-
-    cw.setPosition(cb.x, cb.y)
-
+  function updPos() {
     var uw = remote.BrowserWindow.fromId(cw.id + 1)
     if (uw)
       uw.webContents.send('justMoveUpwin', cb);
@@ -312,9 +308,18 @@ function justScrollAll(xy) {
     var dw = remote.BrowserWindow.fromId(cw.id - 1)
     if (dw)
       dw.webContents.send('justMoveDowin', cb);
-
-
   }
+
+  var throttled = _.throttle(updPos, 50);
+
+  document.body.onmousewheel = function (me) {
+    cb = cw.getBounds();
+    cb.y += me.wheelDeltaY / 3 | 0;
+
+    cw.setPosition(cb.x, cb.y)
+    throttled()
+  }
+
 }
 
 
@@ -334,9 +339,6 @@ function runFile(el) {
     justResultWindow = utils.newTransparentWindow(utils.genDataHtmlUrl(editor.getValue()))
   }
 }
-
-
-Knows.run('editor');
 
 
 //
