@@ -178,7 +178,8 @@ require('electron').ipcRenderer.on('justScrollAll', justScrollAll);
 require('electron').ipcRenderer.on('justMoveUpwin', justMoveUpwin);
 require('electron').ipcRenderer.on('justMoveDowin', justMoveDowin);
 require('electron').ipcRenderer.on('justSource', justSource);
-//require('electron').ipcRenderer.on('justTest', justTest);
+require('electron').ipcRenderer.on('justSendVal', justSendVal);
+require('electron').ipcRenderer.on('justReceiveVal', justReceiveVal);
 
 
 function justSource(e, str) {
@@ -188,14 +189,45 @@ function justSource(e, str) {
 
 var bozid = false;
 
-function justSendgggSource(vt) {
-  document.getElementById('source').innerText;
+function justSendVal(e, to) {
+  var cwid = cw.id;
+  var thisWindow = _(windowManager.windows)
+    .find(function (v, k) {
+      return v.object.id == cwid;
+    })
+    .name;
+
+  var src = editor.getValue();
+  getWin(to).content().send('justReceiveVal', thisWindow, src)
 
 }
 
-function justSendSource(vt) {
-  document.getElementById('source').innerText;
+var customFunk = function (from, code) {
+  isCallShowResult = false;
+  try {
+    var result = eval(code);
+    //document.querySelector('header').style.background = 'rgba(41, 120, 177, 0.5)';
+    document.querySelector('header').style.background = 'rgba(84, 193, 23, 0.7)';
+    if (!isCallShowResult) {
+      if (result && typeof result == "object") {
+        justShowResult(JSON.stringify(result, null, 2));
+      } else {
+        justShowResult(result, isresultHTML);
+      }
+    }
 
+  } catch (e) {
+    document.querySelector('header').style.background = 'rgba(225, 60, 47, 1)';
+
+    justShowResult(`<span class="evalerror"> ${e.name}: ${e.message}</span>`, true);
+  }
+
+
+  syncSizeLines();
+}
+
+function justReceiveVal(e, from, val) {
+  customFunk(from, val)
 }
 
 var isCallShowResult = false;
@@ -224,10 +256,12 @@ function justInfo() {
 function justAutoRestore() {
 
 }
+
 var isAutoRuned = false;
+var timeout = 100;
 function justAutoRun() {
   if (!isAutoRuned) {
-    isAutoRuned = setInterval(handleRunButton);
+    isAutoRuned = setInterval(handleRunButton,timeout);
   } else {
     clearInterval(isAutoRuned);
     isAutoRuned = false;

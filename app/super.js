@@ -28,13 +28,15 @@ function van_dump(sval) {
 function setContent(value) {
   document.getElementById('content').innerHTML = value;
 }
-
-
-onload = function () {
-  setContent('ss'+cw.id);
-
+function getContent(value) {
+  return document.getElementById('content').innerHTML;
 }
 
+//onload = function () {
+//  setContent('ss'+cw.id);
+//
+//}
+//
 
 
 

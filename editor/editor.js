@@ -275,46 +275,46 @@ var ss_scrl = function (e) {
 //_scrl = _.throttle(_scrl, 100);
 
 
-syncSizeLines = function () {
-  //--------------?
-  display = remote.screen.getPrimaryDisplay().bounds;
-  //--------------?
-  var container = document.getElementById('editor');
-  var results = document.getElementById('result');
-  var composite = document.getElementById('composite');
-  var totalWidth = 680;// container.offsetWidth;
-  var upHeight = results.offsetTop - container.offsetHeight + 22;
-  var resultsHeight = results.offsetHeight;
+syncSizeLines = _.throttle(function () {
+    //--------------?
+    display = remote.screen.getPrimaryDisplay().bounds;
+    //--------------?
+    var container = document.getElementById('editor');
+    var results = document.getElementById('result');
+    var composite = document.getElementById('composite');
+    var totalWidth = 680;// container.offsetWidth;
+    var upHeight = results.offsetTop - container.offsetHeight + 22;
+    var resultsHeight = results.offsetHeight;
 
-  if (resultsHeight >= 2000) {
-    resultsHeight = 2000;
-    results.onmousewheel = _scrl;
+    if (resultsHeight >= 2000) {
+      resultsHeight = 2000;
+      results.onmousewheel = _scrl;
 
-  } else {
-    results.onmousewheel = false;
-  }
+    } else {
+      results.onmousewheel = false;
+    }
 
 
-  if (composite.offsetHeight >= 2500) {
-    composite.style.maxHeight = '3000px';
-    //resultsHeight = 200;
-    composite.onmousewheel = _scrl;
-  } else {
-    composite.onmousewheel = false;
-  }
+    if (composite.offsetHeight >= 2500) {
+      composite.style.maxHeight = '3000px';
+      //resultsHeight = 200;
+      composite.onmousewheel = _scrl;
+    } else {
+      composite.onmousewheel = false;
+    }
 
-  console.log(editor)
-  var editorHeight = 8 + 16 * editor.lineCount();
+    //console.log(editor)
+    var editorHeight = 8 + 16 * editor.lineCount();
 
-  var totalHeight = editorHeight + upHeight + resultsHeight;
+    var totalHeight = editorHeight + upHeight + resultsHeight;
 
-  editor.setSize(totalWidth, editorHeight);
+    editor.setSize(totalWidth, editorHeight);
 
-  remote.getCurrentWindow().setSize(totalWidth, totalHeight);
+    remote.getCurrentWindow().setSize(totalWidth, totalHeight);
 
-  // var scrollerElement = editor.getScrollerElement();
-  // scrollerElement.style.width = containerWidth + 'px';
-  // scrollerElement.style.height = containerHeight + 'px';
+    // var scrollerElement = editor.getScrollerElement();
+    // scrollerElement.style.width = containerWidth + 'px';
+    // scrollerElement.style.height = containerHeight + 'px';
 
-  editor.refresh();
-}
+    editor.refresh();
+  },100)

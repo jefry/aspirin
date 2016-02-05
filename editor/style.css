@@ -19,6 +19,14 @@ button {
     text-shadow: 1px 1px 1px #222;
 }
 
+.header-text.waiting {
+    color: #ff602a;
+}
+
+.header-text.yellow {
+    color: #FFEB3B;
+}
+
 #main {
     height: 100%;
     position: relative;
@@ -73,7 +81,7 @@ button {
 }
 
 .toolbar.toolbar-shiftleft {
-    padding-left: 30px;
+    /*padding-left: 30px;*/
     /*border: none;*/
     /*border-left: 30px solid #444444;*/
 }

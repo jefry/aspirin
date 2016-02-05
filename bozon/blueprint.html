@@ -15,21 +15,24 @@
             padding: 0;
             background: rgba(47, 65, 61, 0.29);
         }
-        .active-hid{
+
+        .active-hid {
             -webkit-app-region: no-drag;
         }
-        #content {
-            height: 100%;
-            /*background: #2f413d;*/
 
+        .wrap {
+            overflow: scroll;
+            position: relative;
+            width: 100%;
+            height: 100%;
         }
 
         .blueprint {
+            min-width: 100%;
+            min-height: 100%;
             -webkit-app-region: drag;
             font-family: monospace;
-            white-space: pre;
-            /* margin: 5px; */
-            height: 100%;
+
             background-color: rgba(34, 102, 153, 0.54);
             background-image: linear-gradient(rgba(255, 255, 255, 0.7) 2px, transparent 2px), linear-gradient(90deg, rgba(255, 255, 255, 0.7) 1px, transparent 2px), linear-gradient(rgba(255, 255, 255, .3) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .3) 1px, transparent 1px);
             background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
@@ -37,7 +40,12 @@
             /*filter: blur(20px);*/
         }
 
-        .blueprint.lettercell {
+        .pre {
+            white-space: pre;
+            margin: 0;
+        }
+
+        .pre.lettercell {
             letter-spacing: 0.94em;
             background-image: linear-gradient(rgba(0, 0, 0, 0.6) 2px, transparent 2px), linear-gradient(90deg, rgba(0, 0, 0, 0.6) 1px, transparent 2px), linear-gradient(rgba(255, 255, 255, .3) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .3) 1px, transparent 1px);
         }
@@ -63,38 +71,42 @@
 <header class="boz-header">
     <span class="active-hid" onclick="document.getElementById('content').classList.toggle('lettercell')">[√]</span>
 </header>
-<div id="content" class="blueprint">#^0 ˜˚¬˙ƒ®´∂ç√∫˜Ω
-    1 xxxxxxxx
-    2 yyyyyyyy
-    3 ________
-    4 01234567
-    5 ---++---
-    6 0 x ABCDEF
-    7 @ @ @ @
-    8
-    9 ˜˚¬˙ƒ®´∂ç√∫˜Ω
-    #^0 ˜˚¬˙ƒ®´∂ç√∫˜Ω
-    1 xxxxxxxx
-    2 yyyyyyyy
-    3 ________
-    4 01234567
-    5 ---++---
-    6 0 x ABCDEF
-    7 @ @ @ @
-    8
-    9 ˜˚¬˙ƒ®´∂ç√∫˜Ω
-    #^0 ˜˚¬˙ƒ®´∂ç√∫˜Ω
-    1 xxxxxxxx
-    2 yyyyyyyy
-    3 ________
-    4 01234567
-    5 ---++---
-    6 0 x ABCDEF
-    7 @ @ @ @
-    8
-    9 ˜˚¬˙ƒ®´∂ç√∫˜Ω
+<div class="wrap">
+    <div class="blueprint">
+        <pre class="pre">#^0 ˜˚¬˙ƒ®´∂ç√∫˜Ω
+1 xxxxxxxx
+2 yyyyyyyy
+3 ________
+4 01234567
+5 ---++---
+6 0 x ABCDEF
+7 @ @ @ @
+8
+9 ˜˚¬˙ƒ®´∂ç√∫˜Ω
+#^0 ˜˚¬˙ƒ®´∂ç√∫˜Ω
+1 xxxxxxxx
+2 yyyyyyyy
+3 ________
+4 01234567
+5 ---++---
+6 0 x ABCDEF
+7 @ @ @ @
+8
+9 ˜˚¬˙ƒ®´∂ç√∫˜Ω
+#^0 ˜˚¬˙ƒ®´∂ç√∫˜Ω
+1 xxxxxxxx
+2 yyyyyyyy
+3 ________
+4 01234567
+5 ---++---
+6 0 x ABCDEF
+7 @ @ @ @
+8
+9 ˜˚¬˙ƒ®´∂ç√∫˜Ω
 
 
+        </pre>
+    </div>
 </div>
 </body>
 
