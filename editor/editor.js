@@ -98,9 +98,17 @@ function handleSaveButton() {
   }
 }
 
-var isresultHTML = false;
+runCodeOverride = false;
+
 function handleRunButton() {
-  var code = editor.getValue();
+  if (runCodeOverride)
+    return runCodeOverride();
+  runCode(editor.getValue());
+  syncSizeLines();
+}
+
+var isresultHTML = false;
+function runCode(code) {
   isCallShowResult = false;
   try {
     var result = eval(code);
@@ -119,9 +127,6 @@ function handleRunButton() {
 
     justShowResult(`<span class="evalerror"> ${e.name}: ${e.message}</span>`, true);
   }
-
-
-  syncSizeLines();
 
 
 }
@@ -154,17 +159,18 @@ function initContextMenu() {
   }, false);
 }
 
-
+_currentEditorHeight = 0;
+scrollPosLimit = function (tryPos) {
+  return _.sortBy([(-_currentEditorHeight + 50), tryPos, 1000])[1];
+}
 onload = function () {
 
   document.getElementById("wid").innerHTML = '&nbsp;' + remote.getCurrentWindow().id;
 
-  var test = 0;
   document.body.onmousewheel = function (me) {
     var p = cw.getPosition();
     var sp = me.wheelDeltaY / 3 | 0;
-    // console.log(sp, test+=sp)
-    cw.setPosition(p[0], p[1] + sp)
+    cw.setPosition(p[0], scrollPosLimit(p[1] + sp));
   }
 
 
@@ -187,12 +193,17 @@ onload = function () {
     {
       mode: {name: "javascript", json: true},
       lineNumbers: true,
+      indentWithTabs: false,
       tabSize: 2,
       theme: "lesser-dark",
       value: "\r\n\r\n\r\n",
       // viewportMargin: 5,
       // scrollbarStyle:'none',
       extraKeys: {
+        "Tab": function (cm) {
+          var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
+          cm.replaceSelection(spaces, "end", "+input");
+        },
         "Cmd-B": function (instance) {
           handleRunButton()
         },
@@ -231,40 +242,47 @@ var sign = function (x) {
   return 1 / x === 1 / Math.abs(x);
 }
 
-var _scrl = function (e) {
-  //var el = e.currentTarget;
-  //
-  //if (((el.scrollHeight - el.scrollTop - el.offsetHeight) == 0)
-  //  || (el.scrollTop == 0)) {
-  //  return false;
-  //}
-
-  e.stopImmediatePropagation();
-
-}
-var ss_scrl = function (e) {
-
-  if (!e.currentTarget) {
-    //
-    return false;
-  }
-
+_scrl1 = function (e) {
   var el = e.currentTarget;
-  //console.log(e.deltaY,e.wheelDeltaY)
-  //if (e.wheelDeltaY == 0) {
-  //  e.stopImmediatePropagation();
-  //  return false;
-  //} else
-  if (sign(e.deltaY)
-    && ((el.offsetTop + window.screenTop) < 60)
-    && (el.scrollHeight - el.scrollTop - el.offsetHeight) == 0) { //up
 
+  if (((el.scrollHeight - el.scrollTop - el.offsetHeight) == 0)
+    || (el.scrollTop == 0)) {
+    console.log('asasa', el.scrollHeight - el.scrollTop - el.offsetHeight)
     e.stopImmediatePropagation();
     return true;
-  } else if (!sign(e.deltaY)
+
+  }
+  return false;
+
+
+}
+wheelBuffer = 0;
+
+_scrl = function (e) {
+
+
+  var el = e.currentTarget;
+  //console.log((e.wheelDeltaY < 0) && ((el.offsetTop + window.screenTop)<60))
+  //console.log((el.scrollHeight - el.scrollTop - el.offsetHeight))
+  //console.log([composite.scrollHeight, composite.scrollTop, composite.offsetHeight , composite.offsetTop ,screenTop, document.body.offsetHeight])
+  //console.log(composite.offsetHeight + composite.offsetTop + screenTop - screen.height)
+
+
+  if (e.wheelDeltaY == 0) {
+    e.stopImmediatePropagation();
+    return false;
+  } else if ((e.wheelDeltaY < 0)
+    && ((el.offsetTop + window.screenTop) < 60)
+    && (el.scrollHeight - el.scrollTop - el.offsetHeight) > 0) { //up
+
+//         console.log('up')
+    e.stopImmediatePropagation();
+    return true;
+  } else if ((e.wheelDeltaY >= 0)
     && (screen.height - (el.offsetHeight + el.offsetTop + window.screenTop)) < 60
     && (el.scrollTop > 0)) { //down
 
+//         console.log('down')
     e.stopImmediatePropagation();
     return true;
   }
@@ -275,46 +293,55 @@ var ss_scrl = function (e) {
 //_scrl = _.throttle(_scrl, 100);
 
 
-syncSizeLines = _.throttle(function () {
-    //--------------?
-    display = remote.screen.getPrimaryDisplay().bounds;
-    //--------------?
-    var container = document.getElementById('editor');
-    var results = document.getElementById('result');
-    var composite = document.getElementById('composite');
-    var totalWidth = 680;// container.offsetWidth;
-    var upHeight = results.offsetTop - container.offsetHeight + 22;
-    var resultsHeight = results.offsetHeight;
+syncSizeLines = function () {
+  console.log('origin', document.body.offsetHeight);
+  _sy()
+}
 
-    if (resultsHeight >= 2000) {
-      resultsHeight = 2000;
-      results.onmousewheel = _scrl;
+_sy = _.debounce(function () {
+  //--------------?
+  display = remote.screen.getPrimaryDisplay().bounds;
+  //--------------?
+  var container = document.getElementById('editor');
+  var results = document.getElementById('result');
+  var composite = document.getElementById('composite');
+  var composite_wrap = document.getElementById('composite_wrap');
+  var totalWidth = 680;// container.offsetWidth;
+  var resultsHeight = results.offsetHeight;
 
-    } else {
-      results.onmousewheel = false;
-    }
+  if (resultsHeight >= 2000) {
+    resultsHeight = 2000;
+    results.onmousewheel = _scrl;
 
+  } else {
+    results.onmousewheel = false;
+  }
 
-    if (composite.offsetHeight >= 2500) {
-      composite.style.maxHeight = '3000px';
-      //resultsHeight = 200;
-      composite.onmousewheel = _scrl;
-    } else {
-      composite.onmousewheel = false;
-    }
+  //console.log('si senior', composite.offsetHeight)
 
-    //console.log(editor)
-    var editorHeight = 8 + 16 * editor.lineCount();
+  if (composite.offsetHeight >= 2500) {
+    composite_wrap.style.maxHeight = '900px';
+    //resultsHeight = 200;
+    composite_wrap.onmousewheel = _scrl;
 
-    var totalHeight = editorHeight + upHeight + resultsHeight;
+  } else {
+    composite_wrap.style.maxHeight = 'none';
+    composite_wrap.onmousewheel = false;
+  }
 
-    editor.setSize(totalWidth, editorHeight);
+  var upHeight = results.offsetTop - container.offsetHeight + 22;
+  //console.log(editor)
+  var editorHeight = 8 + 16 * editor.lineCount();
 
-    remote.getCurrentWindow().setSize(totalWidth, totalHeight);
+  var totalHeight = editorHeight + upHeight + resultsHeight;
 
-    // var scrollerElement = editor.getScrollerElement();
-    // scrollerElement.style.width = containerWidth + 'px';
-    // scrollerElement.style.height = containerHeight + 'px';
+  //editor.setSize(totalWidth, editorHeight);
+  //editor.refresh();
+  _currentEditorHeight = totalHeight;
+  remote.getCurrentWindow().setSize(totalWidth, totalHeight);
 
-    editor.refresh();
-  },100)
+  // var scrollerElement = editor.getScrollerElement();
+  // scrollerElement.style.width = containerWidth + 'px';
+  // scrollerElement.style.height = containerHeight + 'px';
+
+}, 100);

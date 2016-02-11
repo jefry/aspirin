@@ -60,7 +60,7 @@ button {
     max-height: 50px;
 }
 
-#composite {
+#composite_wrap {
     margin: 0px 0 0px 29px;
     overflow: scroll;
 }
@@ -225,6 +225,25 @@ button {
 .toolbar-mini .btn.btn-warning.active .icon {
     color: #FF5E00;
     font-size: 18px;
+}
+
+.toolbar .btn.btn-isotop {
+    background: transparent;
+}
+
+.toolbar .btn.btn-isotop .icon {
+    color: #111;
+    font-size: 18px;
+
+}
+
+.toolbar .btn.btn-isotop.active {
+    /*color: #FF5E00;*/
+    /*background: #3F51B5;*/
+}
+
+.toolbar .btn.btn-isotop.active .icon {
+    color: #FFF;
 }
 
 .toolbar .btn.btn-primary.active {

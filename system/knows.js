@@ -23,7 +23,7 @@ module.exports.getDb = function () {
   return db;
 };
 
-module.exports.run = function (key) {
+module.exports.run = function (key, opt) {
   key = {key: key};
   function onFind(err, doc) {
     eval(doc.source)

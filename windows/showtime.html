@@ -2,9 +2,17 @@
 <head>
 <style type="text/css">
   #time {
-    color:white;
-    font-size: 50px;
+  #time {
     color: white;
+    font-size: 20px;
+    font-family: monospace;
+    font-weight: 600;
+    color: #C8FF5B;
+    margin-top: 20px;
+    border-radius: 10px;
+    height: 22px;
+    padding: 0 7px;
+    background: rgba(0, 0, 0, 0.2);
   }  
 
 </style>
@@ -17,15 +25,16 @@
 
   <script type="text/javascript">
     var cw = require('electron').remote.getCurrentWindow()
-
+    //{x: 1206, y: 345, width: 320, height: 43}
+    cw.setAlwaysOnTop(true);
     function render(){
         var d = new Date();
         document.getElementById('time').innerHTML = "" +d.toString();
 
     }
 
-    cw.setSize(700,75);
-    setInterval(render, 50)
+    cw.setSize(320,43);
+    setInterval(render, 1000)
   </script>
 
 </body>

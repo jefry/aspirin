@@ -15,13 +15,40 @@
             padding: 0;
             background: rgba(47, 65, 61, 0.29);
         }
-        .active-hid{
+
+        .active-hid {
             -webkit-app-region: no-drag;
         }
-        #content {
-            height: 100%;
-            /*background: #2f413d;*/
 
+        .boz-header {
+            position: absolute;
+            z-index: 1000;
+            width: 100%;
+            height: 20px;
+
+            background: rgba(82, 82, 82, 0.5);
+            text-align: center;
+            color: #fff;
+        }
+
+        .wrap {
+            overflow: scroll;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .wrap .inner {
+            position: absolute;
+            min-width: 100%;
+            min-height: 100%;
+            padding-top: 20px;
+        }
+
+
+        /*text-shadow: 1px 1px 1px #222;*/
+        #content pre {
+            background: #222222;
         }
 
         .blueprint {
@@ -43,13 +70,6 @@
             background-image: linear-gradient(rgba(0, 0, 0, 0.6) 2px, transparent 2px), linear-gradient(90deg, rgba(0, 0, 0, 0.6) 1px, transparent 2px), linear-gradient(rgba(255, 255, 255, .3) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .3) 1px, transparent 1px);
         }
 
-        .boz-header {
-            height: 20px;
-            background: rgba(82, 82, 82, 0.5);
-            text-align: center;
-            color: #fff;
-        }
-
         #source {
             background: #333;
             padding: 3px 5px;
@@ -65,9 +85,11 @@
     <span class="active-hid" onclick="document.getElementById('content').classList.toggle('lettercell')">[√]</span>
     <span class="param">-</span>
 </header>
-<div id="content">#^0
-    ˜˚¬˙ƒ®´∂ç√∫˜Ω
+<div class="wrap">
+    <div id="content" class="inner">#^0
+        ˜˚¬˙ƒ®´∂ç√∫˜Ω
 
+    </div>
 </div>
 </body>
 

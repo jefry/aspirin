@@ -14,7 +14,7 @@ var jetpack = require('fs-jetpack');
 var coffee = require('coffee-script/register');
 var appRoot = remote.app.getAppPath();
 var Knows = require(appRoot + '/system/knows');
-
+var jade = require('jade');
 
 //UTILS
 
@@ -22,7 +22,6 @@ function van_dump(sval) {
   //arguments
   return JSON.stringify(sval, null, 2);
 }
-
 
 
 function setContent(value) {
@@ -37,10 +36,6 @@ function getContent(value) {
 //
 //}
 //
-
-
-
-
 
 
 var runed = {};
@@ -84,18 +79,23 @@ function createBrowser(url) {
 var nm = 0;
 function createMin(name) {
   name = name || 'min_' + nm++;
-  var w = windowManager.createNew(name, 'Min', _wpaths.min, 'min');
+  var w = !!(windowManager.windows.hasOwnProperty(name))
+    ? windowManager.get(name)
+    : windowManager.createNew(name, 'Min', _wpaths.min, 'min');
   w.open();
   w.execute(`document.querySelector('.boz-header .param').innerText = '${name}'`);
   return w;
 }
 
 
-function createEditor(name) {
+function createEditor(name, command, opt) {
   name = name || 'editor_' + remote.app._enm++;
-  var w = windowManager.createNew(name, 'Editor', _wpaths.editor);
+  var w = !!(windowManager.windows.hasOwnProperty(name))
+    ? windowManager.get(name)
+    : windowManager.createNew(name, 'Editor', _wpaths.editor);
   w.open();
-  w.execute(`document.querySelector('.boz-header .param').innerText = '${name}'`);
+  if (command)
+    w.execute(`Knows.run('${command}', '${opt}')`);
   return w;
 }
 

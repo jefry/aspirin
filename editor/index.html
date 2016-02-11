@@ -80,8 +80,12 @@
                 <span id="wid" class="icon icon-text"></span>
             </button>
             <button class="btn btn-mini " onclick="runFile(this)">
-                <span class="icon icon-flow-cascade icon-text">  </span>
+                <span class="icon icon-traffic-cone">  </span>
                 <span id="title"></span>
+            </button>
+            <button id="isotop" class="btn btn-mini btn-isotop "
+                    onclick="var b_isotop = !cw.isAlwaysOnTop();cw.setAlwaysOnTop(b_isotop);this.classList.toggle('active',b_isotop);">
+                <span class="icon icon-eye"></span>
             </button>
         </div>
 
@@ -106,7 +110,9 @@
             </div>
             <div id="second_toolbar" class="toolbar .toolbar-mini toolbar-shiftleft bar hide"></div>
             <div id="editor" class="floped"></div>
-            <div id="composite">
+            <div id="composite_wrap">
+                <div id="composite">
+                </div>
             </div>
 
             <div class="result_wraper result">

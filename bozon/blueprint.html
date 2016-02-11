@@ -20,6 +20,17 @@
             -webkit-app-region: no-drag;
         }
 
+        .boz-header {
+            position: absolute;
+            z-index: 1000;
+            width: 100%;
+            height: 20px;
+
+            background: rgba(82, 82, 82, 0.5);
+            text-align: center;
+            color: #fff;
+        }
+
         .wrap {
             overflow: scroll;
             position: relative;
@@ -27,34 +38,39 @@
             height: 100%;
         }
 
-        .blueprint {
+        .wrap .inner {
+            position: absolute;
             min-width: 100%;
             min-height: 100%;
-            -webkit-app-region: drag;
-            font-family: monospace;
+            padding-top: 20px;
+        }
 
+        .blueprint {
+
+            font-family: monospace;
+            -webkit-app-region: drag;
             background-color: rgba(34, 102, 153, 0.54);
-            background-image: linear-gradient(rgba(255, 255, 255, 0.7) 2px, transparent 2px), linear-gradient(90deg, rgba(255, 255, 255, 0.7) 1px, transparent 2px), linear-gradient(rgba(255, 255, 255, .3) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .3) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6) 2px, transparent 2px), linear-gradient(90deg, rgba(0, 0, 0, 0.6) 1px, transparent 2px), linear-gradient(rgba(255, 255, 255, .3) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .3) 1px, transparent 1px);
             background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
             background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
             /*filter: blur(20px);*/
         }
 
-        .pre {
-            white-space: pre;
+        .blueprint pre {
+            /*white-space: pre;*/
             margin: 0;
+            /*min-width: 100%;*/
+            /*min-height: 100%;*/
+
         }
 
-        .pre.lettercell {
+        .blueprint.bright {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.7) 2px, transparent 2px), linear-gradient(90deg, rgba(255, 255, 255, 0.7) 1px, transparent 2px), linear-gradient(rgba(255, 255, 255, .3) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .3) 1px, transparent 1px);
+
+        }
+
+        .blueprint.lettercell pre {
             letter-spacing: 0.94em;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.6) 2px, transparent 2px), linear-gradient(90deg, rgba(0, 0, 0, 0.6) 1px, transparent 2px), linear-gradient(rgba(255, 255, 255, .3) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .3) 1px, transparent 1px);
-        }
-
-        .boz-header {
-            height: 20px;
-            background: rgba(82, 82, 82, 0.5);
-            text-align: center;
-            color: #fff;
         }
 
         #source {
@@ -69,11 +85,12 @@
 
 <body>
 <header class="boz-header">
+    <span class="active-hid" onclick="document.getElementById('content').classList.toggle('bright')">[æ]</span>
     <span class="active-hid" onclick="document.getElementById('content').classList.toggle('lettercell')">[√]</span>
 </header>
 <div class="wrap">
-    <div class="blueprint">
-        <pre class="pre">#^0 ˜˚¬˙ƒ®´∂ç√∫˜Ω
+    <div id="content" class="inner blueprint">
+        <pre>#^0 ˜˚¬˙ƒ®´∂ç√∫˜Ω
 1 xxxxxxxx
 2 yyyyyyyy
 3 ________

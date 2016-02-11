@@ -41,24 +41,24 @@ function newTransparentWindow (url, options) {
     event.preventDefault();
     //
     var wb = cw.getBounds()
-    // cw.setSize(100,100);
-    // cw.setPosition(wb.x-105, wb.y+25)
+     cw.setSize(100,100);
+     cw.setPosition(wb.x-105, wb.y+25)
     options.x = wb.x
     options.y = wb.y
     //
     var nw = newTransparentWindow(url, options);
-    // nw.on('move',function(){
-    //
-    //   var nwb = nw.getBounds()
-    //   cw.setPosition(nwb.x-105, nwb.y+25)
-    // })
-    // nw.on('closed',function(){
-    //
-    //   cw.setBounds(wb)
-    // })
-    // cw.on('closed',function(){
-    //   nw.off('closed')
-    // })
+     nw.on('move',function(){
+
+       var nwb = nw.getBounds()
+       cw.setPosition(nwb.x-105, nwb.y+25)
+     })
+     nw.on('closed',function(){
+
+       cw.setBounds(wb)
+     })
+     cw.on('closed',function(){
+       nw.off('closed')
+     })
 
 
   })
