@@ -38,6 +38,8 @@ function getContent(value) {
 //
 
 
+
+
 var runed = {};
 
 function once(name, func) {
@@ -69,8 +71,11 @@ function createBozon() {
 }
 
 var n = 0;
-function createBrowser(url) {
-  var w = windowManager.createNew('bro_' + n++, 'Bro', url, 'bro');
+function createBrowser(url, name) {
+  name = name || 'bro_' + nm++;
+  var w = !!(windowManager.windows.hasOwnProperty(name))
+    ? windowManager.get(name)
+    : windowManager.createNew(name, 'Bro', url, 'bro');
   w.open();
   return w;
 }

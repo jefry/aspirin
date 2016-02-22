@@ -103,3 +103,10 @@ $RECYCLE.BIN/
 *.lnk
 
 # Created by .ignore support plugin (hsz.mobi)
+
+allsrc.js
+appvir/
+data/
+sandbox/d.json
+temp1/
+temp2/

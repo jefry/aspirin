@@ -4,6 +4,7 @@
   "main": "main.js",
   "dependencies": {
     "algorithms": "^0.9.1",
+    "bulma": "0.0.14",
     "codemirror": "^5.10.0",
     "cson": "^3.0.2",
     "cson-config": "^0.1.12",
@@ -18,6 +19,7 @@
     "nedb": "^1.7.1",
     "require-cson": "^0.1.0",
     "underscore": "^1.8.3",
+    "wireless-osx": "0.0.1",
     "x-ray": "^2.0.2"
   },
   "devDependencies": {
