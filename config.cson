@@ -48,7 +48,7 @@ toolbarWindowSetup:
     "experimental-features": true
     "experimental-canvas-features": true
     "subpixel-font-scaling": true
-    "overlay-scrollbars": true
+    "overlay-scrollbars": false
 
 minWindowSetup:
   width: 100
@@ -70,7 +70,7 @@ minWindowSetup:
     "experimental-features": true
     "experimental-canvas-features": true
     "subpixel-font-scaling": true
-    "overlay-scrollbars": true
+    "overlay-scrollbars": false
 
 browserWindowSetup:
   width: 640
