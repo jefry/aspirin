@@ -10,9 +10,13 @@ var CodeMirror = require('codemirror');
 window.un$ = window.$
 
 window.$ = require('jquery');
+localStorage.Knows = localStorage.Knows || "[]"
+
+
 //todo: setup install script!
-localStorage.Knows = localStorage.Knows ||
-  `[null,{"sourceText":"// click yellow |^| button for run code\nvar message = 'Hello world!!'\n\nfunction try_aspirine(msg){\n alert(msg)\n // cw - is a current window\n cw.setPosition(400,400)\n return cw.getBounds()\n}\n\ntry_aspirine(message)\n//see result below\n\n"}]`;
+if (!JSON.parse(localStorage.Knows)[1]) {
+  localStorage.Knows = `[null,{"sourceText":"// click yellow |^| button for run code\nvar message = 'Hello world!!'\n\nfunction try_aspirine(msg){\n alert(msg)\n // cw - is a current window\n cw.setPosition(400,400)\n return cw.getBounds()\n}\n\ntry_aspirine(message)\n//see result below\n\n"}]`;
+}
 
 var justData = currentKnows();
 
@@ -89,7 +93,7 @@ just.edit = function (name, btn) {
   $('#second_toolbar').removeClass('act-edit');
 };
 
-just.file = appPath+'/editor/justFunc.json';
+just.file = appPath + '/editor/justFunc.json';
 
 
 just.compile = function (rawFunc, name) {
@@ -262,7 +266,7 @@ var isAutoRuned = false;
 var timeout = 100;
 function justAutoRun() {
   if (!isAutoRuned) {
-    isAutoRuned = setInterval(handleRunButton,timeout);
+    isAutoRuned = setInterval(handleRunButton, timeout);
   } else {
     clearInterval(isAutoRuned);
     isAutoRuned = false;
