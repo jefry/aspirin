@@ -14,3 +14,7 @@ just see the future
 
 
 windows version a bit later
+try this in `package.json`
+
+`"start": ".\\node_modules\\.bin\\electron.cmd .",
+"build": ".\\node_modules\\.bin\\electron-rebuild.cmd",`
