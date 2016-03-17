@@ -17,5 +17,6 @@
   "ToT": "q = !(typeof q == 'boolean') || !q;\nexw = [\"toolbar\", \"listknows\", \"showTime\", \"fulloverlay\"];\n_(windowManager.windows).chain()\n  .filter(function(w){\n    return !exw.includes(w.name)\n  })\n  .each(function(w){\n  w.object.setAlwaysOnTop(q);\n})\n\n",
   "ignore_mouse": "\nw = getWin(just.name)\nw.setIgnoreMouseEvents(!w.isIgnoreMouseEvents())\n",
   "jetpack_sample": "\njetpack.find(remote.app.getHomeDir()+'/Desktop/',\n             { matching: 'Screen Shot*'})\n",
-  "chromeAllTabs": "\nalltabs = jetpack.read('../allTabs_chrome.json', 'json');\njustShowResult(_(alltabs).pluck('url').join('\\n'))\n"
+  "chromeAllTabs": "\nalltabs = jetpack.read('../allTabs_chrome.json', 'json');\njustShowResult(_(alltabs).pluck('url').join('\\n'))\n",
+  "editor_0": "tf = false || !tf\nw = getWin(just.name)\nw.object.setIgnoreMouseEvents(tf)\n"
 }

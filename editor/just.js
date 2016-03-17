@@ -38,7 +38,7 @@ just.setName = function (name) {
 };
 
 //just.setName('#@%');
-
+localStorage.justOptions = localStorage.justOptions || "[]";
 just.syncOptions = function (data) {
   var dk = JSON.parse(localStorage.justOptions);
   if (data) {
@@ -88,7 +88,7 @@ just.edit = function (name, btn) {
   $('#second_toolbar').removeClass('act-edit');
 };
 
-just.file = '/Users/rainerg/ajr/Aspirin/editor/justFunc.json';
+just.file = appPath+'/editor/justFunc.json';
 
 
 just.compile = function (rawFunc, name) {
