@@ -14,9 +14,11 @@ localStorage.Knows = localStorage.Knows || "[]"
 
 
 //todo: setup install script!
-if (JSON.parse(localStorage.Knows)[1]==null) {
+if (!JSON.parse(localStorage.Knows)[1] || !JSON.parse(localStorage.Knows)[1].sourceText) {
 
-  dob = {"sourceText":"// click yellow |^| button for run code\nvar message = 'Hello world!!'\n\nfunction try_aspirine(msg){\n alert(msg)\n // cw - is a current window\n cw.setPosition(400,400)\n return cw.getBounds()\n}\n\ntry_aspirine(message)\n//see result below\n\n"};
+  dob = {
+    "sourceText":"// click yellow |^| button for run code\nvar message = 'Hello world!!'\n\nfunction try_aspirine(msg){\n alert(msg)\n // cw - is a current window\n cw.setPosition(400,400)\n return cw.getBounds()\n}\n\ntry_aspirine(message)\n//see result below\n\n"
+  }
   currentKnows(dob, 1)
 }
 
