@@ -10,7 +10,7 @@ var CodeMirror = require('codemirror');
 window.un$ = window.$
 
 window.$ = require('jquery');
-localStorage.Knows = localStorage.Knows || "[]"
+localStorage.Knows = localStorage.Knows || "[null, null]"
 
 
 //todo: setup install script!
