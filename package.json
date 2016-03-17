@@ -14,6 +14,7 @@
     "electron-rebuild": "^1.0.2",
     "epipebomb": "^0.1.1",
     "fs-jetpack": "^0.7.1",
+    "jade": "^1.11.0",
     "jquery": "^2.2.0",
     "json-fs": "^1.1.1",
     "md5": "^2.0.0",
