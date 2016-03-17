@@ -14,16 +14,20 @@ localStorage.Knows = localStorage.Knows || "[]"
 
 
 //todo: setup install script!
-if (!JSON.parse(localStorage.Knows)[1]) {
-  localStorage.Knows = `[null,{"sourceText":"// click yellow |^| button for run code\nvar message = 'Hello world!!'\n\nfunction try_aspirine(msg){\n alert(msg)\n // cw - is a current window\n cw.setPosition(400,400)\n return cw.getBounds()\n}\n\ntry_aspirine(message)\n//see result below\n\n"}]`;
+if (JSON.parse(localStorage.Knows)[1]==null) {
+
+  dob = {"sourceText":"// click yellow |^| button for run code\nvar message = 'Hello world!!'\n\nfunction try_aspirine(msg){\n alert(msg)\n // cw - is a current window\n cw.setPosition(400,400)\n return cw.getBounds()\n}\n\ntry_aspirine(message)\n//see result below\n\n"};
+  currentKnows(dob, 1)
 }
 
 var justData = currentKnows();
 
-function currentKnows(data) {
+function currentKnows(data, id) {
+  id = id || cw.id;
+
   var dk = JSON.parse(localStorage.Knows);
   if (data) {
-    dk[cw.id] = data;
+    dk[id] = data;
     localStorage.Knows = JSON.stringify(dk);
   }
 
