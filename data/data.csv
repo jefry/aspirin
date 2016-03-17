@@ -1,0 +1,36 @@
+id,name,priority,who,time,status
+T-024,Organisation list in directory,MUST,Joe,5,Complete
+T-015,Make term Commissions customisable,MUST,Natasha,6,Complete
+T-016,Comments popup on select rates,MUST,Mike,3,In Progress
+T-0169,Upgrade Centos Box,MUST,Joe,2,In Progress
+T-013,Search in Documents on selected folder,MUST,Natasha,6,In Progress
+T-014,Separate Document system for LA and Legals,MUST,Joe,9,In Progress
+T-017,Demo of Look and Feel of Documents front end,MUST,Natasha,5,In Progress
+T-021,Fix error where forum filename is greater than 100chars,MUST,Mike,4,Not Started
+T-025,Fix admin so structure of categories displayed,MUST,Mike,2.5,Complete
+T-027,Reorganise git repos in Assembla,MUST,Joe,3,Not Started
+T-033,Tree not showing correctly in documents,MUST,Natasha,1,In Progress
+T-052,Add Cacheing,MUST,Mike,1.5,Complete
+T-055,Allow custom ordering of document categories,MUST,Joe,0.5,Not Started
+T-056,Pressing enter on date button triggers cancel,MUST,Joe,1,Not Started
+T-057,Ajax not working on IE when selecting org,MUST,Natasha,6,Not Started
+T-060,Send Reminder Email as required,SHOULD,Mike,3,Complete
+T-061,Attach Document to response in Forum,SHOULD,Joe,4,Not Started
+T-062,Forum thread notifications,SHOULD,Natasha,9,Complete
+T-063,Group email notification,SHOULD,Mike,8,In Progress
+T-064,Admin can see Who is logged in ,SHOULD,Joe,9,Not Started
+T-067,Extend Audit Trail,SHOULD,Natasha,12,Complete
+T-068,Maintenance Links,SHOULD,Mike,4,Complete
+T-094,Browse prices button,SHOULD,Joe,6,Not Started
+T-095,Group email to be only available to the administrator,SHOULD,Natasha,5,Complete
+T-096,Update cribsheet,COULD,Mike,2,Not Started
+T-0103,Awarded missing from Estimated Tab,COULD,Joe,7,Complete
+T-0105,New cribsheet,COULD,Natasha,7,Not Started
+T-0111,Document not being added on forum response,COULD,Mike,6,Not Started
+T-0114,Can't delete users once active,WISH,Joe,3,Not Started
+T-0125,Add course organiser on notification,WISH,Natasha,2.5,In Progress
+T-0126,Setup demonstration system for Demo,MUST,Joe,3,Not Started
+T-0133,Fix forum pagination problem properly,MUST,Natasha,3,Not Started
+T-0145,"In Directory, tickbox to select all filtered users",MUST,Joe,3,Complete
+T-0146,Merge user and user profile in admin,MUST,Natasha,2,Not Started
+T-0147,Have multiple documents on an estimate,MUST,Mike,2,Not Started
