@@ -10,8 +10,8 @@ var CodeMirror = require('codemirror');
 window.un$ = window.$
 
 window.$ = require('jquery');
-
-localStorage.Knows = localStorage.Knows || "[]";
+//todo: setup install script!
+localStorage.Knows = localStorage.Knows || `[null,{"sourceText":"// click yellow |^| button fo…try_aspirine(message)\n\n//see result below \n"}]`;
 
 var justData = currentKnows();
 
