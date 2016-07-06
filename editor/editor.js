@@ -294,11 +294,12 @@ _scrl = function (e) {
 
 
 syncSizeLines = function () {
-  console.log('origin', document.body.offsetHeight);
-  _sy()
+  //console.log('origin', document.body.offsetHeight);
+  _syd()
 }
 
-_sy = _.debounce(function () {
+
+_sy =function () {
   //--------------?
   display = remote.screen.getPrimaryDisplay().bounds;
   //--------------?
@@ -344,4 +345,6 @@ _sy = _.debounce(function () {
   // scrollerElement.style.width = containerWidth + 'px';
   // scrollerElement.style.height = containerHeight + 'px';
 
-}, 100);
+}
+
+var _syd = _.debounce(_sy, 100);

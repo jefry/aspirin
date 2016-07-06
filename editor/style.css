@@ -28,8 +28,11 @@ button {
 }
 
 #main {
-    height: 100%;
-    position: relative;
+    /*height: 100%;*/
+    width: 100%;
+    position: absolute;
+    top: 22px;
+    bottom: 0;
 }
 
 #main .pane {

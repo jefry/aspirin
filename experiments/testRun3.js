@@ -148,9 +148,9 @@ function duality(EL_BUTTON, autostart, quant){
 			Object.keys(d.speed).forEach(function(k){
 					d[k] += d.speed[k]; //!!!Numbers
       })
-      
-      
-      
+
+
+
     }
 	
   function check(d,k){

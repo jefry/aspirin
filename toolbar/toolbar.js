@@ -1,9 +1,6 @@
 var Person, Toolbar;
 
 Toolbar = {};
-function giveWindow(name) {
-  return getWin(name) || createMin(name);
-}
 
 
 function calcPosition(bounds) {
@@ -36,24 +33,15 @@ Toolbar.listKnows = function () {
   dw = giveWindow(name);
   dw.execute(`Knows.run('${name}')`)
   dw.object.setBounds({
-    "x": 1455,
-    "y": 55,
+    "x": 1460,
+    "y": 30,
     "width": 150,
     "height": 275
   }, true);
 };
 
 Toolbar.showAppDir = function () {
-  var dw, name;
-  name = 'dir';
-  dw = giveWindow(name);
-  dw.object.setBounds({
-    "x": 1300,
-    "y": 55,
-    "width": 150,
-    "height": 275
-  }, true);
-
+  Knows.run('showAppDir')
 };
 
 Toolbar.addtool = 1111;

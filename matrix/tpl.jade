@@ -1,0 +1,39 @@
+mixin btn(text,icon)
+    .btn.btn-large.btn-default&attributes(attributes)
+        span.icon(class!="icon-#{icon}")
+        //span.icon.icon-text
+        | #{text}
+style
+    :stylus
+        .title
+            font-size: 20px
+
+        .large-font
+            select.btn
+                height: 40px
+            .btn
+                font-size: 18px
+            span.icon
+                color: black
+                font-size: 22px
+                margin-right: 7px
+.toolbar
+    h1.title #{name}
+    .toolbar-actions
+        .large-font.btb-group
+            +btn('!','plus')#mquantadd
+            +btn('!','cw')(class="btn-primary")#mreload
+            .pull-right
+                span.icon.icon-text#qcount -
+                select.btn.btn-default#mtimeout
+                    option 0
+                    option 50
+                    option(selected) 200
+                    option 500
+                    option 1000
+                +btn('run','play')(class="btn-warning")#mrun
+                +btn('step','to-end')#mstep
+                +btn('pause','pause')(class="btn-positive")#mpause
+//h3.title ---
+pre#preout
+

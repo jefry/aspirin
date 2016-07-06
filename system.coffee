@@ -1,6 +1,8 @@
 app = require 'app'
 
+app.Database = require __dirname + '/system/database'
 app.knows = require __dirname + '/system/knows'
+app.matrix = require __dirname + '/matrix/matrix'
 
 app._enm = 0;
 # Module to control application life.
@@ -59,7 +61,7 @@ app.on 'ready', ->
   #
   we1 = windowManager.createNew('toolbar', 'Toolbar', 'file://' + __dirname + '/toolbar/toolbar.html', 'toolbar');
   we1.open();
-  we1.move(PrimaryDisplay.bounds.width - 70, 50);
+  we1.move(PrimaryDisplay.bounds.width - 63, 25);
 
 
   #  we1.execute('justUpdate()');

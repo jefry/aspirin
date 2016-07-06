@@ -16,13 +16,24 @@ body {
 .tool {
     background: #444444;
     margin: 3px;
-    padding: 3px;
-    border-radius: 2px;
+    padding: 5px;
+    border-radius: 5px;
     height: 54px;
 }
 .tool:hover {
     background: #555555;
 
 
+}
+
+.tool.iconized{
+    overflow: hidden;
+}
+
+.tool .icon-large {
+    font-size: 45px;
+    line-height: 0em;
+    color: darkorange;
+    padding-left: 1px;
 }
 

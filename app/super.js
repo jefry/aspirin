@@ -13,7 +13,9 @@ var _ = require('underscore');
 var jetpack = require('fs-jetpack');
 var coffee = require('coffee-script/register');
 var appRoot = remote.app.getAppPath();
+var Database = require(appRoot + '/system/database');
 var Knows = require(appRoot + '/system/knows');
+var Matrix = require(appRoot + '/matrix/matrix');
 var jade = require('jade');
 
 //UTILS
@@ -23,6 +25,16 @@ function van_dump(sval) {
   return JSON.stringify(sval, null, 2);
 }
 
+var textMode = false;
+
+function setData(value) {
+  textMode ? setText(value) : setContent(value);
+}
+
+function setText(value) {
+  setContent(`<pre id="context"></pre>`);
+  document.getElementById('context').innerText = value;
+}
 
 function setContent(value) {
   document.getElementById('content').innerHTML = value;
@@ -64,6 +76,13 @@ function genPath(part) {
 
 function getWin(name) {
   return windowManager.get(name);
+}
+
+function giveWin(name) {
+  return getWin(name) || createMin(name);
+}
+function giveWindow(name) {
+  return getWin(name) || createMin(name);
 }
 
 function createBozon() {

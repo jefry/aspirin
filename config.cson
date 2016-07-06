@@ -31,7 +31,7 @@ defaultWindowSetup:
 
 toolbarWindowSetup:
   width: 60
-  height: 300
+  height: 310
   transparent: true
   acceptFirstMouse: true
   enableLargerThanScreen: true
