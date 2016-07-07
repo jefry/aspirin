@@ -1,9 +1,7 @@
-const remote = require('remote');
-var Menu = remote.require('menu');
-var MenuItem = remote.require('menu-item');
-var dialog = remote.require('dialog');
+const {remote,clipboard,BrowserWindow} = require('electron');
+const {Menu, MenuItem,dialog} = remote;
+
 var fs = require("fs");
-var clipboard = require('clipboard');
 var cw = remote.getCurrentWindow();
 var appPath = remote.app.getAppPath();
 var utils = remote.require(appPath + '/experiments/utils');

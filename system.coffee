@@ -1,4 +1,6 @@
-app = require 'app'
+
+`const electron = require('electron')
+const {app, BrowserWindow} = electron`
 
 app.Database = require __dirname + '/system/database'
 app.knows = require __dirname + '/system/knows'
@@ -8,8 +10,8 @@ app._enm = 0;
 # Module to control application life.
 fs = require('fs')
 
-BrowserWindow = require('browser-window')
 windowManager = require('electron-window-manager')
+
 #const {app, BrowserWindow} = require('electron')
 #var testcc = require('cson-config').load();
 
@@ -31,7 +33,7 @@ app.on 'before-quit', ->
   return
 
 app.on 'ready', ->
-  PrimaryDisplay = require('screen').getPrimaryDisplay()
+  PrimaryDisplay = electron.screen.getPrimaryDisplay()
 
 
   windowManager.init
@@ -52,7 +54,7 @@ app.on 'ready', ->
   we = windowManager.createNew('editor', 'Editor', 'file://' + __dirname + '/editor/index.html')
   we.open()
 #  we.toggleDevTools()
-  we.move 'bottomRight'
+  #we.move 'bottomRight'
   we.execute 'justUpdate()'
   #
   wb = windowManager.createNew('bozon', 'Bozon', 'file://' + __dirname + '/bozon/index.html')

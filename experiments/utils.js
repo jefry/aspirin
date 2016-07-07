@@ -6,7 +6,7 @@ var path = require('path');
 var util = require('util');
 // var mime = require('mime');
 
-const BrowserWindow = require('browser-window');
+//const BrowserWindow = require('browser-window');
 
 
 function newTransparentWindow (url, options) {
