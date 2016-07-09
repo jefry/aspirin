@@ -8,7 +8,7 @@
   "sJ2": "var res = _(eval(editor.getValue())).chain()\n  .mapObject(function(v, k){\n    var tpl = `<div class=\"toolbar bar result\">\n<pre> <big>${k}</big>\t\n   <code>${_.escape(String(v).trim())}</code>\n</pre></div>`\n    return tpl;\n  })\n  .values()\n\t//.first(7)\n  .value()\n  .join('<hr/>\\n')\n\n$('#composite').html(res);\nsyncSizeLines()",
   "clr": "//createBrowser('http://gooogle.com')\n$('#composite').html('');\n$('body').css('backgroundColor','transparent');\njustShowResult(null)\ndocument.querySelector('header').style.background = 'rgba(41, 120, 177, 0.5)';\n",
   "md5": "hash = md5(editor.getValue())\njustShowResult(van_dump(hash))\n",
-  "ksave": "if(just.name){\n\tKnows.save(just.name, editor.getValue())\n  if(w = getWin(just.name)){\n  \tw.execute(\"Knows.run('\"+just.name+\"')\")\n  \tjustShowResult('<b style=\"color:orange;\">Saved code and Updated window {'+just.name+'}</b>', true)\n  }else{\n    justShowResult('<b style=\"color:green;\">Only saved code</b>', true)\n  }\n}else{\n  just.run('add');\n}\n'wait'\n",
+  "ksave": "if(just.name){\n  if(!isAutoRuned)\n\tKnows.save(just.name, editor.getValue());\n  if(w = getWin(just.name)){\n  \tw.execute(\"Knows.run('\"+just.name+\"')\")\n  \tjustShowResult('<b style=\"color:orange;\">Saved code and Updated window {'+just.name+'}</b>', true)\n  }else{\n    justShowResult('<b style=\"color:green;\">Only saved code</b>', true)\n  }\n}else{\n  just.run('add');\n}\n'wait'\n",
   "Œ": "\n$('#editor').toggleClass('fliped')\n\n",
   "ß": "\n$('#composite').toggleClass('joinY')\nsyncSizeLines()\n",
   "krun": "if(w = getWin(just.name))\n  w.execute(`Knows.run('${just.name}');`)\nelse\n\tKnows.run('editor');\n\n",
