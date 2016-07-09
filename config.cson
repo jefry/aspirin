@@ -17,13 +17,13 @@ defaultWindowSetup:
   alwaysOnTop: true
   webSecurity: false
   zoomFactor: 1
-  titleBarStyle: "hidden"
   show: true
   resizable: true
   plugins: true
   frame: false
   hasShadow: false
   "web-preferences":
+    scrollBounce: true
     "experimental-features": true
     "experimental-canvas-features": true
     "subpixel-font-scaling": true
@@ -38,7 +38,6 @@ toolbarWindowSetup:
   alwaysOnTop: true
   webSecurity: false
   zoomFactor: 1
-  titleBarStyle: "hidden"
   show: true
   resizable: true
   plugins: true
@@ -59,7 +58,6 @@ minWindowSetup:
   alwaysOnTop: true
   webSecurity: false
   zoomFactor: 1
-  titleBarStyle: "hidden"
   show: true
 #  backgroundColor:false
   resizable: true
@@ -103,7 +101,7 @@ noFrameWindowSetup:
   alwaysOnTop: true
   webSecurity: false
   zoomFactor: 1
-  titleBarStyle: "hidden"
+
   show: true
   resizable: true
   plugins: true
@@ -125,7 +123,6 @@ noNodeWindowSetup:
   alwaysOnTop: false
   webSecurity: false
   zoomFactor: 1
-  titleBarStyle: "hidden"
   show: true
   resizable: true
   plugins: true

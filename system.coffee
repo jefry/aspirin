@@ -29,7 +29,7 @@ app.on 'window-all-closed', ->
   return
 
 app.on 'before-quit', ->
-  app.quit()
+  #app.quit()
   return
 
 app.on 'ready', ->
