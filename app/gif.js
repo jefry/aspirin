@@ -1,4 +1,4 @@
-var cw = require('remote').getCurrentWindow()
+var cw = remote.getCurrentWindow()
 
 var m = 600
 function move(){

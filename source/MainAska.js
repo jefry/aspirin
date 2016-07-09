@@ -1,10 +1,10 @@
-var cw = require('remote').getCurrentWindow()
+var cw = remote.getCurrentWindow()
 var n = 100
 var m = 10
 function move(){
     //m = m%629
     m++;
-    pp = require('remote').require("robotjs").getMousePos()
+    pp = remote.require("robotjs").getMousePos()
 
 
          x = Math.floor(pp.x + Math.sin(m/100) * (m/n))

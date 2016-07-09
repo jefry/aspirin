@@ -7,7 +7,6 @@
     "cson": "^3.0.2",
     "cson-config": "^0.1.12",
     "d3": "^3.5.16",
-    "electron-prebuilt": "^1.2.6",
     "electron-window-manager": "^1.0.1",
     "fs-jetpack": "^0.7.1",
     "jade": "^1.11.0",
@@ -22,13 +21,15 @@
     "x-ray": "^2.0.2"
   },
   "devDependencies": {
-    "robotjs": "^0.3.7",
+
+    "electron-rebuild": "^1.1.5",
+    "robotjs": "^0.4.4",
     "tableify": "^1.0.0",
     "wireless-osx": "0.0.1"
   },
   "scripts": {
     "start": "./node_modules/.bin/electron .",
-    "build": "./node_modules/.bin/electron-rebuild",
+    "rebuild": "./node_modules/.bin/electron-rebuild",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
