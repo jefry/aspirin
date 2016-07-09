@@ -10,17 +10,18 @@ style
 
         .large-font
             select.btn
-                height: 40px
+                height: 33px
             .btn
-                font-size: 18px
+                font-size: 14px
             span.icon
                 color: black
-                font-size: 22px
-                margin-right: 7px
+                font-size: 15px
+                margin-right: 2px
 .toolbar
     h1.title #{name}
     .toolbar-actions
         .large-font.btb-group
+            +btn('!','menu')#mview
             +btn('!','plus')#mquantadd
             +btn('!','cw')(class="btn-primary")#mreload
             .pull-right
