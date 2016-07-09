@@ -21,11 +21,9 @@
     "x-ray": "^2.0.2"
   },
   "devDependencies": {
-
     "electron-rebuild": "^1.1.5",
     "robotjs": "^0.4.4",
-    "tableify": "^1.0.0",
-    "wireless-osx": "0.0.1"
+    "tableify": "^1.0.0"
   },
   "scripts": {
     "start": "./node_modules/.bin/electron .",
