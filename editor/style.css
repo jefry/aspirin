@@ -79,6 +79,10 @@ button {
     color: #fcfcfc;
 }
 
+.result table {
+    color: #111111;
+}
+
 .result .evalerror {
     color: #ff391e;
 }

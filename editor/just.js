@@ -254,6 +254,9 @@ function justShowResult(result, isHTML) {
   return result;
 }
 
+function jLog(result){
+  return justShowResult(van_dump(result))
+}
 
 function justInfo() {
   var re = [

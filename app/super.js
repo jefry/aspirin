@@ -1,9 +1,10 @@
 const {remote,clipboard,BrowserWindow} = require('electron');
 const {Menu, MenuItem,dialog} = remote;
+const Util = require('util');
 
 var fs = require("fs");
 var cw = remote.getCurrentWindow();
-var appPath = remote.app.getAppPath();
+var appPath = remote.app.aspirinRoot;
 var utils = remote.require(appPath + '/experiments/utils');
 var windowManager = remote.require('electron-window-manager');
 var md5 = require('md5');

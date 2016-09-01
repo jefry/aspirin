@@ -1,11 +1,11 @@
 # Comments!!!
 
 # An Array with no commas!
-greatDocumentaries: [
-  'earthlings.com'
-  'forksoverknives.com'
-  'cowspiracy.com'
-]
+# greatDocumentaries: [
+#   'earthlings.com'
+#   'forksoverknives.com'
+#   'cowspiracy.com'
+# ]
 
 # An Object without braces!
 defaultWindowSetup:
@@ -22,7 +22,27 @@ defaultWindowSetup:
   plugins: true
   frame: false
   hasShadow: false
-  "web-preferences":
+  webPreferences:
+    scrollBounce: true
+    "experimental-features": true
+    "experimental-canvas-features": true
+    "subpixel-font-scaling": true
+    "overlay-scrollbars": true
+editorWindowSetup:
+  width: 680
+  height: 240
+  transparent: true
+  acceptFirstMouse: true
+  enableLargerThanScreen: true
+  alwaysOnTop: false
+  webSecurity: false
+  zoomFactor: 1
+  show: true
+  resizable: true
+  plugins: true
+  frame: false
+  hasShadow: false
+  webPreferences:
     scrollBounce: true
     "experimental-features": true
     "experimental-canvas-features": true
@@ -43,7 +63,7 @@ toolbarWindowSetup:
   plugins: true
   frame: false
   hasShadow: false
-  "web-preferences":
+  webPreferences:
     "experimental-features": true
     "experimental-canvas-features": true
     "subpixel-font-scaling": true
@@ -64,7 +84,7 @@ minWindowSetup:
   plugins: true
   frame: false
   hasShadow: false
-  "web-preferences":
+  webPreferences:
     "experimental-features": true
     "experimental-canvas-features": true
     "subpixel-font-scaling": true
@@ -85,7 +105,7 @@ browserWindowSetup:
   plugins: true
   frame: true
   hasShadow: false
-  "web-preferences":
+  webPreferences:
     preload: "/Users/rainerg/ajr/Aspirin/source/inject2"
     "experimental-features": true
     "experimental-canvas-features": true
@@ -107,7 +127,7 @@ noFrameWindowSetup:
   plugins: true
   frame: false
   hasShadow: false
-  "web-preferences":
+  webPreferences:
     "experimental-features": true
     "experimental-canvas-features": true
     "subpixel-font-scaling": true
@@ -128,7 +148,7 @@ noNodeWindowSetup:
   plugins: true
   frame: true
   hasShadow: false
-  "web-preferences":
+  webPreferences:
     preload: "/Users/rainerg/ajr/Aspirin/source/inject2"
     "nodeIntegration": false
     "experimental-features": true
