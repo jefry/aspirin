@@ -92,6 +92,8 @@ button {
 }
 
 .toolbar.toolbar-shiftleft {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;    
     /*padding-left: 30px;*/
     /*border: none;*/
     /*border-left: 30px solid #444444;*/

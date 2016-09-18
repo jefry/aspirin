@@ -207,6 +207,9 @@ onload = function () {
         "Cmd-B": function (instance) {
           handleRunButton()
         },
+        "Ctrl-B": function (instance) {
+          handleRunButton()
+        },
         "Cmd-S": function (instance) {
           handleSaveButton()
         },
