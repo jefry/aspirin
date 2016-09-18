@@ -62,9 +62,9 @@ button {
 #composite.joinY .bar {
     max-height: 50px;
 }
-
+    
 #composite_wrap {
-    margin: 0px 0 0px 29px;
+    margin: 0px 0 -17px 29px;
     overflow: scroll;
 }
 

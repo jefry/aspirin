@@ -198,7 +198,7 @@ onload = function () {
       theme: "lesser-dark",
       value: "\r\n\r\n\r\n",
       // viewportMargin: 5,
-      // scrollbarStyle:'none',
+      scrollbarStyle: 'null',
       extraKeys: {
         "Tab": function (cm) {
           var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
