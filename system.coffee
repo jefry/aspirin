@@ -37,6 +37,10 @@ app.on 'ready', ->
   PrimaryDisplay = electron.screen.getPrimaryDisplay()
 
 
+  global.getAllWin = ->
+     Object.keys(require('electron-window-manager').windows);
+  
+
   windowManager.init
     'devMode': false
     'appBase': __dirname

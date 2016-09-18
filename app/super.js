@@ -1,7 +1,7 @@
 const {remote,clipboard,BrowserWindow} = require('electron');
 const {Menu, MenuItem,dialog} = remote;
 const Util = require('util');
-
+const path = require('path');
 var fs = require("fs");
 var cw = remote.getCurrentWindow();
 var appPath = remote.app.aspirinRoot;
@@ -115,7 +115,7 @@ function createEditor(name, command, opt) {
   name = name || 'editor_' + remote.app._enm++;
   var w = !!(windowManager.windows.hasOwnProperty(name))
     ? windowManager.get(name)
-    : windowManager.createNew(name, 'Editor', _wpaths.editor);
+    : windowManager.createNew(name, 'Editor', _wpaths.editor, 'editor');
   w.open();
   if (command)
     w.execute(`Knows.run('${command}', '${opt}')`);

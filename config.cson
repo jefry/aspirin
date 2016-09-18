@@ -51,7 +51,7 @@ editorWindowSetup:
 
 toolbarWindowSetup:
   width: 60
-  height: 310
+  height: 421
   transparent: true
   acceptFirstMouse: true
   enableLargerThanScreen: true
@@ -75,7 +75,7 @@ minWindowSetup:
   transparent: true
   acceptFirstMouse: true
   enableLargerThanScreen: true
-  alwaysOnTop: true
+  alwaysOnTop: false
   webSecurity: false
   zoomFactor: 1
   show: true
