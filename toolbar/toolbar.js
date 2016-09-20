@@ -3,6 +3,8 @@ var Person, Toolbar;
 Toolbar = {};
 
 
+
+
 function calcPosition(bounds) {
 
 }
@@ -45,6 +47,10 @@ Toolbar.showAppDir = function () {
 };
 
 Toolbar.addtool = 1111;
+
+
+Knows.run('toolbar_scroll_handler');
+
 
 Person = (function () {
   function Person(name1) {
