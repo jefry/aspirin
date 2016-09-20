@@ -336,7 +336,7 @@ _sy =function () {
 
   var totalHeight = editorHeight + upHeight + resultsHeight;
 
-  //editor.setSize(totalWidth, editorHeight);
+  editor.setSize(totalWidth, editorHeight);
   //editor.refresh();
   _currentEditorHeight = totalHeight;
   remote.getCurrentWindow().setSize(totalWidth, totalHeight);
