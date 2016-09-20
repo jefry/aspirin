@@ -6,6 +6,7 @@ app.Database = require __dirname + '/system/database'
 app.knows = require __dirname + '/system/knows'
 app.matrix = require __dirname + '/matrix/matrix'
 
+app.aspirinRoot = app.getAppPath();
 app._enm = 0;
 # Module to control application life.
 fs = require('fs')
@@ -15,9 +16,9 @@ windowManager = require('electron-window-manager')
 #const {app, BrowserWindow} = require('electron')
 #var testcc = require('cson-config').load();
 
-require('cson-config').load('config.cson')
+require('cson-config').load(__dirname + '/config.cson')
 
-config = global['config'] = require('config.cson')
+config = global['config'] = require(__dirname + '/config.cson')
 
 
 #app.commandLine.appendSwitch "js-flags", "--harmony_proxies --harmony_collections"
@@ -36,6 +37,10 @@ app.on 'ready', ->
   PrimaryDisplay = electron.screen.getPrimaryDisplay()
 
 
+  global.getAllWin = ->
+     Object.keys(require('electron-window-manager').windows);
+  
+
   windowManager.init
     'devMode': false
     'appBase': __dirname
@@ -45,21 +50,22 @@ app.on 'ready', ->
       'p5': '/windows/p5test1.html'
 
   windowManager.setDefaultSetup config.defaultWindowSetup
+  windowManager.templates.set 'editor', config.editorWindowSetup
   windowManager.templates.set 'bro', config.browserWindowSetup
   windowManager.templates.set 'min', config.minWindowSetup
   windowManager.templates.set 'nonode', config.noNodeWindowSetup
   windowManager.templates.set 'toolbar', config.toolbarWindowSetup
 
 
-  we = windowManager.createNew('editor', 'Editor', 'file://' + __dirname + '/editor/index.html')
+  we = windowManager.createNew('editor', 'Editor', 'file://' + __dirname + '/editor/index.html', 'editor')
   we.open()
 #  we.toggleDevTools()
   #we.move 'bottomRight'
   we.execute 'justUpdate()'
   #
-  wb = windowManager.createNew('bozon', 'Bozon', 'file://' + __dirname + '/bozon/index.html')
-  wb.open();
-  wb.move PrimaryDisplay.bounds.width - 470, PrimaryDisplay.bounds.height - 50
+  # wb = windowManager.createNew('bozon', 'Bozon', 'file://' + __dirname + '/bozon/index.html')
+  # wb.open();
+  # wb.move PrimaryDisplay.bounds.width - 470, PrimaryDisplay.bounds.height - 50
   #
   we1 = windowManager.createNew('toolbar', 'Toolbar', 'file://' + __dirname + '/toolbar/toolbar.html', 'toolbar');
   we1.open();

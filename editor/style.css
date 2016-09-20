@@ -79,6 +79,14 @@ button {
     color: #fcfcfc;
 }
 
+.result table {
+    color: #111111;
+}
+
+.result table td{
+    border-bottom: 1px solid;
+}
+
 .result .evalerror {
     color: #ff391e;
 }
