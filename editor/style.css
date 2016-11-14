@@ -49,11 +49,11 @@ button {
 }
 
 #result {
-    max-height: 2000px;
+    max-height: 1000px;
     /*-webkit-user-drag: text;*/
     -webkit-user-select: text;
     margin: 0px 0px 0px 29px;
-    padding: 0 0 0 10px;
+    padding: 0 10px 0 10px;
     color: #cccccc;
     background: #333333;
     border-left: #91a327 1px solid;
@@ -129,7 +129,9 @@ button {
     /*background: rgba(77, 77, 77, 0.8);*/
     /*background: rgba(57, 68, 76, 0.9);*/
 }
-
+.toolbar-mini > * {
+    opacity: 1;
+}
 #composite .toolbar {
     margin: 2px 0;
     border-left: #20E9E9 1px solid;

@@ -99,7 +99,7 @@ function handleSaveButton() {
 }
 
 runCodeOverride = false;
-
+evalFN = eval;
 function handleRunButton() {
   if (runCodeOverride)
     return runCodeOverride();
@@ -111,7 +111,7 @@ var isresultHTML = false;
 function runCode(code) {
   isCallShowResult = false;
   try {
-    var result = eval(code);
+    var result = evalFN(code);
     //document.querySelector('header').style.background = 'rgba(41, 120, 177, 0.5)';
     document.querySelector('header').style.background = 'rgba(84, 193, 23, 0.7)';
     if (!isCallShowResult) {
@@ -125,7 +125,7 @@ function runCode(code) {
   } catch (e) {
     document.querySelector('header').style.background = 'rgba(225, 60, 47, 1)';
 
-    justShowResult(`<span class="evalerror"> ${e.name}: ${e.message}</span>`, true);
+    justShowResult(`<span class="evalerror"> ${e.name}: ${e.message} ${e.stack}</span>`, true);
   }
 
 
@@ -160,8 +160,9 @@ function initContextMenu() {
 }
 
 _currentEditorHeight = 0;
+
 scrollPosLimit = function (tryPos) {
-  return _.sortBy([(-_currentEditorHeight + 50), tryPos, 1000])[1];
+  return _.sortBy([(screen.availTop - _currentEditorHeight + 50), tryPos, 1000])[1];
 }
 onload = function () {
 
@@ -259,27 +260,27 @@ _scrl1 = function (e) {
 wheelBuffer = 0;
 
 _scrl = function (e) {
-
+  let TOP = 37+screen.availTop;
 
   var el = e.currentTarget;
   //console.log((e.wheelDeltaY < 0) && ((el.offsetTop + window.screenTop)<60))
   //console.log((el.scrollHeight - el.scrollTop - el.offsetHeight))
   //console.log([composite.scrollHeight, composite.scrollTop, composite.offsetHeight , composite.offsetTop ,screenTop, document.body.offsetHeight])
   //console.log(composite.offsetHeight + composite.offsetTop + screenTop - screen.height)
-
+  
 
   if (e.wheelDeltaY == 0) {
     e.stopImmediatePropagation();
     return false;
   } else if ((e.wheelDeltaY < 0)
-    && ((el.offsetTop + window.screenTop) < 60)
+    && ((el.offsetTop + window.screenTop) < TOP)
     && (el.scrollHeight - el.scrollTop - el.offsetHeight) > 0) { //up
 
 //         console.log('up')
     e.stopImmediatePropagation();
     return true;
   } else if ((e.wheelDeltaY >= 0)
-    && (screen.height - (el.offsetHeight + el.offsetTop + window.screenTop)) < 60
+    && (screen.height - (el.offsetHeight + el.offsetTop + 23+window.screenTop-screen.availTop)) < 60
     && (el.scrollTop > 0)) { //down
 
 //         console.log('down')
@@ -310,8 +311,8 @@ _sy =function () {
   var totalWidth = 680;// container.offsetWidth;
   var resultsHeight = results.offsetHeight;
 
-  if (resultsHeight >= 2000) {
-    resultsHeight = 2000;
+  if (resultsHeight >= 1000) {
+    resultsHeight = 1000;
     results.onmousewheel = _scrl;
 
   } else {

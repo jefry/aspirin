@@ -30,7 +30,7 @@ html += '<pre>'+JSON.stringify(size)+'<pre/>';
 
 //mainWindow.loadURL("data:text/html;charset=utf-8," + encodeURI(html)); 
 
-mainWindow.loadUrl('file://' + __dirname + '/exec.html');
+mainWindow.loadURL('file://' + __dirname + '/exec.html');
 mainWindow.webContents.on("did-finish-load", function() {
 	mainWindow.webContents.executeJavaScript(`setScript("${url}");`);
 });

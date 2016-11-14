@@ -6,16 +6,16 @@ const clipboard = require('electron').clipboard;
 
 var mainWindow;
 
-
+  
 var electronScreen = electron.screen;
 //window.size = electronScreen.getPrimaryDisplay().workAreaSize;
 window.savedBounds = remote.getCurrentWindow().getBounds();
 
-elseWindow = new BrowserWindow({ width: 500, height: 500 });
+elseWindow = new BrowserWindow({ width: 800, height: 500 });
 
 var str = electronScreen.getPrimaryDisplay();
 str = JSON.stringify(str,'',2);
-str += JSON.stringify(remote.getCurrentWebContents(),'',2);
+//str += JSON.stringify(remote.getCurrentWebContents(),'',2);
 var html = [
     "<body>",
       "<h1>It works</h1>",
@@ -34,8 +34,8 @@ tSize = BrowserWindow.fromId(1).getSize();
 window.wcont = BrowserWindow.fromId(1).webContents;
 
 //console.log(wcont)
-BrowserWindow.fromId(1).setSize(300,300);
-BrowserWindow.fromId(1).setPosition(30,20);
+//BrowserWindow.fromId(1).setSize(300,300);
+//BrowserWindow.fromId(1).setPosition(30,20);
 
 wcont.beginFrameSubscription(test);
 
@@ -46,8 +46,8 @@ function test(cont){
 	
   var canvas = document.getElementById("fbuf"); 
 
-  var canvasWidth  = canvas.width = 300;
-  var canvasHeight = canvas.height = 300;
+  var canvasWidth  = canvas.width = 760;
+  var canvasHeight = canvas.height = 600;
   var ctx = canvas.getContext('2d');
   var imageData = ctx.getImageData(0, 0, canvasWidth, canvasHeight);
 
@@ -55,7 +55,7 @@ function test(cont){
   var buf8 = new Uint8ClampedArray(buf);
   var data = new Uint8Array(buf);
   
-  console.log(canvasWidth, canvasHeight)
+  //console.log(canvasWidth, canvasHeight)
   
   //console.log(imageData.data.length)
   // Determine whether Uint32 is little- or big-endian.
@@ -84,7 +84,7 @@ function test(cont){
 "id="fbuf" />
 </body>
 `;
-elseWindow.loadUrl("data:text/html;charset=utf-8," + encodeURI(html2));
+elseWindow.loadURL("data:text/html;charset=utf-8," + encodeURI(html2));
 
 elseWindow.on('closed', function() {
     // Dereference the window object, usually you would store windows

@@ -16,7 +16,7 @@ var Database = require(appRoot + '/system/database');
 var Knows = require(appRoot + '/system/knows');
 var Matrix = require(appRoot + '/matrix/matrix');
 var jade = require('jade');
-
+var colf = require('columnify');
 //UTILS
 
 function van_dump(sval) {
@@ -144,7 +144,9 @@ function createWindowNoNode(name, url) {
   return win;
 }
 
-
+function getResourceUsage(){
+  return _(require('electron').webFrame.getResourceUsage()).reduce((m,v,k)=>Object.assign(m,_(_(v).map((iv,ik)=>[k+'_'+ik,iv])).object()),{})
+}
 //var events = require('events');
 //var fs = require('fs');
 //var path = require('path');
