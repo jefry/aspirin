@@ -116,7 +116,7 @@
   ],
   [
     "edit_interface",
-    "edit_interface = ()=>{\n var robot = require('robotjs');\n let posD = robot.getMousePos();\n let win = createEditor();\n win.object.setPosition(posD.x,posD.y)\n let jstext = `\nonChosenFileToOpen(path.resolve('F:/ajr/aspirin/editor/','D3_interface.html'))\n`\n let winid = win.object.id\n var yw = BrowserWindow.fromId(winid)\n yw.webContents.executeJavaScript(jstext)\n}",
+    "edit_interface = ()=>{\n var robot = require('robotjs');\n let posD = robot.getMousePos();\n let win = createEditor();\n win.object.setPosition(posD.x,posD.y)\n let jstext = `\nonChosenFileToOpen(path.resolve('F:/ajr/aspirin/','D3_interface.html'))\n`\n let winid = win.object.id\n var yw = BrowserWindow.fromId(winid)\n yw.webContents.executeJavaScript(jstext)\n}",
     18.666666666666668
   ],
   [
@@ -332,7 +332,7 @@
   ],
   [
     "run_x_code_win",
-    "run_x_code_win = function(){\n  var  jw = new BrowserWindow({ width: 1920, height: 1080, x:0, y:0,movable:true,alwaysOnTop:true, transparent: true,skipTaskbar:true, frame: false });\n    jw.on('closed', function() {\n      jw = null;\n    });\n    windowManager.sharedData.set('x_code_get_id',jw.id)\n    jw.loadURL('F:/ajr/round_interface/run_x_code.html');\n    jw.setSize(1920+10,1080+10)\n    jw.show();\n  }",
+    "run_x_code_win = function(){\n  var  jw = new BrowserWindow({ width: 1920, height: 1080, x:0, y:0,movable:true,alwaysOnTop:true, transparent: true,skipTaskbar:true, frame: false });\n    jw.on('closed', function() {\n      jw = null;\n    });\n    windowManager.sharedData.set('x_code_get_id',jw.id)\n    jw.loadURL(appRoot+'/run_x_code.html');\n    jw.setSize(1920+10,1080+10)\n    jw.show();\n  }",
     62,
     63.666666666666664,
     62.333333333333336,

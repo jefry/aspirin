@@ -173,7 +173,7 @@
               "color": "bb4466",
               "coments": "run_x_code_win = function(){\n  var  jw = new Brows",
               "coments2": "erWindow({ width: 1920, height: 1080, x:0, y:0,mov",
-              "coments3": 403,
+              "coments3": 389,
               "children": [
                 {
                   "name": "search4D",
@@ -697,7 +697,7 @@
               "color": "dd9400",
               "coments": "edit_interface = ()=>{\n var robot = require('robot",
               "coments2": "js');\n let posD = robot.getMousePos();\n let win = ",
-              "coments3": 360,
+              "coments3": 353,
               "children": [
                 {
                   "name": "edit_run_x_code",

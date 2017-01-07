@@ -562,7 +562,7 @@ treeJSON = d3.json(appPath+'/ASKA_4D_d3.json', function(error, treeData) {
     //start_render(A4D,'A4D','A4D')
     d = toggleChildren(d);
     update(d);
-    centerNode(d);
+    //centerNode(d);
   }
 
   function update(source) {
