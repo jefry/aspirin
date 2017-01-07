@@ -24,6 +24,7 @@
     "stylus": "^0.54.5",
     "underscore": "^1.8.3",
     "webmonkeys": "^1.6.0",
+    "win-mouse": "^1.1.1",
     "x-ray": "^2.0.2"
   },
   "devDependencies": {

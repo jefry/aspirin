@@ -14,6 +14,7 @@ localStorage.Knows = localStorage.Knows || "[null, null]"
 
 
 //todo: setup install script!
+/*
 if (!JSON.parse(localStorage.Knows)[1] || !JSON.parse(localStorage.Knows)[1].sourceText) {
 
   dob = {
@@ -21,7 +22,7 @@ if (!JSON.parse(localStorage.Knows)[1] || !JSON.parse(localStorage.Knows)[1].sou
   }
   currentKnows(dob, 1)
 }
-
+*/
 var justData = currentKnows();
 
 function currentKnows(data, id) {
@@ -184,7 +185,8 @@ function justOnceFocus() {
 }
 
 
-require('electron').ipcRenderer.on('justUpdate', justUpdate);
+
+require('electron').ipcRenderer.on('justUpdate2', justUpdate2);
 require('electron').ipcRenderer.on('justScrollAll', justScrollAll);
 require('electron').ipcRenderer.on('justMoveUpwin', justMoveUpwin);
 require('electron').ipcRenderer.on('justMoveDowin', justMoveDowin);
@@ -291,14 +293,14 @@ function justRestore(el) {
 
   function startKnows(know, id) {
     if (id < 2) return;
-
+    alert(__dirname)
     windowManager.open(null, 'Editor', 'file://' + __dirname + '/index.html');
     var win = remote.BrowserWindow.fromId(id);
 
     if (win) {
 
       win.webContents.on("did-finish-load", function () {
-        win.webContents.send('justUpdate');
+        win.webContents.send('justUpdate2');
         win.webContents.send('justScrollAll');
       })
     }
@@ -323,6 +325,41 @@ function justUpdate(el) {
 
   editor.setValue(currentKnows(justData).sourceText);
 }
+
+function justUpdate2() {
+  let code = editor.getValue()
+  console.log(code)
+  let A4D = jetpack.read('F:/ajr/ASKA_4D.json', 'json')
+  let start_run = 0
+  if(code[0]=='/'){start_run = 2}
+  let code_name = code.substring(start_run,code.search('=')-1);
+  if(just.name == code_name){
+    A4D.map((v,index)=>{if(v[0]== just.name){
+      A4D[index][1] = code;
+    }})
+    jetpack.write('F:/ajr/ASKA_4D.json', A4D);
+  }else{
+   A4D.map((v,index)=>{if(v[0]== just.name){
+      A4D[index][0] = code_name;
+      A4D[index][1] = code;
+    }})
+    jetpack.write('F:/ajr/ASKA_4D.json', A4D);
+  }
+  let name = just.name
+  name = 'editor_aska_'+name
+  let winid = getWin(name).object.id
+  var yw = BrowserWindow.fromId(winid)
+  yw.close();
+}
+ 
+/*
+  if (ed.trim()) {
+    justData.sourceText = ed;
+  }
+
+  //editor.setValue(currentKnows(justData).sourceText);
+}
+*/
 
 function justMoveUpwin(e, db) { // from down window
   var cb = cw.getBounds();

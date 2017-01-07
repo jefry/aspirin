@@ -1,5 +1,5 @@
-const {remote,clipboard,BrowserWindow} = require('electron');
-const {Menu, MenuItem,dialog} = remote;
+const {remote,clipboard} = require('electron');
+const {Menu, MenuItem,dialog,BrowserWindow} = remote;
 const Util = require('util');
 const path = require('path');
 var fs = require("fs");
@@ -15,6 +15,7 @@ var appRoot = remote.app.getAppPath();
 var Database = require(appRoot + '/system/database');
 var Knows = require(appRoot + '/system/knows');
 var Matrix = require(appRoot + '/matrix/matrix');
+var DNO = require(appRoot + '/system/dno');
 var jade = require('jade');
 
 //UTILS
@@ -42,10 +43,10 @@ function getContent(value) {
   return document.getElementById('content').innerHTML;
 }
 
-//onload = function () {
-//  setContent('ss'+cw.id);
-//
-//}
+onload = function () {
+  setContent('ss'+cw.id);
+
+}
 //
 
 
@@ -143,7 +144,9 @@ function createWindowNoNode(name, url) {
 
   return win;
 }
-
+function genDataHtmlUrl(content){
+  return "data:text/html;charset=utf-8," + encodeURI(content);
+}
 
 //var events = require('events');
 //var fs = require('fs');

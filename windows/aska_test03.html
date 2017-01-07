@@ -1,67 +1,166 @@
-<link rel="stylesheet" href="index.css">
-<script type="text/javascript" src="file:///C:/Users/YaEby/Desktop/AskaNode/resources/p5.js"></script>
-<script type="text/javascript" src="file:///C:/Users/YaEby/Desktop/AskaNode/resources/p5.sound.js"></script>
-<script type="text/javascript" src="file:///C:/Users/YaEby/Desktop/AskaNode/resources/p5.gif.js"></script>
-<script type="text/javascript">
-  const clipboard = require('electron').clipboard;
-  const ipcRenderer = require('electron').ipcRenderer;
-  const remote = require('electron').remote;
-  const shell = require('electron').shell;
-  const BrowserWindow = remote.BrowserWindow;
-  const Core = remote.require('./app/corelib');
-  var robot = remote.require("robotjs");
+<script type="text/javascript" src="F:/ajr/aspirin/resources/p5.js"></script>
+<script type="text/javascript" src="F:/ajr/aspirin/resources/p5.sound.js"></script>
+<script type="text/javascript" src="F:/ajr/aspirin/resources/p5.gif.js"></script>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  </head>
+  <style>
+    ::-webkit-scrollbar { width: 0 !important }
 
-
-
-  var gif, pg;
-
- function setup() {
-  createCanvas(windowWidth, windowHeight,'p2d');
-  //frameRate(30);
-  gif = loadGif('file:///C:/Users/YaEby/Desktop/MTI5MDU2ODM2MjQxMzc3Mjkw.gif');
- }
-
- function draw() {
-    clear();
-    background(0,0,0,0);
-    image(gif, 0, 0);
-    if (mouseIsPressed) {
-      if (mouseButton == RIGHT){
-        gif.pause();
-      }else{
-        gif.frames()
-        gif.play()
-      }
+    body{
+      width:90%;
+      background: rgba(10, 10, 10, 0);
+      color: white;
     }
-}
-function mouseMoved(){
-  if (gif.loaded() && !gif.playing()){
-    var totalFrames = gif.totalFrames();
-    var frame = int(map(mouseX, 0, width, 0, totalFrames));
-    gif.frame(frame);
+  </style> 
+  <body>
+    <div id="run"></div>
+  </body>
+</html>
+<script type="text/javascript">
+
+  document.getElementById('run').innerHTML += 
+    '<audio src="" id="audio"><audio/>';
+
+  var gif, pg, sound, amplitude, cnv;
+  var jetpack = require('fs-jetpack')
+  let zzz2 = windowManager.sharedData.fetch('x_code_get_id');
+  function preload() {
+    var text2 = jetpack.read('F:/ajr/aspirin/windows/aska_test03_buffer.json','json'); 
+   // console.log(text2)
+    var text = text2[0]
+    var url = 'https:/tts.voicetech.yandex.net/generate?'+
+        'key=ddf051c8-8d90-4912-bccb-9fd85f0e21db'+
+        '&text='+text+
+        '&format=mp3'+
+        '&lang=ru-RU'+
+        '&topic=queries'+
+        'speed=2'+
+        '&robot=1'+
+        '&emotion=evil';
+    mySound = loadSound(url);
   }
-}
 
-// function startLooping() {
-//    windowResized();
-//    loop()
-//  };
-// setInterval(function(){
-// 	resizeCanvas(windowWidth, windowHeight);
-// }, 10);
-// function windowResized(){
-//   resizeCanvas(windowWidth, windowHeight);
-//  };
+  function setup() {
+    createCanvas(1200,1080);
+    mySound.setVolume(2);
+    mySound.play();
+    amplitude = new p5.Amplitude();
+  }
 
-// function startLooping() {
-//    resizeCanvas(windowWidth+1, windowHeight+1);
-//    //text('looping', width/2, height/2);
-//
-//    // start loop now, at playback rate of 3x, volume of 0.1
-//    //mySound.loop(0, 3, 0.1);
-//  }
-
-// function windowResized() {
-//    resizeCanvas(windowWidth, windowHeight);
-//  }
+  function draw() {
+    clear();
+    //background(0,0,0,0);
+    //image(gif,30,30);
+    var level = amplitude.getLevel();
+    level = level*2000|0
+    //console.log(level)
+    //translate(level, level);
+    var lx = 150
+    let ly = 550
+    var x_otstyp = 20
+    var size = 6
+    var degrice = 0.2
+    level = level*0.01
+    fill('red')
+    
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1+degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1+degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1+degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1+degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1+degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1+degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1+degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1+degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1+degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1+degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1+degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1+degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1+degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1+degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1+degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1+degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1+degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1+degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1+degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1+degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1+degrice)
+    rect(lx, ly-level, size, (level/0.5));
+   
+    lx = lx + x_otstyp
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1-degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1-degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1-degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    lx = lx + x_otstyp
+    level = level*(1-degrice)
+    rect(lx, ly-level, size, (level/0.5));
+    
+  }
+  
+  function window_close(time){
+    let sec = 0
+    let iid = setInterval(int_timer, 1000);
+    function int_timer(){
+      sec+=1
+      if(time < sec){
+        let cl = require('electron').remote.BrowserWindow.fromId(zzz2)
+        clearInterval(iid)
+        cl.close()
+      }
+    }   
+  }
+  var text3 = jetpack.read('F:/ajr/aspirin/windows/aska_test03_buffer.json','json'); 
+  let delay = text3[1]
+  window_close(delay)
 </script>

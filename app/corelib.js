@@ -17,9 +17,13 @@ function newTransparentWindow (url, options) {
 		transparent:true,
 		acceptFirstMouse:true,
 		alwaysOnTop :false,
-		//show :false,
+		webPreferences: {
+        zoomFactor: 2.0,
+        nodeIntegration: false
+      },
 		plugins :true,
-		frame:false
+		frame:false,
+    
   };
   var cw = newWindow(url, options);
   cw.webContents.on('new-window',function (event, url,frameName){
@@ -30,6 +34,7 @@ function newTransparentWindow (url, options) {
     // cw.setPosition(wb.x-105, wb.y+25)
     options.x = wb.x
     options.y = wb.y
+    options.zoomFactor = 2
     //
     var nw = newTransparentWindow(url, options);
     // nw.on('move',function(){
