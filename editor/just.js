@@ -329,7 +329,7 @@ function justUpdate(el) {
 function justUpdate2() {
   let code = editor.getValue()
   console.log(code)
-  let A4D = jetpack.read('F:/ajr/ASKA_4D.json', 'json')
+  let A4D = jetpack.read(appPath + '/ASKA_4D.json', 'json')
   let start_run = 0
   if(code[0]=='/'){start_run = 2}
   let code_name = code.substring(start_run,code.search('=')-1);
@@ -337,13 +337,13 @@ function justUpdate2() {
     A4D.map((v,index)=>{if(v[0]== just.name){
       A4D[index][1] = code;
     }})
-    jetpack.write('F:/ajr/ASKA_4D.json', A4D);
+    jetpack.write(appPath + '/ASKA_4D.json', A4D);
   }else{
    A4D.map((v,index)=>{if(v[0]== just.name){
       A4D[index][0] = code_name;
       A4D[index][1] = code;
     }})
-    jetpack.write('F:/ajr/ASKA_4D.json', A4D);
+    jetpack.write(appPath + '/ASKA_4D.json', A4D);
   }
   let name = just.name
   name = 'editor_aska_'+name
