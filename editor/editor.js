@@ -23,41 +23,41 @@ require('codemirror/mode/markdown/markdown');
 
 
 //START BLOCK: ADD DUBLICATELINE KEY COMMAND
-CodeMirror.keyMap.macDefault["Cmd-D"] = function(cm){
-    // get a position of a current cursor in a current cell
-    var current_cursor = cm.doc.getCursor();
-    // read a content from a line where is the current cursor
-    var line_content = cm.doc.getLine(current_cursor.line);
-    // go to the end the current line
-    CodeMirror.commands.goLineEnd(cm);
-    // make a break for a new line
-    CodeMirror.commands.newlineAndIndent(cm);
-    // filled a content of the new line content from line above it
-    cm.doc.replaceSelection(line_content);
-    // restore position cursor on the new line
-    cm.doc.setCursor(current_cursor.line + 1, current_cursor.ch);
+CodeMirror.keyMap.macDefault["Cmd-D"] = function (cm) {
+  // get a position of a current cursor in a current cell
+  var current_cursor = cm.doc.getCursor();
+  // read a content from a line where is the current cursor
+  var line_content = cm.doc.getLine(current_cursor.line);
+  // go to the end the current line
+  CodeMirror.commands.goLineEnd(cm);
+  // make a break for a new line
+  CodeMirror.commands.newlineAndIndent(cm);
+  // filled a content of the new line content from line above it
+  cm.doc.replaceSelection(line_content);
+  // restore position cursor on the new line
+  cm.doc.setCursor(current_cursor.line + 1, current_cursor.ch);
 };
 //END DUBLICATELINE
 
 /*//START BLOCK: ADD BLOCKCOMMENT KEY COMMAND
-CodeMirror.keyMap.macDefault["Cmd-/"] = function(cm){
-    var sl = cm.doc.listSelections()[0];
-    if (sl.anchor.line == sl.head.line)  
-    cm.doc.blockComment(sl.anchor, sl.head);
+ CodeMirror.keyMap.macDefault["Cmd-/"] = function(cm){
+ var sl = cm.doc.listSelections()[0];
+ if (sl.anchor.line == sl.head.line)
+ cm.doc.blockComment(sl.anchor, sl.head);
 
-    // get a position of a current cursor in a current cell
-    var current_cursor = cm.doc.getCursor();
-    // read a content from a line where is the current cursor
-    var line_content = cm.doc.getLine(current_cursor.line);
-    // go to the end the current line
-    CodeMirror.commands.goLineEnd(cm);
-    // make a break for a new line
-    CodeMirror.commands.newlineAndIndent(cm);
-    // filled a content of the new line content from line above it
-    cm.doc.replaceSelection(line_content);
-    // restore position cursor on the new line
-    cm.doc.setCursor(current_cursor.line + 1, current_cursor.ch);
-};*/
+ // get a position of a current cursor in a current cell
+ var current_cursor = cm.doc.getCursor();
+ // read a content from a line where is the current cursor
+ var line_content = cm.doc.getLine(current_cursor.line);
+ // go to the end the current line
+ CodeMirror.commands.goLineEnd(cm);
+ // make a break for a new line
+ CodeMirror.commands.newlineAndIndent(cm);
+ // filled a content of the new line content from line above it
+ cm.doc.replaceSelection(line_content);
+ // restore position cursor on the new line
+ cm.doc.setCursor(current_cursor.line + 1, current_cursor.ch);
+ };*/
 //END DUBLICATELINE
 var editor;
 function handleDocumentChange(title) {
@@ -250,30 +250,6 @@ onload = function () {
   runButton.addEventListener("click", handleRunButton);
   // wsxButton.addEventListener("click", handleRunButton);
 
-editor = CodeMirror(
-document.getElementById("editor"),
-{
-  mode: {name: "javascript", json: true},
-  lineNumbers: true,
-  indentWithTabs: false,
-  tabSize: 1,
-  theme: "lesser-dark",
-  value: "\r\n\r\n\r\n",
-  // viewportMargin: 5,
-  // scrollbarStyle:'none',
-  extraKeys: {
-    "Tab": function (cm) {
-      var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
-      cm.replaceSelection(spaces, "end", "+input");
-    },
-    "Ctrl-Enter": function (instance) {
-      handleRunButton()
-    },
-    "Ctrl-S": function (instance) {
-      handleSaveButton()
-    }
-  }
-});
   editor = CodeMirror(
     document.getElementById("editor"),
     {
@@ -304,6 +280,10 @@ document.getElementById("editor"),
           handleSaveButton()
         },
         "Ctrl-Space": "autocomplete"
+        ,
+        "Ctrl-Enter": function (instance) {
+          handleRunButton()
+        }
       }
     });
 
@@ -350,14 +330,14 @@ _scrl1 = function (e) {
 wheelBuffer = 0;
 
 _scrl = function (e) {
-  let TOP = 37+screen.availTop;
+  let TOP = 37 + screen.availTop;
 
   var el = e.currentTarget;
   //console.log((e.wheelDeltaY < 0) && ((el.offsetTop + window.screenTop)<60))
   //console.log((el.scrollHeight - el.scrollTop - el.offsetHeight))
   //console.log([composite.scrollHeight, composite.scrollTop, composite.offsetHeight , composite.offsetTop ,screenTop, document.body.offsetHeight])
   //console.log(composite.offsetHeight + composite.offsetTop + screenTop - screen.height)
-  
+
 
   if (e.wheelDeltaY == 0) {
     e.stopImmediatePropagation();
@@ -370,7 +350,7 @@ _scrl = function (e) {
     e.stopImmediatePropagation();
     return true;
   } else if ((e.wheelDeltaY >= 0)
-    && (screen.height - (el.offsetHeight + el.offsetTop + 23+window.screenTop-screen.availTop)) < 60
+    && (screen.height - (el.offsetHeight + el.offsetTop + 23 + window.screenTop - screen.availTop)) < 60
     && (el.scrollTop > 0)) { //down
 
 //         console.log('down')
@@ -391,13 +371,13 @@ syncSizeLines = function () {
 totalWidth = 680;
 greatScale = 1;
 
-justScale = (s=1,ws=1)=>{
+justScale = (s = 1, ws = 1)=> {
   greatScale = s;
   totalWidth *= ws;
   cw.webContents.setZoomFactor(greatScale);
 }
 
-_sy =function () {
+_sy = function () {
   //--------------?
   display = remote.screen.getPrimaryDisplay().bounds;
   //--------------?
@@ -438,7 +418,7 @@ _sy =function () {
   //editor.setSize(totalWidth, editorHeight);
   //editor.refresh();
   _currentEditorHeight = totalHeight;
-  remote.getCurrentWindow().setSize(totalWidth*greatScale|0, totalHeight*greatScale|0);
+  remote.getCurrentWindow().setSize(totalWidth * greatScale | 0, totalHeight * greatScale | 0);
 
   // var scrollerElement = editor.getScrollerElement();
   // scrollerElement.style.width = containerWidth + 'px';
