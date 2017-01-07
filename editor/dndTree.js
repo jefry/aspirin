@@ -296,7 +296,15 @@ treeJSON = d3.json(appPath+'/ASKA_4D_d3.json', function(error, treeData) {
   // Define the zoom function for the zoomable tree
 
   function zoom() {
-    console.log(d3.event.translate)
+    console.log(d3.event.translate[0])
+    let xc = d3.event.translate[0]
+    xc = xc/1000
+    xc = xc*10|0
+    
+   
+    xc = xc/10
+    console.log(xc)
+    windowManager.sharedData.set('xscale_win',xc);
     svgGroup.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
   }
 
