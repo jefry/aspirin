@@ -7,16 +7,39 @@
 
     <link rel="stylesheet" href="../node_modules/codemirror/lib/codemirror.css">
     <link rel="stylesheet" href="../node_modules/codemirror/theme/lesser-dark.css">
+    <link rel="stylesheet" href="../node_modules/codemirror/addon/fold/foldgutter.css">
+    <link rel="stylesheet" href="../node_modules/codemirror/addon/hint/show-hint.css">
+    <style type="text/css" media="screen">
+
+        .CodeMirror-linenumber {
+            color: #777;
+            margin-left: 0px;
+            padding: 0;
+            letter-spacing: -2px;
+        }
+        .CodeMirror-linenumbers {
+            width: 20px !important;
+        }
+        .CodeMirror-foldgutter {
+          /*width: 0px;*/
+          /*margin-left: 0px;*/
+        }
+        .CodeMirror-gutter-wrapper .CodeMirror-foldgutter-open,
+        .CodeMirror-gutter-wrapper .CodeMirror-foldgutter-folded {
+          /*z-index: 1000000;         */
+          color: #999;
+        }    
+    </style>
     <link rel="stylesheet" href="../styles/photon.css">
     <link rel="stylesheet" href="style.css">
 
     <script type="text/javascript" src="../app/super.js"></script>
     <script src="just.js"></script>
 
-    <script src="../node_modules/codemirror/mode/css/css.js"></script>
-    <script src="../node_modules/codemirror/mode/xml/xml.js"></script>
-    <script src="../node_modules/codemirror/mode/javascript/javascript.js"></script>
-    <script src="../node_modules/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+    <!-- <script src="../node_modules/codemirror/mode/css/css.js"></script> -->
+    <!-- <script src="../node_modules/codemirror/mode/xml/xml.js"></script> -->
+    <!-- <script src="../node_modules/codemirror/mode/javascript/javascript.js"></script> -->
+    <!-- <script src="../node_modules/codemirror/mode/htmlmixed/htmlmixed.js"></script> -->
 
     <!--<script src="zepto.min.js"></script>-->
 
@@ -99,14 +122,7 @@
         <div class="pane">
 
             <div id="meta_toolbar" class="toolbar .toolbar-mini toolbar-shiftleft bar meta hide">
-
-                <h1>META</h1>
-                123456
-                <br/>
-    <pre class="print">
-
-    </pre>
-
+                meta is empty
             </div>
             <div id="second_toolbar" class="toolbar .toolbar-mini toolbar-shiftleft bar hide"></div>
             <div id="editor" class="floped"></div>

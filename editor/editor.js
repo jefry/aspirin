@@ -1,3 +1,64 @@
+var CodeMirror = require('codemirror');
+
+require('codemirror/addon/edit/matchbrackets')
+require('codemirror/addon/comment/comment')
+require('codemirror/addon/comment/continuecomment')
+require('codemirror/addon/fold/foldcode');
+require('codemirror/addon/fold/foldgutter');
+require('codemirror/addon/fold/brace-fold');
+require('codemirror/addon/fold/xml-fold');
+require('codemirror/addon/fold/markdown-fold');
+require('codemirror/addon/fold/comment-fold');
+
+require('codemirror/addon/hint/javascript-hint');
+require('codemirror/addon/hint/show-hint');
+
+
+require('codemirror/mode/css/css')
+require('codemirror/mode/xml/xml')
+require('codemirror/mode/htmlmixed/htmlmixed')
+require('codemirror/mode/javascript/javascript');
+require('codemirror/mode/xml/xml');
+require('codemirror/mode/markdown/markdown');
+
+
+//START BLOCK: ADD DUBLICATELINE KEY COMMAND
+CodeMirror.keyMap.macDefault["Cmd-D"] = function(cm){
+    // get a position of a current cursor in a current cell
+    var current_cursor = cm.doc.getCursor();
+    // read a content from a line where is the current cursor
+    var line_content = cm.doc.getLine(current_cursor.line);
+    // go to the end the current line
+    CodeMirror.commands.goLineEnd(cm);
+    // make a break for a new line
+    CodeMirror.commands.newlineAndIndent(cm);
+    // filled a content of the new line content from line above it
+    cm.doc.replaceSelection(line_content);
+    // restore position cursor on the new line
+    cm.doc.setCursor(current_cursor.line + 1, current_cursor.ch);
+};
+//END DUBLICATELINE
+
+/*//START BLOCK: ADD BLOCKCOMMENT KEY COMMAND
+CodeMirror.keyMap.macDefault["Cmd-/"] = function(cm){
+    var sl = cm.doc.listSelections()[0];
+    if (sl.anchor.line == sl.head.line)  
+    cm.doc.blockComment(sl.anchor, sl.head);
+
+    // get a position of a current cursor in a current cell
+    var current_cursor = cm.doc.getCursor();
+    // read a content from a line where is the current cursor
+    var line_content = cm.doc.getLine(current_cursor.line);
+    // go to the end the current line
+    CodeMirror.commands.goLineEnd(cm);
+    // make a break for a new line
+    CodeMirror.commands.newlineAndIndent(cm);
+    // filled a content of the new line content from line above it
+    cm.doc.replaceSelection(line_content);
+    // restore position cursor on the new line
+    cm.doc.setCursor(current_cursor.line + 1, current_cursor.ch);
+};*/
+//END DUBLICATELINE
 var editor;
 function handleDocumentChange(title) {
   var mode = "javascript";
@@ -192,7 +253,7 @@ onload = function () {
   editor = CodeMirror(
     document.getElementById("editor"),
     {
-      mode: {name: "javascript", json: true},
+      mode: {name: "javascript", json: true, globalVars: true},
       lineNumbers: true,
       indentWithTabs: false,
       tabSize: 2,
@@ -200,6 +261,10 @@ onload = function () {
       value: "\r\n\r\n\r\n",
       // viewportMargin: 5,
       // scrollbarStyle:'none',
+      matchBrackets: true,
+      continueComments: true,
+      foldGutter: true,
+      gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
       extraKeys: {
         "Tab": function (cm) {
           var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
@@ -214,6 +279,7 @@ onload = function () {
         "Ctrl-S": function (instance) {
           handleSaveButton()
         },
+        "Ctrl-Space": "autocomplete"
       }
     });
 
@@ -224,7 +290,7 @@ onload = function () {
 
   // onChosenFileToOpen(remote.app.getAppPath()+'/experiments/testRun3.js');
   newFile();
-  editor.on("change", function () {
+  editor.on("update", function () {
     // console.log(arguments)
     syncSizeLines();
   })
@@ -298,7 +364,14 @@ syncSizeLines = function () {
   //console.log('origin', document.body.offsetHeight);
   _syd()
 }
+totalWidth = 680;
+greatScale = 1;
 
+justScale = (s=1,ws=1)=>{
+  greatScale = s;
+  totalWidth *= ws;
+  cw.webContents.setZoomFactor(greatScale);
+}
 
 _sy =function () {
   //--------------?
@@ -308,7 +381,7 @@ _sy =function () {
   var results = document.getElementById('result');
   var composite = document.getElementById('composite');
   var composite_wrap = document.getElementById('composite_wrap');
-  var totalWidth = 680;// container.offsetWidth;
+  // container.offsetWidth;
   var resultsHeight = results.offsetHeight;
 
   if (resultsHeight >= 1000) {
@@ -333,14 +406,15 @@ _sy =function () {
 
   var upHeight = results.offsetTop - container.offsetHeight + 22;
   //console.log(editor)
-  var editorHeight = 8 + 16 * editor.lineCount();
+  // var editorHeight = 8 + 16 * editor.lineCount();
+  var editorHeight = editor.getScrollInfo().height;
 
   var totalHeight = editorHeight + upHeight + resultsHeight;
 
   //editor.setSize(totalWidth, editorHeight);
   //editor.refresh();
   _currentEditorHeight = totalHeight;
-  remote.getCurrentWindow().setSize(totalWidth, totalHeight);
+  remote.getCurrentWindow().setSize(totalWidth*greatScale|0, totalHeight*greatScale|0);
 
   // var scrollerElement = editor.getScrollerElement();
   // scrollerElement.style.width = containerWidth + 'px';

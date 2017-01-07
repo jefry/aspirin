@@ -4,9 +4,6 @@ var menu;
 var fileEntry;
 var hasWriteAccess;
 
-
-var CodeMirror = require('codemirror');
-
 window.un$ = window.$
 
 window.$ = require('jquery');
@@ -152,8 +149,10 @@ function justToggleBar(elButton) {
 
 meta = {};
 meta.render = function () {
-
-  $('#meta_toolbar .print').html('sddsd');
+  DNO
+    .open('zerolist')
+    .run('zero')
+    .then(v=>$('#meta_toolbar').html(v));
 };
 
 //-----------
@@ -258,10 +257,27 @@ function jLog(result){
   return justShowResult(van_dump(result))
 }
 
+function jColf(result,opt){
+    let co = colf(result,opt).split('\n')
+    co[0] = co[0].fixed()
+    isresultHTML = true;
+    return co.join('\n')
+}
+
 function justInfo() {
+  var sinf = Object
+    .keys(Screen.prototype)
+    .reduce((m,v)=>{m[v]=screen[v];return m},{})
+
+  sinf.orientation = Object
+    .keys(ScreenOrientation.prototype)
+    .reduce((m,v)=>{m[v]=screen.orientation[v];return m},{})  
+
   var re = [
-    `id: ${cw.id}, name: ${windowManager.getCurrent().name}`
-  ];
+    `id: ${cw.id}, name: ${windowManager.getCurrent().name}`,
+    'bounds = '+van_dump(cw.getBounds()),
+    'screen = '+van_dump(sinf)
+  ].join('\n');
 
   justShowResult(re);
   syncSizeLines()

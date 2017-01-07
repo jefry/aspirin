@@ -15,6 +15,7 @@ var appRoot = remote.app.getAppPath();
 var Database = require(appRoot + '/system/database');
 var Knows = require(appRoot + '/system/knows');
 var Matrix = require(appRoot + '/matrix/matrix');
+var DNO = require(appRoot + '/system/dno');
 var jade = require('jade');
 var colf = require('columnify');
 //UTILS
@@ -41,6 +42,15 @@ function setContent(value) {
 function getContent(value) {
   return document.getElementById('content').innerHTML;
 }
+
+function require_c (file) {
+  delete require.cache[require.resolve(file)];
+  return require(file)
+};
+
+function require_clear (file = module.id) {
+  delete require.cache[require.resolve(file)];
+};
 
 //onload = function () {
 //  setContent('ss'+cw.id);
@@ -146,6 +156,10 @@ function createWindowNoNode(name, url) {
 
 function getResourceUsage(){
   return _(require('electron').webFrame.getResourceUsage()).reduce((m,v,k)=>Object.assign(m,_(_(v).map((iv,ik)=>[k+'_'+ik,iv])).object()),{})
+}
+
+function genDataHtmlUrl(content){
+  return "data:text/html;charset=utf-8," + encodeURI(content);
 }
 //var events = require('events');
 //var fs = require('fs');

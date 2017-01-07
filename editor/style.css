@@ -59,6 +59,11 @@ button {
     border-left: #91a327 1px solid;
 }
 
+#result tt {
+    position: fixed;
+    background: #333;
+}
+
 #composite.joinY .bar {
     max-height: 50px;
 }
