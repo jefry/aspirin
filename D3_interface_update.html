@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <meta charset="utf-8">
+  <style type="text/css">
+    ::-webkit-scrollbar { width: 0 !important }
+    ::-webkit-input-placeholder {
+      color: #fff;
+    }
+    .node {
+      stroke: #111111;
+      stroke-width: 1px;
+    }
+
+    .overlay{
+      background-color:rgba(3, 3, 3, 0.93);
+    }
+
+    .nodeEnter circle {
+      fill: #0a0a0a;
+      stroke: #cdc;
+      stroke-width: 0.1px;
+    }
+
+    .link {
+      fill: none;
+      stroke: #0f0f0f;
+      stroke-width: 16px;
+    }
+
+    .templink {
+      fill: none;
+      stroke: red;
+      stroke-width: 3px;
+    }
+
+    .ghostCircle.show{
+      display:block;
+    }
+
+    .ghostCircle, .activeDrag .ghostCircle{
+      display: none;
+    }
+
+  </style>
+  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script type="text/javascript" src="../aspirin/app/super.js"></script>
+  <script>
+    var appPath = remote.app.aspirinRoot;
+    var d3 = require(appPath+'/node_modules/d3/d3.js')
+    var windowManager = remote.require('electron-window-manager');   
+  </script>
+  <script type="text/javascript" src="editor/API4D.js"></script>
+  <script type="text/javascript" src="editor/dndTree.js"></script>
+  <body>
+    <div id="tree-container"></div>
+    <div id='wid'></div>
+    <div id='content'></div>
+  </body>
+</html>
+<script>
+
+  function run_x_code(){
+    jw = new BrowserWindow({ width: 1920, height: 1200, x:0, y:0,movable:true,alwaysOnTop:true, transparent: true,skipTaskbar:true, frame: false });
+    jw.on('closed', function() {
+      jw = null;
+    });
+    windowManager.sharedData.set('x_code_get_id',jw.id)
+    jw.loadURL(appPath+'/run_x_code.html');
+    jw.setSize(1920,1300)
+    jw.show();
+  }
+  function mouse_right_click(c,b,a){
+    var A4D = jetpack.read(appPath+'/ASKA_4D.json','json')
+    let new_arr = window.date_to_delete_link
+    if(new_arr != 0 && new_arr != undefined){
+
+      let a_del = new_arr[0]
+      let b_del = new_arr[1]
+      let c_del = new_arr[2]
+
+      if(a_del == a && b_del == b && c_del == c){
+        let c_name = Math.random()*100|0
+        c_name = 'New'+c_name
+        let d_code = Math.random()*100|0
+        d_code = 'new_code'+d_code
+        createNew(b,c,c_name,d_code)
+      }else{
+        let arr_calc = all_links4D(A4D,b_del,c_del)
+        A4D = delete_all_link4D(A4D,c_del)
+        if(arr_calc != ''){
+          for(ig=0;ig<arr_calc.length;ig++){
+            A4D = linked4D(A4D,c,c_del,arr_calc[ig])
+          }
+        }
+        A4D = delete_link4D(A4D,a_del,b_del,c_del)
+        A4D = linked4D(A4D,b,c,c_del)
+        jetpack.write(appPath+'/ASKA_4D.json',A4D)
+      }
+      window.buffer_d3 = 0
+      window.date_to_delete_link = 0
+      reload4D();
+      Aska_d3_render();
+
+    }else{
+      window.date_to_delete_link = 0
+      createEditor('editor_aska_'+c, 'ASKA4D_GO',c);
+    }
+  }
+
+  function real_time(){
+    var objData = new Date();
+    var year = objData.getFullYear()
+    var month = objData.getMonth()+1;
+    var date = objData.getDate();
+    var hours = objData.getHours();
+    var minutes = objData.getMinutes();
+    let yy = windowManager.sharedData.fetch('runcode_buffer');
+    if(year==yy[0]&&month==yy[1]&&date==yy[2]&&hours==yy[3]&&minutes==yy[4]){
+      if(window.run_color != yy[5]){
+        window.run_color=yy[5]
+        //Aska_d3_render()
+      }
+    }else if(window.run_color != 'x_code_run'){
+      window.run_color='x_code_run'
+      // Aska_d3_render()
+    }
+  }
+  function reflect_lvl(arr,know){
+    for(i=0;i<know.children.length;i++){
+      know.children[i].children = start_render(arr,know.name,know.children[i].name)
+    }
+    know.children.children = clear_null_in_names(know.children)
+    return know
+  }
+
+  let exw = ["all_windows_drag", "showCodeList", "toolbar", "listknows", "showTime", "fulloverlay"];   
+  var position = false;
+  var other_position = false;
+
+  document.querySelector('body').onmousedown = function(e){
+    console.log('start');
+    let cp = cw.getPosition();
+    position = [e.screenX-cp[0],e.screenY-cp[1]];
+    other_position = _(remote.getGlobal('getAllWin')())
+      .chain()
+      .filter(v=>!exw.includes(v))
+      .map(v=>[v, windowManager.windows[v].object.getPosition()])
+      .map(([name,xy])=>[name, [e.screenX-xy[0], e.screenY-xy[1]]])
+      .object()
+      .value()
+  }
+  document.querySelector('body').onmouseup = function(e){
+    console.log('end');
+    position = false;
+    other_position = false;
+  }
+  document.querySelector('body').onmousemove = _.throttle(function(e){
+    e.preventDefault();
+
+    if(!position) return;
+    if(e.screenX){
+      let posX = e.screenX-position[0]
+      let posY = e.screenY-position[1]
+      // cw.setPosition(posX,posY);
+
+      _(remote.getGlobal('getAllWin')())
+        .chain()
+        .filter(v=>!exw.includes(v))
+        .each(w=>{
+
+        let [sx, sy] = other_position[w];
+        windowManager.windows[w].object
+          .setPosition(e.screenX-sx, e.screenY-sy); 
+      })
+    }
+  },30);  
+
+  //////////////////////////////////////////////////////////////////////////////
+
+</script>

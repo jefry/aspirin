@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head id = "hy">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <!-- <script type="text/javascript" src="G:/d3-master/d3.min.js"></script> -->
+  <script>var d3 = require('F:/ajr/aspirin/node_modules/d3/d3.js')</script>
+  <!--<script>const {BrowserWindow} = require('electron').remote</script> -->
+  <script type="text/javascript" src="F:/ajr/aspirin/app/super.js"></script>
+  <!--<script>var Toolbar = require('F:/ajr/aspirin/toolbar/toolbar.js');</script> -->
+  <!-- <script type="text/javascript" src="editor.js"></script> -->
+</head>
+<style>
+::-webkit-scrollbar { width: 0 !important }
+
+</style>
+
+<body >
+
+<div id='mydiv' class="nav-group"  ></div>
+<div id='wid'></div>
+</body>
+<script>
+function Aska_d3_render2(){
+
+        d3.json("G:/flare.json", function(error, json) {
+          if (error) throw error;
+
+          svg.selectAll(".link").remove(".link")
+          svg.selectAll(".node").remove(".node")
+            var nodes = tree.nodes(json),
+                links = tree.links(nodes);
+
+            var link = svg.selectAll("path.link")
+                .data(links)
+              .enter().append("path")
+                .attr("class", "link")
+                .attr("d", diagonal)
+
+            var node = svg.selectAll("g.node")
+                .data(nodes)
+              .enter().append("g")
+              .attr("id", function(d) { return  "wid"})//d.name
+                .attr("class", "node")
+                .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+
+
+
+            node.append("circle")
+                .attr("r", function(d) { return d.size; })
+
+            node.append("text")
+                .attr("dx", function(d) { return d.children ? -23 : -18; })
+                .attr("dy", 5)
+                .attr("id", function(d) { return  d.name})//d.name
+                .attr("style", function(d) { return "stroke:#"+d.color+";font: "+d.fontsize+"px Verdana, Arial, sans-serif;"; })
+                .attr( "onclick",function(d) { return "aska_speech_config('"+d.name+"')" })
+                .attr( "oncontextmenu",function(d) { return "aska('"+d.name+"');" })  //aska_redactor('"+d.name+"'); just.run('${name}', this)
+                //.attr("text-anchor", function(d) { return d.children ? "end" : "start"; })
+                .text(function(d) { return d.name; });//
+          });
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+document.getElementById('hy')//Toolbar.listKnows(this)
+  .innerHTML += `<link href="G:/js/main/style.css" rel="stylesheet">`
+///////////////////////////////////////////////////////////////////////////////
+function aska(name){
+  createEditor('editor_aska_'+name, 'open_aska_4d',name);
+}
+var width = 1800,
+height = 3000;
+  
+//Knows.run('aska_scroll_handler');
+  
+var tree = d3.layout.tree()
+.size([height, width]);
+
+var diagonal = d3.svg.diagonal()
+.projection(function(d) { return [d.x, d.y]; });
+
+var svg = d3.select("body").append("svg")
+.attr("width", width+1500 )
+.attr("height", height-1000)
+.append("g")
+.attr("transform", "translate(0,100)");
+
+Aska_d3_render2()
+  d3.select(self.frameElement).style("height", height + "px");
+document.body.style.background = 'rgba(80, 80, 80, 0.95)';
+</script>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>  
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script type="text/javascript" src="https://webasr.yandex.net/jsapi/v1/webspeechkit.js" ></script>
+    <script type="text/javascript" src="../aspirin/app/super.js"></script>
+    <script>
+      var appPath = remote.app.aspirinRoot;
+      var d3 = require(appPath+'/node_modules/d3/d3.js')
+      var windowManager = remote.require('electron-window-manager');   
+    </script>
+    <script type="text/javascript" src="editor/API4D.js"></script>
+  </head>
+  <style>
+    ::-webkit-scrollbar { width: 0 !important }
+    body{
+      background: rgba(5,1,1,0.1);
+      color: white;
+    }
+    #wrapper_aska{
+      height: 1100px;
+      position: relative;
+      overflow: hidden;
+    }
+    #wrapper_aska>div{
+      position:absolute;
+    }
+  </style> 
+  <canvas id="myChart"></canvas>
+  <body id="room" >
+    <div id="run"><h1>ASKA v.4.2</h1><p>CodeActive</p></div>
+    <div id="content">RunCode</div>
+    <div id="wrapper_aska">
+      <div>
+        <font id="content2" size="1" color="#cc3355" face="Arial">CodeActive</font>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  var zzz = windowManager.sharedData.fetch('x_code_get_id');
+  var streamer = new ya.speechkit.SpeechRecognition();
+  function runCodeA4D(a,b){
+    //-----------------------------------------------------------------
+    let KnowsName_to_code = function(arr,name){ 
+      var code_x = 0;
+      arr.map((v, index)=>{return v.map((v)=>{if(v == name){code_x = index}return v})})
+      if(code_x != 0){
+        var code_name = arr[code_x][0]
+        code_x = arr[code_x][1]
+      }
+      return code_x
+    }
+    //////////////////////////////////////
+    function reflect4D(arr,a,b){
+      let c = 0
+      a = search4D(arr,a)
+      b = search4D(arr,b)
+      let n = [];
+      arr[b].filter((v)=>{n.push(calc4D(v,a,b))})
+      n = clear_null_in_numbers(n)
+      return n
+    }
+    /////////////////////////////////////////////
+    function search4D(arr,name){
+      arr.map((v,index)=>{
+        if(v[0] == name){name=index}
+      })
+      if(isNaN(name)){
+        aska('не нашла, имя')
+        name = 0;
+      }
+      return name
+    }
+    //////////////////////////////////////////////////
+    function all_links4D(arr,a,b){
+      let d = reflect4D(arr,a,b)
+      d = d.map((v)=>{if(arr[v]){
+        return v = arr[v][0]
+      }})
+      d = clear_null_in_names(d)
+      return d
+    }
+    //////////////////////////////////////
+    function clear_null_in_names(n){
+      n = n.filter((v)=>{if(isFinite(v)){}else{return v}})
+      return n
+    }
+    //////////////////////////////////////
+    function clear_null_in_numbers(n){
+      n = n.filter((v)=>{if(isNaN(v)){}else{return v}})
+      return n
+    }
+    //////////////////////////////////////
+    function calc4D(link,a,b){
+      return link = (link*3)-(a+b)
+    }
+    function start_render(arr,a,b){
+      let buffer_render = window.buffer5
+      let pep = all_links4D(arr,a,b)
+      let know = []
+      let kok = 0
+      let obj
+      pep.map((v)=>{obj = {};
+                    obj.name = v;
+                    obj.previous_name = b;
+                    obj.earlier_name = a;
+                    obj.children = [];
+                    buffer_render.push(obj);
+                   })
+      window.buffer5 = buffer_render
+      return
+    }
+    //-----------------------------------------------------------------
+
+    var A4D = jetpack.read(appPath+'/ASKA_4D.json','json')
+    var obj = {};
+    window.buffer5 = []
+    start_render(A4D,'A4D','x_code_run')
+
+    var buffer_ren
+    for(iz=0;iz<A4D.length;iz++){
+      buffer_ren = window.buffer5
+      if(buffer_ren[iz] == undefined){
+        iz = 2 + A4D.length
+      }else{
+        let a1 = buffer_ren[iz].previous_name
+        let b1 = buffer_ren[iz].name
+        start_render(A4D,a1,b1)
+      }
+    }
+    let objs_to_arr = window.buffer5
+    objs_to_arr = objs_to_arr.map(v=>v.name)
+    let code_func = ' ';
+    let yuit
+    let jui
+    document.getElementById('content2').innerText +='\n\n\n\n\n\n'
+    for(io=0;io<objs_to_arr.length;io++){
+      jui = objs_to_arr[io]
+      if(KnowsName_to_code(A4D,b).search(jui)!= -1){
+        yuit = KnowsName_to_code(A4D,jui);
+        objs_to_arr[io] = 'diablo'
+        document.getElementById('content2').innerText += yuit+' \n'
+        code_func += yuit+`
+`;
+      }
+    }
+
+    for(ioi=0;ioi<objs_to_arr.length;ioi++){
+      jui = objs_to_arr[ioi]
+      if(code_func.search(jui)!= -1){
+        yuit = KnowsName_to_code(A4D,jui);
+        document.getElementById('content2').innerText += yuit+' \n'
+        code_func += yuit+`
+`;
+      }
+    }
+
+    for(io2=0;io2<objs_to_arr.length;io2++){
+      jui = objs_to_arr[io2]
+      if(code_func.search(jui)!= -1){
+        yuit = KnowsName_to_code(A4D,jui);
+        document.getElementById('content2').innerText += yuit+' \n'
+        code_func += yuit+`
+`;
+      }
+    }
+    document.getElementById('content2').innerText += '\n\n'+KnowsName_to_code(A4D,b)
+    let wrp = document.getElementById('wrapper_aska');
+    let numInterval = false;
+    move_inner_text = function(){
+      if(wrp.scrollTop >= wrp.scrollHeight-1200){
+        //wrp.scrollHeight = 2000
+        wrp.scrollTop = 100
+        //return clearInterval(numInterval);
+      }
+      wrp.scrollTop = wrp.scrollTop + 10;
+    }
+    numInterval = setInterval(move_inner_text,40)
+
+    obj.name = b
+    obj.code = KnowsName_to_code(A4D,obj.name)
+    code_func = code_func+`
+`+obj.code+`
+`+obj.name+`('${obj.name}');`;
+    return code_func
+  }
+
+  function window_close(time){
+    let robot = require('robotjs')
+    let sec = 0
+    let iid = setInterval(int_timer, 1000);
+    function int_timer(){
+      sec+=1
+      if(time < sec){
+        let cl = require('electron').remote.BrowserWindow.fromId(zzz)
+        clearInterval(iid)
+        windowManager.sharedData.set('x_command',0)
+        windowManager.sharedData.set('x_com_time',1);
+        cl.close()
+      }
+    }   
+  }
+
+
+  var jetpack = require('F:/ajr/aspirin/node_modules/fs-jetpack')
+  var robot = require('robotjs')
+  let com = windowManager.sharedData.fetch('x_command');
+  let x_code = runCodeA4D(com[0],com[1])
+  try{
+    eval(x_code)
+  }catch(err){
+    alert('Ошибка: '+err)
+    //const {BrowserWindow} = require('electron').remote
+    //gw = new BrowserWindow({ width: 1500, height: 1301, x:2000, y:0,movable:true,alwaysOnTop:true, transparent: true,skipTaskbar:true, frame: false });
+    //gw.loadURL('F:/ajr/aspirin/windows/aska_test03.html');
+    //gw.show();
+  }
+  let delay = windowManager.sharedData.fetch('x_com_time');
+  window_close(delay)
+</script>
