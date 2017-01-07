@@ -105,7 +105,7 @@
     }else{
       window.date_to_delete_link = 0
       createEditor('editor_aska_'+c, 'ASKA4D_GO',c);
-   
+
     }
   }
 
@@ -135,51 +135,57 @@
     return know
   }
 
-    let exw = ["all_windows_drag", "showCodeList", "toolbar", "listknows", "showTime", "fulloverlay"];   
-    var position = false;
-    var other_position = false;
+  let exw = ["all_windows_drag", "showCodeList", "toolbar", "listknows", "showTime", "fulloverlay"];   
+  var position = false;
+  var other_position = false;
 
-    document.querySelector('body').onmousedown = function(e){
-      console.log('start');
-      let cp = cw.getPosition();
-      position = [e.screenX-cp[0],e.screenY-cp[1]];
-      other_position = _(remote.getGlobal('getAllWin')())
+  document.querySelector('body').onmousedown = function(e){
+    console.log('start');
+    let cp = cw.getPosition();
+    position = [e.screenX-cp[0],e.screenY-cp[1]];
+    other_position = _(remote.getGlobal('getAllWin')())
+      .chain()
+      .filter(v=>!exw.includes(v))
+      .map(v=>[v, windowManager.windows[v].object.getPosition()])
+      .map(([name,xy])=>[name, [e.screenX-xy[0], e.screenY-xy[1]]])
+      .object()
+      .value()
+  }
+  document.querySelector('body').onmouseup = function(e){
+    console.log('end');
+    position = false;
+    other_position = false;
+  }
+  document.querySelector('body').onmousemove = function(e){
+    e.preventDefault();
+
+    if(!position) return;
+    if(e.screenX){
+      let posX = e.screenX-position[0]
+      let posY = e.screenY-position[1]
+      // cw.setPosition(posX,posY);
+
+      _(remote.getGlobal('getAllWin')())
         .chain()
         .filter(v=>!exw.includes(v))
-        .map(v=>[v, windowManager.windows[v].object.getPosition()])
-        .map(([name,xy])=>[name, [e.screenX-xy[0], e.screenY-xy[1]]])
-        .object()
-        .value()
-    }
-    document.querySelector('body').onmouseup = function(e){
-      console.log('end');
-      position = false;
-      other_position = false;
-    }
-    document.querySelector('body').onmousemove = function(e){
-      e.preventDefault();
+        .each(w=>{
 
-      if(!position) return;
-      if(e.screenX){
-        let posX = e.screenX-position[0]
-        let posY = e.screenY-position[1]
-        // cw.setPosition(posX,posY);
-       
-        _(remote.getGlobal('getAllWin')())
-          .chain()
-          .filter(v=>!exw.includes(v))
-          .each(w=>{
+        let [sx, sy] = other_position[w];
+        console.log(w)
+        windowManager.windows[w].object
+          .webContents.setZoomFactor(windowManager.sharedData.fetch('xscale_win')) 
+        windowManager.windows[w].object
+          .getBounds()e.screenX-sx, e.screenY-sy);
+        let yui = cw.getBounds()
+        let xj = yui.width
+        let yj = yui.height
+        xj = xj *
+          windowManager.windows[w].object
+          .setPosition(e.screenX-sx, e.screenY-sy);
+      })
+    }
+  };  
 
-          let [sx, sy] = other_position[w];
-          console.log(w)
-          windowManager.windows[w].object
-            .webContents.setZoomFactor(windowManager.sharedData.fetch('xscale_win')) 
-          windowManager.windows[w].object
-            .setPosition(e.screenX-sx, e.screenY-sy); 
-        })
-      }
-    };  
-  
 
   //////////////////////////////////////////////////////////////////////////////
 
