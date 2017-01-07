@@ -421,7 +421,7 @@ var container = document.getElementById('editor');
 var results = document.getElementById('result');
 var composite = document.getElementById('composite');
 var composite_wrap = document.getElementById('composite_wrap');
-var totalWidth = 680;// container.offsetWidth;
+var totalWidth = container.offsetWidth;
 var resultsHeight = results.offsetHeight;
 
 if (resultsHeight >= 2000) {
