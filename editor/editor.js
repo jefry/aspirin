@@ -250,6 +250,30 @@ onload = function () {
   runButton.addEventListener("click", handleRunButton);
   // wsxButton.addEventListener("click", handleRunButton);
 
+editor = CodeMirror(
+document.getElementById("editor"),
+{
+  mode: {name: "javascript", json: true},
+  lineNumbers: true,
+  indentWithTabs: false,
+  tabSize: 1,
+  theme: "lesser-dark",
+  value: "\r\n\r\n\r\n",
+  // viewportMargin: 5,
+  // scrollbarStyle:'none',
+  extraKeys: {
+    "Tab": function (cm) {
+      var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
+      cm.replaceSelection(spaces, "end", "+input");
+    },
+    "Ctrl-Enter": function (instance) {
+      handleRunButton()
+    },
+    "Ctrl-S": function (instance) {
+      handleSaveButton()
+    }
+  }
+});
   editor = CodeMirror(
     document.getElementById("editor"),
     {

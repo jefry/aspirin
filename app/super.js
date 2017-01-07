@@ -1,5 +1,5 @@
-const {remote,clipboard,BrowserWindow} = require('electron');
-const {Menu, MenuItem,dialog} = remote;
+const {remote,clipboard} = require('electron');
+const {Menu, MenuItem,dialog,BrowserWindow} = remote;
 const Util = require('util');
 const path = require('path');
 var fs = require("fs");
@@ -157,10 +157,10 @@ function createWindowNoNode(name, url) {
 function getResourceUsage(){
   return _(require('electron').webFrame.getResourceUsage()).reduce((m,v,k)=>Object.assign(m,_(_(v).map((iv,ik)=>[k+'_'+ik,iv])).object()),{})
 }
-
 function genDataHtmlUrl(content){
   return "data:text/html;charset=utf-8," + encodeURI(content);
 }
+
 //var events = require('events');
 //var fs = require('fs');
 //var path = require('path');

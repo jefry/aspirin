@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<script type="text/javascript" src="https://webasr.yandex.net/jsapi/v1/webspeechkit.js"></script>
 <head>
     <meta charset="UTF-8">
     <title>Bozon</title>
@@ -7,7 +8,7 @@
     <script type="text/javascript" src="../app/super.js"></script>
     <!--<script src="bozon.js"></script>-->
 
-    <link rel="stylesheet" href="../styles/photon.css">
+    <link rel="stylesheet" href="../styles/photon.css"></link>
     <style>
         body {
             color: #eee;
@@ -91,6 +92,8 @@
 </head>
 
 <body>
+
+<audio src="" id="audio"></audio>
 <header class="boz-header">
     <span id="isText" class="active-hid">[H]</span>
     <span class="active-hid" onclick="document.getElementById('content').classList.toggle('lettercell')">[√]</span>

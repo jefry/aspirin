@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+  <head id = "hy">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script type="text/javascript" src="../aspirin/app/super.js"></script>
+    <script>
+      var appPath = remote.app.aspirinRoot;
+      var d3 = require(appPath+'/node_modules/d3/d3.js')
+      var windowManager = remote.require('electron-window-manager');   
+    </script>
+    <script type="text/javascript" src="editor/API4D.js"></script>
+    <style>
+      ::-webkit-scrollbar { width: 0 !important }
+      html, body {
+        height: 100%; 
+      }
+      body {
+        background: rgba(3, 3, 3, 0.93);
+      }
+    </style>
+  </head>
+  <body>
+    <div id='wid'></div>
+    <div id='content'></div>
+  </body>
+</html>
+<script>
+  document.getElementById('hy')//Toolbar.listKnows(this)
+    .innerHTML += `<link href="G:/js/main/style.css" rel="stylesheet">`
+  //////////////////////////////////////////////////////////////////////////////
+  function Aska_d3_render(){
+    d3.json(appPath+'/ASKA_4D_d3.json', function(error, json) {
+      if (error) throw error;
+      svg.selectAll(".link").remove(".link")
+      svg.selectAll(".node").remove(".node")
+      var nodes = tree.nodes(json),
+          links = tree.links(nodes);
+      var link = svg.selectAll("path.link")
+      .data(links)
+      .enter().append("path")
+      .attr("class", "link")
+      .attr("d", diagonal)
+      var node = svg.selectAll("g.node")
+      .data(nodes)
+      .enter().append("g")
+      .attr("id", function(d) { return  "wid"})//d.name
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
+
+      node.append("circle")
+        .attr("r", function(d) { return d.size; })
+      node.append("text")
+        .attr("dx", function(d) { return d.children ? -16 : -16; })
+        .attr("dy", -2)
+        .attr("id", function(d) { return  d.name})//d.name
+
+
+        .attr("style", function(d){
+        if(d.name == window.run_color){
+          d.color = '99dd00'
+        }
+        let ti = "stroke:#"+d.color+";font: "+d.fontsize+"px Verdana, Arial, sans-serif;";
+        return ti
+      })
+        .attr( "onclick",function(d) {
+        return "aska('"+d.name+"','"+d.previous_name+"','"+d.earlier_name+"')" 
+      })
+        .attr( "oncontextmenu",function(d) { return "aska_speech_config('"+d.name+"','"+d.previous_name+"','"+d.earlier_name+"');" })  //aska_redactor('"+d.name+"'); just.run('${name}', this)
+      //.attr("text-anchor", function(d) { return d.children ? "end" : "start"; })
+        .text(function(d) { return d.name})
+
+      node.append("text")
+        .attr("dx", function(d) { return d.children ? 30 : 30; })
+        .attr("dy", 11)
+        .attr("style", function(d) { return "stroke:#353535;font: "+(d.fontsize-8)+"px  Arial;"; })
+        .text(function(d) { return d.coments});//
+
+      node.append("text")
+        .attr("dx", function(d) { return d.children ? 40 : 40; })
+        .attr("dy", 21)
+        .attr("style", function(d) { return "stroke:#303030;font: "+(d.fontsize-8)+"px  Arial;"; })
+        .text(function(d) { return d.coments2});//
+/*
+      node.append("text")
+        .attr("dy", +4)
+        .attr("style", function(d) { return "stroke:#000;font:"+(d.fontsize-5)+"px  Arial;"; })
+        .attr("dx", function(d){ return d.children ? -50:-50})
+        .text(function(d) { return d.coments3});
+*/
+      
+      node.append("text")
+        .attr("dy", 11)
+        .attr("style", function(d) { return "stroke:#222;font:"+(d.fontsize-6)+"px  Arial;"; })
+        .attr("dx", function(d) { return d.children ? -15 : -15; })
+        .text(function(d) { return d.coments3});
+        
+    });
+  }
+
+
+  let level = jetpack.read(appPath+'/ASKA_4D_buffer.json','json');
+  var width = 100+300*level, height = 100+200*level;
+  var tree = d3.layout.tree()
+  .size([height,width]);
+
+  var diagonal = d3.svg.diagonal()
+  .projection(function(d) { return [d.y, d.x]; });
+
+  var svg = d3.select("body").append("svg")
+  .attr("height", height )
+  .attr("width", width +1000)
+  //.append("g")
+  //.attr("transform", "translate(50%,50%)", "scale(1)");
+  ///////////////////////////////////////////////////////////////////
+  Aska_d3_render();
+  //////////////////////////////////////////////////////////////
+  d3.select(self.frameElement).style("height", height + "px");
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  function run_x_code(){
+    jw = new BrowserWindow({ width: 1920, height: 1080, x:0, y:0,movable:true,alwaysOnTop:true, transparent: true,skipTaskbar:true, frame: false });
+    jw.on('closed', function() {
+      jw = null;
+    });
+    windowManager.sharedData.set('x_code_get_id',jw.id)
+    jw.loadURL(appPath+'/run_x_code.html');
+   // jw.setSize(1920,1300)
+    jw.show();
+  }
+  ///////////////////////////////////////////////////////////////////////////////
+  function aska(c,b,a){
+    let new_arr = window.date_to_delete_link
+    if(new_arr != 0 && new_arr != undefined){
+      let a_del = new_arr[0]
+      let b_del = new_arr[1]
+      let c_del = new_arr[2]
+      window.date_to_delete_link = [a,b,c]
+      window.buffer_d3 = c
+      if(a_del == a && b_del == b && c_del == c){
+        window.date_to_delete_link = 0
+        window.buffer_d3 = 0
+        windowManager.sharedData.set('x_command',[b,c])
+        windowManager.sharedData.set('d3_windows_copy',[a,b,c])
+        run_x_code();
+      }
+    }else{
+      window.date_to_delete_link = [a,b,c]
+      window.buffer_d3 = c
+    }
+    reload4D();
+    Aska_d3_render();
+  }
+  function aska_speech_config(c,b,a){
+    var A4D = jetpack.read(appPath+'/ASKA_4D.json','json')
+    let new_arr = window.date_to_delete_link
+    if(new_arr != 0 && new_arr != undefined){
+
+      let a_del = new_arr[0]
+      let b_del = new_arr[1]
+      let c_del = new_arr[2]
+
+      if(a_del == a && b_del == b && c_del == c){
+        let c_name = Math.random()*100|0
+        c_name = 'New'+c_name
+        let d_code = Math.random()*100|0
+        d_code = 'new_code'+d_code
+        
+        createNew(b,c,c_name,d_code)
+      }else{
+        let arr_calc = all_links4D(A4D,b_del,c_del)
+        A4D = delete_all_link4D(A4D,c_del)
+        if(arr_calc != ''){
+          for(ig=0;ig<arr_calc.length;ig++){
+            A4D = linked4D(A4D,c,c_del,arr_calc[ig])
+          }
+        }
+        A4D = delete_link4D(A4D,a_del,b_del,c_del)
+        A4D = linked4D(A4D,b,c,c_del)
+        jetpack.write(appPath+'/ASKA_4D.json',A4D)
+      }
+      window.buffer_d3 = 0
+      window.date_to_delete_link = 0
+      reload4D();
+      Aska_d3_render();
+
+    }else{
+      window.date_to_delete_link = 0
+      createEditor('editor_aska_'+c, 'ASKA4D_GO',c);
+    }
+  }
+  ///////////////////////////////////////////////
+  
+  //////////////////////////////////////
+  function start_render(arr,a,b){
+    let buffer_render = jetpack.read(appPath+'/ASKA_4D_render_buffer.json','json');
+    let pep = all_links4D(arr,a,b)
+    let know = []
+    let kok = 0
+    let obj
+
+    pep.map((v)=>{obj = {};
+                  obj.name = v;
+                  obj.previous_name = b;
+                  obj.earlier_name = a;
+                  if(v == window.buffer_d3){
+                    obj.fontsize = 12;
+                    obj.size = 80;
+                    obj.color = 'B22222';
+                  }else{
+                    obj.fontsize = 16;
+                    obj.size = 28;
+                    obj.color = 'dd9400';
+                    if(b=='x_code_run'||a=='x_code_run'){obj.color = 'aa3355';}
+                    if(v=='Кнопки'||b=='Кнопки'||a=='Кнопки'){obj.color = '3399aa';}
+                    if(v=='aska'||b=='aska'||a=='aska'){obj.color = 'bb4466';}
+                    if(v=='calc_time'||b=='calc_time'||a=='calc_time'){obj.color = 'bb4466';}
+                    if(v=='run_x_code_win'||b=='run_x_code_win'||a=='run_x_code_win'){obj.color = 'bb4466';}
+                  }
+                  arr.map((m,index)=>{if(m[0] == v){kok = index}})
+                  kok = arr[kok][1]
+                  if(kok.length > 50){
+                    obj.coments = kok.substring(0,50)
+                    if(kok.length > 100){
+                      obj.coments2 = kok.substring(50,100)
+                    }else{
+                      obj.coments2 = kok.substring(50,kok.length);
+                    }
+                  }else{
+                    obj.coments = kok
+                  }
+                  obj.coments3 = kok.length
+                  obj.children = [];
+                  buffer_render.push(obj);
+                 })
+    jetpack.write(appPath+'/ASKA_4D_render_buffer.json',buffer_render);
+    return
+  }
+  //////////////////////////////////////
+  function save_new_code4D(arr,name,code){
+    let count = 0
+    arr.map((v,index)=>{if(v[0]==name){count +=1; arr[index][1] = code}})
+    if(count == 0)arr.push([name,code])
+    return arr
+  }
+  /////////////////////////////////////////////////////////////////////
+  function reload4D(){
+    var A4D = jetpack.read(appPath+'/ASKA_4D.json','json');
+    let level = 10
+    let knows = {}
+    knows.name = A4D[3][0];
+    knows.previous_name = A4D[3][0];
+    knows.earlier_name = A4D[3][0];
+    knows.fontsize = 16;
+    knows.size = 130;
+    knows.color = 'FFD700';
+    knows.children = [];
+    jetpack.write(appPath+'/ASKA_4D_render_buffer.json',[knows]);
+
+    var buffer_ren
+
+    for(iz=0;iz<A4D.length;iz++){
+      buffer_ren = jetpack.read(appPath+'/ASKA_4D_render_buffer.json','json');
+      if(buffer_ren[iz] == undefined){
+        iz = 2 + A4D.length
+      }else{
+        let a1 = buffer_ren[iz].previous_name
+        let b1 = buffer_ren[iz].name
+        start_render(A4D,a1,b1)
+      }
+    }
+
+    buffer_ren = jetpack.read(appPath+'/ASKA_4D_render_buffer.json','json');
+    for(ie=buffer_ren.length-1;ie>0;ie--){
+      let a2 = buffer_ren[ie].previous_name
+      let b2 = buffer_ren[ie].name
+      let ass = 'w'
+      buffer_ren.map((v,index)=>{if(v.name == a2){ass = index}})
+      let knowz = buffer_ren[ass]
+      knowz.children.unshift(buffer_ren[ie])
+      buffer_ren[ass] = knowz
+      buffer_ren.splice(ie,1)
+      jetpack.write(appPath+'/ASKA_4D_render_buffer.json',buffer_ren);
+    }
+    buffer_ren = jetpack.read(appPath+'/ASKA_4D_render_buffer.json','json');
+    buffer_ren = buffer_ren[0]
+    jetpack.write(appPath+'/ASKA_4D_render_buffer.json',buffer_ren);
+    jetpack.write(appPath+'/ASKA_4D_d3.json',buffer_ren)
+  }
+  ////////////////////////////////////////
+  function real_time(){
+    var objData = new Date();
+    var year = objData.getFullYear()
+    var month = objData.getMonth()+1;
+    var date = objData.getDate();
+    var hours = objData.getHours();
+    var minutes = objData.getMinutes();
+    let yy = windowManager.sharedData.fetch('runcode_buffer');
+    if(year==yy[0]&&month==yy[1]&&date==yy[2]&&hours==yy[3]&&minutes==yy[4]){
+      if(window.run_color != yy[5]){
+        window.run_color=yy[5]
+        Aska_d3_render()
+      }
+    }else if(window.run_color != 'x_code_run'){
+      window.run_color='x_code_run'
+      Aska_d3_render()
+    }
+  }
+  function reflect_lvl(arr,know){
+    for(i=0;i<know.children.length;i++){
+      know.children[i].children = start_render(arr,know.name,know.children[i].name)
+    }
+    know.children.children = clear_null_in_names(know.children)
+    return know
+  }
+  ///////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+
+  let exw = ["all_windows_drag", "showCodeList", "toolbar", "listknows", "showTime", "fulloverlay"];   
+  var position = false;
+  var other_position = false;
+
+  document.querySelector('body').onmousedown = function(e){
+    console.log('start');
+    let cp = cw.getPosition();
+    position = [e.screenX-cp[0],e.screenY-cp[1]];
+    /*
+    other_position = _(remote.getGlobal('getAllWin')())
+      .chain()
+      .filter(v=>!exw.includes(v))
+      .map(v=>[v, windowManager.windows[v].object.getPosition()])
+      .map(([name,xy])=>[name, [e.screenX-xy[0], e.screenY-xy[1]]])
+      .object()
+      .value()
+      */
+  }
+  document.querySelector('body').onmouseup = function(e){
+    console.log('end');
+    position = false;
+    other_position = false;
+  }
+  
+  document.querySelector('body').onmousemove = _.throttle(function(e){
+    e.preventDefault();
+
+    if(!position) return;
+    if(e.screenX){
+      let posX = e.screenX-position[0]
+      let posY = e.screenY-position[1]
+      cw.setPosition(posX,posY);
+/*
+      _(remote.getGlobal('getAllWin')())
+        .chain()
+        .filter(v=>!exw.includes(v))
+        .each(w=>{
+
+        let [sx, sy] = other_position[w];
+        windowManager.windows[w].object
+          .setPosition(e.screenX-sx, e.screenY-sy); 
+      })
+      */
+    }
+  },30);  
+  
+</script>

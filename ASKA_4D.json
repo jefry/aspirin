@@ -1,0 +1,401 @@
+[
+  [
+    "03",
+    "\n033 = function(this_name){\nre_name_code(this_name)\ncode_run_time(10)\n}"
+  ],
+  [
+    "code_to_A4Did",
+    "code_to_A4Did = function(this_name){\n  let A4D = jetpack.read('F:/ajr/ASKA_4D.json', 'json')\n  let code\n  A4D.map((v,index)=>{if(v[0]== this_name){\n    code = A4D[index][1]\n  }})\n  let yui = md5_to_int(md5(code))\n  console.log(yui)\n  return yui\n}\n\n",
+    28
+  ],
+  [
+    "code_to_A4Did",
+    "code_to_A4Did = function(this_name){\n  let A4D = jetpack.read('F:/ajr/ASKA_4D.json', 'json')\n  let code\n  A4D.map((v,index)=>{if(v[0]== this_name){\n    code = A4D[index][1]\n  }})\n  let yui = md5_to_int(md5(code))\n  console.log(yui)\n  return yui\n}\n\n"
+  ],
+  [
+    "A4D",
+    "A4D = function(){\n  sleep(17)\n  //ignore_mouse_ivents()\n  //let a = [2016,11,17,13,30]\n  //let a = [2016,11,26,22,30]\n  let a = [2016,12,16,19,20]\n  let arr_text = [\n    'верь и преумножай свою веру, набрано '+27+' интелекта',\n    'у тебя есть реальная возможность исполнять свои желания, воспользуешься ли ты ей , тебе решать',\n    'как результат преодоления дна, энергетическая независимость, и настоящая свобода выбора'\n  ];\n  let mR = (Math.random()*arr_text.length)|0\n  console.log(mR)\n  //voice_music(0,8)\n  audio()\n  aska_ai(17,'мой Капитан,'+\n       ' Добро пожаловать на мостик'+\n       ',. Звездная дата,'+calc_time(a)+//'с момента варп прыжка в гипер тлеэное пространство'\n       ' , с момента выхода в гипер тленное пространство,'+\n       arr_text[mR]);\n}",
+    3.3333333333333335,
+    9.666666666666666,
+    10.333333333333334,
+    12,
+    21.666666666666668
+  ],
+  [
+    "x_code_run",
+    "x_code_run = function(text){\naska('');\n}\n",
+    13.666666666666666,
+    15.333333333333334,
+    19.666666666666668
+  ],
+  [
+    "code_for_A4D",
+    "function search4D(arr,name){\n  arr.map((v,index)=>{\n    if(v[0] == name){name=index}\n  })\n  if(isNaN(name)){\n    aska('ненашла имя')\n    name = 0;\n  }\n  return name\n}\n//////////////////////////////////////\nfunction save4D(arr,a,b,c){\n  a = search4D(arr,a)\n  b = search4D(arr,b)\n  c = search4D(arr,c)\n  let d = (a+b+c)/3\n  return d\n}\n//////////////////////////////////////\nfunction linked4D(arr,a,b,c){\n  let link = save4D(arr,a,b,c)\n  b = search4D(arr,b)\n  arr[b].push(link)\n  return arr\n}\n//////////////////////////////////////\nfunction calc4D(link,a,b){\n  return link = (link*3)-(a+b)\n}\n//////////////////////////////////////\nfunction clear_null_in_numbers(n){\n  n = n.filter((v)=>{if(isNaN(v)){}else{return v}})\n  return n\n}\n//////////////////////////////////////\nfunction clear_null_in_names(n){\n  n = n.filter((v)=>{if(isFinite(v)){}else{return v}})\n  return n\n}\n//////////////////////////////////////\nfunction reflect4D(arr,a,b){\n  let c = 0\n  a = search4D(arr,a)\n  b = search4D(arr,b)\n  let n = [];\n  arr[b].filter((v)=>{n.push(calc4D(v,a,b))})\n  n = clear_null_in_numbers(n)\n  return n\n}\n//////////////////////////////////////\nfunction all_links4D(arr,a,b){\n  console.log(a)\n  console.log(b)\n  let d = reflect4D(arr,a,b)\n  console.log(d)\n  d = d.map((v)=>{if(arr[v]){\n    return v = arr[v][0]\n  }})\n  d = clear_null_in_names(d)\n  return d\n}\n////////////////////////////////////////\nfunction delete_link4D(arr,a,b,c){\n    a = search4D(arr,a)\n    b = search4D(arr,b)\n    c = search4D(arr,c)\n    let i = 0\n    let linker = arr[b]\n    linker.map((v,index)=>{\n      if(index > 1){\n        if(calc4D(v,b,c) == a){ i = index}\n      }\n    })\n    linker.splice(i,1)\n    arr[b] = linker\n    return arr\n  }\n//////////////////////////////////////\nfunction start_render(arr,a,b){\n  let pep = all_links4D(arr,a,b)\n  let know = []\n  let obj\n  pep.map((v)=>{obj = {};\n                  obj.name = v;\n                  obj.fontsize = 16;\n                  obj.size = 20;\n                  obj.color = 'ffa61d';\n                  obj.children = [];\n                  know.push(obj);\n    })\n  return know\n}\n//////////////////////////////////////\nfunction save_new_code4D(arr,name,code){\n  let count = 0\n  arr.map((v,index)=>{if(v[0]==name){count +=1; arr[index][1] = code}})\n  if(count == 0)arr.push([name,code])\n  return arr\n}\n////////////////////////////////////////\nfunction reflect_lvl(arr,know){\n  for(i=0;i<know.children.length;i++){\n    know.children[i].children = start_render(arr,know.name,know.children[i].name)\n  }\n  know.children.children = clear_null_in_names(know.children)\n  return know\n}\n///////////////////////////////////////////\nvar A4D = jetpack.read('F:/ajr/ASKA_4D.json','json');\n/*\nlet level = 2\nlet knows = {}\nknows.name = 'root';\nknows.fontsize = 50;\nknows.size = 120;\nknows.color = 'ffa61d';\nknows.children = [];\n\nknows.children = start_render(A4D,'root','root')\n/////////////\nknows = reflect_lvl(A4D,knows)\n///////////////\nknows.children.map(v=>reflect_lvl(A4D,v))\n///////////////////\nfor(i=0;i<knows.children.length;i++){\n  knows.children[i].children.map(v=>reflect_lvl(A4D,v))\n}\n//////////////////////\n*/\n //let hhh2 = hhh.map(v=>all_links(A4D,'aska',v))\n//console.log(hhh2)\n//delete_link4D(A4D,'my_music','Matrix','итересно')\nlinked4D(A4D,'my_music','Matrix','итересно')\njetpack.write('F:/ajr/ASKA_4D.json',A4D)\n//jetpack.write('F:/ajr/ASKA_4D_d3.json',knows)\n//jetpack.write('F:/ajr/ASKA_4D_buffer.json',level)\n//knows\n\n\n\n"
+  ],
+  [
+    "Сегодня_к_родителям",
+    "Сегодня_к_родителям = function(){\n aska('Заежал домой, 16 числа');\n}"
+  ],
+  [
+    "this_new542",
+    "this_new542 = function(){\n  console.log()\n}\n\n",
+    16,
+    17.666666666666668,
+    29.333333333333332,
+    37,
+    31.666666666666668
+  ],
+  [
+    "edit_run_x_code",
+    "edit_run_x_code = ()=>{\n var robot = require('robotjs');\n let posD = robot.getMousePos();\n let win = createEditor();\n win.object.setPosition(posD.x,posD.y)\n let jstext = `\nonChosenFileToOpen(path.resolve('F:/ajr/round_interface/','run_x_code.html'))\n`\n let winid = win.object.id\n var yw = BrowserWindow.fromId(winid)\n yw.webContents.executeJavaScript(jstext)\n}",
+    17,
+    13.333333333333334,
+    30,
+    23.666666666666668
+  ],
+  [
+    "Отключиться_от_второго_интернета",
+    "Отключиться_от_второго_интернета = function(){\nsleep(6)//0800210000\naska('Отключись от второго интерфейса, это вить твоиже деньги, тебя хотят наебать')\n}"
+  ],
+  [
+    "roundEvent",
+    "roundEvent = function(){\nif(window.position == undefined){\n  window.position = []\n}\n\nlast_position = window.position\nlet position = robot.getMousePos()\n\n\nif(last_position.x != position.x && last_position.y != position.y ){\n  window.position = position\n  //alert(last_position.x+' '+last_position.y+' --- '+position.x+' '+position.y)\n  let state = {} \nstate.x = last_position.x - position.x\nstate.y = last_position.y - position.y\n\nif(state.x == 0){\n  state.x = 0;\n}else if(state.x > 0){\n  state.x = 1;\n}else{\n  state.x = -1;\n}\n\nif(state.y == 0){\n  state.y = 0;\n}else if(state.y > 0){\n  state.y = 1;\n}else{\n  state.y = -1;\n}\n//////////////////////////////////////////\nif(window.arr_state == undefined){\n  window.arr_state = [[1,-1],[0,0]]\n}\nlet arr_state = window.arr_state\n\nif(arr_state[0][0] != state.x || arr_state[0][1] != state.y){\n\n  arr_state.splice(0,0,[state.x,state.y])\n  if(arr_state.length > 4){\n  arr_state.splice(4,1)\n}\nwindow.arr_state = arr_state;\n//console.log(arr_state[0][0]+' '+arr_state[0][1]+', \\n'+\n//           arr_state[1][0]+' '+arr_state[1][1]+', \\n'+\n//            arr_state[2][0]+' '+arr_state[2][1]+', \\n'+\n//            arr_state[3][0]+' '+arr_state[3][1])\n\nif(\n  arr_state[0][0] == -1 && arr_state[0][1] == 1 &&\n  arr_state[1][0] == 1 && arr_state[1][1] == 1 &&\n  arr_state[2][0] == 1 && arr_state[2][1] == -1 &&\n  arr_state[3][0] == -1 && arr_state[3][1] == -1 \n){\n  alert('ok')\n}\n}\n\n\n}\n\n}\n",
+    10.333333333333334
+  ],
+  [
+    "edit_editor",
+    "edit_editor = ()=>{\n let posD = robot.getMousePos();\n let win = createEditor();\n win.object.setPosition(posD.x,posD.y)\n let jstext = `\nonChosenFileToOpen(path.resolve('F:/ajr/aspirin/editor/','editor.js'))\n`\n let winid = win.object.id\n var yw = BrowserWindow.fromId(winid)\n yw.webContents.executeJavaScript(jstext)\n}"
+  ],
+  [
+    "Написал_еще_немного_кода",
+    "Написал_еще_немного_кода = function(this_name){\n  ////////////////////////////////////////////////////  \n  sleep(6)\n  //voice_music(57,2)\n  //play_gif()\n  ignore_mouse_ivents()\n  \n  let a = this_real_time()\n  a.push(this_name)\n  if(windowManager.sharedData.fetch('runcode_buffer') != undefined){\n    let aa = windowManager.sharedData.fetch('runcode_buffer');\n    if(a[0]==aa[0]&&a[1]==aa[1]&&a[2]==aa[2]&&a[3]==aa[3]&&a[4]==aa[4]&&a[5]==aa[5]){\n      b = A4DName_json(this_name,a)\n      let c = jetpack.read('F:/ajr/JSON/'+this_name+'.json','json');\n      aska('Подходов к написанию кода, за запоминаемое мной время было '+c.length+'-раз');\n    }else{\n      windowManager.sharedData.set('runcode_buffer',a)\n      let b = A4DName_json(this_name)\n      aska_ai(10,'Последний раз написал хоть одну полезную строчку '+calc_time(b)+' назад');\n     \n    }\n  }else{\n    windowManager.sharedData.set('runcode_buffer',a)\n  }\n  grafics(this_name)\n}"
+  ],
+  [
+    "Набор_robotjs_кода",
+    "Набор_robotjs_кода = function(){\n  aska('Примеры кода, робот дже ес')\n\n  remote = require('electron').remote;\n  windowManager = remote.require('electron-window-manager');\n\n  if(false){\n    var robot = require('robotjs');\n    var mouse = robot.getMousePos();\n\n    var img = robot.screen.capture(0, 0, 1920, 1080);\n\n    if (img.colorAt(1723,38) == '7d4311'){var z=1;}\n\n    robot.moveMouse(203,1182);robot.mouseClick();\n\n    robot.moveMouse(mouse.x,mouse.y);\n  }\n  setTimeout(function(){\n    console.log('500')\n  }, 100);\n  \n//clearInterval//////////////////////////////////////////////////////////////\n  sec = 0\n  function int_timer(){\n    sec+=1\n    robot.keyTap('backspace');\n    if(9 < sec){\n      clearInterval(iid)\n    }\n  }   \n  iid = setInterval(int_timer, 50);\n\n  //////////////////////////////////////////////////////////////\n  var robot = require('robotjs');\n  var mouse = robot.getMousePos();\n  var img = robot.screen.capture(0, 0, 1920*2, 1200);\n  var hex = img.colorAt(mouse.x,mouse.y)\n\n\n  windowManager.sharedData.set('web_camera_signal', 0);\n  //mouse.x+' '+mouse.y+' '+hex\n  //JetPack набор\n  jetpack.write('F:/ajr/aspirin/windows/aska_test03_buffer.json',`'${text}'`);\n}\n\n",
+    12.333333333333334,
+    12.666666666666666,
+    19.666666666666668
+  ],
+  [
+    "coub_gif",
+    "coub_gif = function(){ \nvar robot = require('robotjs');\nvar mouse = robot.getMousePos();\nvar p1 = parameter0;\nvar p2 = parameter1;\nvar img = robot.screen.capture(0,0, 3840, 1200);\nfunction proverka_z(z){\n  console.log('circle_lvl_2'); \n  if(true){var z=1;}\n  return z\n}\nproverka_z(0);\n////////\nfunction proverka_j(j){ \n  var gif = jetpack.read('F:/ajr/chat/coub_video_cache.json', 'json');\n  const {BrowserWindow} = require('electron').remote\n  var gw = new BrowserWindow({ width: 500, height: 301, x:800, y:400,movable:true,alwaysOnTop:true, transparent: true,skipTaskbar:true, frame: false });\n  gw.on('closed', function() {\n    gw = null;\n  });\n  gw.loadURL(gif[0]);\n  gw.show();\n\n  jstext = `\ntest2 = function(v){\nv = decodeURI(v)\nvar hhh = v.substring(v.search('src')+5,v.length)\nvar yyy = hhh.search('\"')\nvar jjj = hhh.substring(0,yyy);\n\nvar jetpack = require('F:/ajr/aspirin/node_modules/fs-jetpack')\n\nif(jetpack.read('F:/ajr/chat/coub_video_cache_mp4.json', 'json') != undefined){\nvar mp4 = jetpack.read('F:/ajr/chat/coub_video_cache_mp4.json', 'json');\n}else{\nvar mp4 = [];\n}\nvar counts = 0;\nfor(i=0;i<mp4.length;i++){\nif(mp4[i] == jjj){counts+=1;}\n}\nif(counts == 0){\nmp4.splice(mp4.length,0,jjj);\n}\njetpack.write('F:/ajr/chat/coub_video_cache_mp4.json',mp4);\n}\n\nout = encodeURI(document.getElementById('videoPlayer').outerHTML);\nrequire('electron').remote.BrowserWindow.fromId(${gw.id})\n.webContents.executeJavaScript('test2(\"' + out + '\")')`\n  gw.webContents.executeJavaScript(jstext)\n  setTimeout(function(){\n    gw.close()\n  }, 2000);\n  return j\n}\nproverka_j(0);\n////////\nconsole.log('sleep');\n}\n\n\n"
+  ],
+  [
+    "New_magic",
+    "New_magic = function(){\nnode.append(\"text\")\n        .attr(\"dy\", 50)\n        .attr(\"style\", function(d) { return \"stroke:#708090;font: \"+(d.fontsize-10)+\"px  Arial;\"; })\n        .attr(\"dx\", function(d) { return d.children ? 0 : 0; })\n        .text(function(d) { return d.coments2});\n}"
+  ],
+  [
+    "Управление",
+    "Управление = function(){\nwindowManager.sharedData.set('x_com_time',10)\naska('Сейчас я розкажу, о управлении, нажатие правой кнопкой, редактировать,'\n    +'левой, выделить, еще раз левой, запустить код')\n}\n"
+  ],
+  [
+    "Поливал_кусты",
+    "Поливал_кусты = function(this_name){\n  ///////////////////////////////////////////////////////\n  let min = 6\n  sleep(min)\n  //play_gif()\n  let a = this_real_time()\n  a.push(this_name)\n  if(windowManager.sharedData.fetch('runcode_buffer') != undefined){\n    let aa = windowManager.sharedData.fetch('runcode_buffer');\n    \n    if(a[0]==aa[0]&&a[1]==aa[1]&&a[2]==aa[2]&&a[3]==aa[3]&&a[4]==aa[4]&&a[5]==aa[5]){\n      b = A4DName_json(this_name,a)\n      let c = jetpack.read('F:/ajr/JSON/'+this_name+'.json','json');\n      aska('Молодец, за всё время, поливал кусты уже '+c.length+' раз');\n    }else{\n      windowManager.sharedData.set('runcode_buffer',a)\n      let b = A4DName_json(this_name)\n      aska('Последний раз поливал '+calc_time(b)+' назад');\n    }\n  }else{\n    windowManager.sharedData.set('runcode_buffer',a)\n  }\n  ignore_mouse_ivents()\n  voice_music(min*10-13)\n  grafics(this_name)\n}\n"
+  ],
+  [
+    "разобрать_холодильник",
+    "разобрать_холодильник = function(t){\n  voice_music(27)\n  aska('разобрать холодильник и приготовить к уборке комнат')\n  play_gif()\n  sleep(4)\n  ignore_mouse_ivents()\n}"
+  ],
+  [
+    "Постирать_платки_false",
+    "Постирать_платки_false = function(this_name){\nre_name_code(this_name)\ncode_run_time(3)\n};"
+  ],
+  [
+    "audio",
+    "audio = function(){\ndocument.getElementById('content').innerHTML += \n'<audio src=\"\" id=\"audio\"><audio/>'\n}\naudio()\n",
+    38
+  ],
+  [
+    "d3_render_level",
+    "d3_render_level = function(){\n jetpack.write('F:/ajr/ASKA_4D_buffer.json',6);\n}",
+    24,
+    24.666666666666668,
+    25,
+    11.333333333333334
+  ],
+  [
+    "edit_interface",
+    "edit_interface = ()=>{\n var robot = require('robotjs');\n let posD = robot.getMousePos();\n let win = createEditor();\n win.object.setPosition(posD.x,posD.y)\n let jstext = `\nonChosenFileToOpen(path.resolve('F:/ajr/aspirin/editor/','D3_interface.html'))\n`\n let winid = win.object.id\n var yw = BrowserWindow.fromId(winid)\n yw.webContents.executeJavaScript(jstext)\n}",
+    18.666666666666668
+  ],
+  [
+    "Мои_дела",
+    "Мои_дела = function(v){\n  var xname ='Мои_дела'\n  let a = [2016,11,17,16,30]\n  let b = [2016,11,18,1,18]\n  let c = [2016,11,19,1,50]\n  let d = [2016,11,19,0,10]\n  let e = [2016,11,20,11,43]\n  let f = calc_time(e)\n  sleep(5);\n  aska('Есть вить чем заняться '+f);\n}",
+    11.666666666666666,
+    29.333333333333332
+  ],
+  [
+    "Вода_сходи_набери",
+    "Вода_сходи_набери = function(){\n  sleep(30)\n  let jw = new BrowserWindow({ width: 1000, height: 500, x:2700, y:400,movable:true,alwaysOnTop:true, transparent: true,skipTaskbar:true, frame: false });\n    windowManager.sharedData.set('x_command',['sleep','grafics'])\n    windowManager.sharedData.set('x_code_get_id',jw.id)\n    jw.loadURL('F:/ajr/round_interface/run_x_code3.html');\n    jw.setSize(1000,500)\n    jw.show();\n}\n"
+  ],
+  [
+    "Отложил_дела",
+    "Отложил_дела = function(){\n code_run_time(5)\n aska('Собери своей систре хороший компьютер');\n}",
+    11.333333333333334,
+    15.666666666666666,
+    23.333333333333332,
+    24,
+    18.333333333333332,
+    15.333333333333334,
+    21
+  ],
+  [
+    "Root_path",
+    "Root_path = function(){\n  let yui = `\n  <meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\" />\n    <script type=\"text/javascript\" src=\"../app/super.js\"></script>\n    <script>\n      var appPath = remote.app.aspirinRoot;\n      var d3 = require(appPath+'/node_modules/d3/d3.js')\n      var windowManager = remote.require('electron-window-manager');   \n    </script>\n    <script type=\"text/javascript\" src=\"API4D.js\"></script>\n`\n  }",
+    35.666666666666664
+  ],
+  [
+    "Вытрусить_пылесос",
+    "Вытрусить_пылесос = function(){\n aska('выниси и вытруси пылисос, пожалуста');\n}"
+  ],
+  [
+    "Когда_чистил_зубы",
+    "Когда_чистил_зубы = function(this_name){\n  ///////////////////////////////////////////////////////\n  let min = 6\n  sleep(min)\n // play_gif()\n  let a = this_real_time()\n  a.push(this_name)\n\n  if(windowManager.sharedData.fetch('runcode_buffer') != undefined){\n\n    let aa = windowManager.sharedData.fetch('runcode_buffer');\n    if(a[0]==aa[0]&&a[1]==aa[1]&&a[2]==aa[2]&&a[3]==aa[3]&&a[4]==aa[4]&&a[5]==aa[5]){\n      b = A4DName_json(this_name,a)\n      let c = jetpack.read('F:/ajr/JSON/'+this_name+'.json','json');\n      aska('Молодец, за всё время, чистил зубы уже '+c.length+' раз');\n\n    }else{\n      windowManager.sharedData.set('runcode_buffer',a)\n      let b = A4DName_json(this_name)\n      aska('Последний раз чистил зубы '+calc_time(b)+' назад');\n    }\n  }else{\n    let ga = this_real_time()\n    windowManager.sharedData.set('runcode_buffer',ga)\n  }\n  ignore_mouse_ivents()\n  voice_music(min*10-13)\n  grafics(this_name)\n}\n"
+  ],
+  [
+    "re_name",
+    "re_name = function(name,s_name){\n  let A4D = jetpack.read('F:/ajr/ASKA_4D.json', 'json')\n    A4D.map((v,index)=>{if(v[0]== name){\n      A4D[index][0] = s_name;\n    }})\n    jetpack.write('F:/ajr/ASKA_4D.json', A4D);\n  }\n\n"
+  ],
+  [
+    "ttttt",
+    "ttttt = function(){\n  aska('15')\n}",
+    13.333333333333334
+  ],
+  [
+    "code_to_A4Did",
+    "code_to_A4Did = function(this_name){\n  let A4D = jetpack.read('F:/ajr/ASKA_4D.json', 'json')\n  let code\n  A4D.map((v,index)=>{if(v[0]== this_name){\n    code = A4D[index][1]\n  }})\n  let yui = md5_to_int(md5(code))\n  console.log(yui)\n  return yui\n}\n\n"
+  ],
+  [
+    "Когда_последний_раз_курил",
+    "Когда_последний_раз_курил = function(this_name){\n  ////////////////////////////////////////////////////  \n  let a = this_real_time()\n  a.push(this_name)\n  if(windowManager.sharedData.fetch('runcode_buffer') != undefined){\n    let aa = windowManager.sharedData.fetch('runcode_buffer');\n\n    if(a[0]==aa[0]&&a[1]==aa[1]&&a[2]==aa[2]&&a[3]==aa[3]&&a[4]==aa[4]&&a[5]==aa[5]){\n\n      b = A4DName_json(this_name,a)\n      let c = jetpack.read('F:/ajr/JSON/'+this_name+'.json','json');\n      aska('Молодец, за всё время, скурил '+c.length+' банок');\n      sleep(3)\n    }else{\n\n      windowManager.sharedData.set('runcode_buffer',a)\n      let b = A4DName_json(this_name)\n      aska('Последний раз, курил банки '+calc_time(b)+' назад');\n      sleep(7)\n    }\n\n  }else{\n    windowManager.sharedData.set('runcode_buffer',a)\n  }\n  //grafics(this_name)\n  play_gif(2)\n  voice_music(0,6)\n  //ignore_mouse_ivents()\n}"
+  ],
+  [
+    "calc_time_difference",
+    "calc_time_difference = function(arr_time_x,arr_real_time){\n  // var real_time = this_real_time()\n  int_day_in_month = function(iu){\n    let arr_month = [0,0,31,59,90,120,151,181,212,243,273,304,334,365]\n    var ii = 0\n    arr_month.map((v,index)=>{if(index == iu){ ii = v}})\n    return ii\n  }\n  int_day_in_year = function(v){\n    switch(v) {\n      case 2016:  v = 0; break;\n      case 2017:  v = 365; break;\n      case 2018:  v = 365+365; break;\n      case 2019:  v = 365+365+365; break;\n      case 2020:  v = 365+365+365+365; break;\n    }\n    return v\n  }\n  arr_time_x[1] = int_day_in_month(arr_time_x[1])\n  arr_time_x[0] = int_day_in_year(arr_time_x[0])\n  let the_magic_begin = (arr_time_x[0]*24*60)+(arr_time_x[1]*24*60)+(arr_time_x[2]*24*60)+(arr_time_x[3]*60)+arr_time_x[4];\n  arr_real_time[1] = int_day_in_month(arr_real_time[1])\n  arr_real_time[0] = int_day_in_year(arr_real_time[0])\n  var symaDate = (arr_real_time[0]*24*60)+(arr_real_time[1]*24*60)+(arr_real_time[2]*24*60)+(arr_real_time[3]*60)+arr_real_time[4]\n  symaDate = symaDate - the_magic_begin;\n  return symaDate\n}"
+  ],
+  [
+    "calc_time",
+    "calc_time = function(arr_time){\n  int_day_in_month = function(iu){\n  let arr_month = [0,0,31,59,90,120,151,181,212,243,273,304,334,365]\n  var ii = 0\n  arr_month.map((v,index)=>{if(index == iu){ ii = v}})\n  return ii\n}\nint_day_in_year = function(v){\n  switch(v) {\n    case 2016:  v = 0; break;\n    case 2017:  v = 365; break;\n    case 2018:  v = 365+365; break;\n    case 2019:  v = 365+365+365; break;\n    case 2020:  v = 365+365+365+365; break;\n  }\n  return v\n}\n  arr_time[1] = int_day_in_month(arr_time[1])\n  arr_time[0] = int_day_in_year(arr_time[0])\n // alert(arr_time[0]+' '+arr_time[1])\n  let the_magic_begin = (arr_time[0]*24*60)+(arr_time[1]*24*60)+(arr_time[2]*24*60)+(arr_time[3]*60)+arr_time[4];\n // alert(the_magic_begin)\n  var real_time = this_real_time()\n // alert(real_time)\n  real_time[1] = int_day_in_month(real_time[1])\n  real_time[0] = int_day_in_year(real_time[0])\n  var symaDate = (real_time[0]*24*60)+(real_time[1]*24*60)+(real_time[2]*24*60)+(real_time[3]*60)+real_time[4]\n // alert(symaDate)\n  symaDate = symaDate - the_magic_begin;\n // alert(symaDate)\n  let minutes = symaDate%60\n  let hours = (symaDate-minutes)/60%24\n  let date = ((symaDate-(hours*60)-minutes)/24/60)//\n  // month = \n  // year = \n  \n  if(date>0){date+=' дня,'}else{date = ' ,'}\n  if(hours==0){hours =', '}else\n    if(hours==1){hours+=' час,'}else\n        if(hours>5){hours+=' часов,'}else{hours += ' часа,'}\n  if(minutes==1){minutes =', одна минута'}else\n    if(minutes==2){minutes =', две минуты'}else\n      if(minutes==3){minutes =', три минуты'}else\n        if(minutes==4){minutes =', четыри минуты'}else\n          if((minutes%10)==1){minutes+=' минута,'}else\n            if((minutes%10)==2){minutes+=' минута'}else\n              if(minutes==22){minutes+=' минуты'}else\n                if(minutes==13){minutes+=' минут'}else\n                  if((minutes%10)==3){minutes+=' минута'}else\n                    if(minutes==14){minutes+=' минут'}else\n                      if((minutes%10)==4){minutes ='четвертая минута'}else\n                        if(minutes==0){hours ='и ровно'+hours; minutes=', '}else{minutes +=' минут'}\n  \n  return date+' '+hours+' '+minutes\n}",
+    25.333333333333332,
+    13,
+    23.666666666666668
+  ],
+  [
+    "Купить",
+    "Купить = function(){\n  voice_music(0,4)\n  aska('придумай что еще купить:'+\n       'сахар,'+\n       'ушные палочки');\n  play_gif(1)\n  sleep(9)\n  ignore_mouse_ivents()\n  //купи пожалуста\n}"
+  ],
+  [
+    "fix_runCode_erorre",
+    "fix_runCode_erorre = function(){\nfunction reverse(s){\n  return s.split(\"\").reverse().join(\"\");\n}\n////////////////////////////////////////////////////////////\nfunction runCode(code) {\n  //alert(code)\n  console.log(code)\n  isCallShowResult = false;\n  try {\n    var result = eval(code);\n    if (!isCallShowResult) {\n      if (result && typeof result == \"object\") {\n      }else{\n        try{\n          window.last_name = window.last_name.reverse()\n          let buffer = window.ask_buffer\n          windowManager.sharedData.set('ask_buffer_window',buffer)\n        }catch(err){\n        }\n      }\n    }\n  } catch (e) {\n    //////////////////////////////////////////////////////////////////////////////////////\n    function auto_fix_undefined_code(name,value){\n\n      function get_from_4d(name){\n        let base_4d = jetpack.read('F:/ajr/ASKA_4D.json','json')\n        var code_x = 0;\n        base_4d.map((v, index)=>{return v.map((v)=>{if(v == name){code_x = index}return v})})\n        if(code_x != 0){\n          var code_name = base_4d[code_x][0]\n          code_x = base_4d[code_x][1]\n          if(window.ask_buffer == undefined){window.ask_buffer = [];}\n          var ask_buffer = window.ask_buffer\n          if(ask_buffer == ''){\n            let code_do = code/////---------------------------\n            ask_buffer.splice(ask_buffer.length,0,code_x+'\\n'+code_do)\n            window.counts = 1\n            window.ask_buffer = ask_buffer\n          }else{\n            let code_do = ask_buffer[ask_buffer.length-1]\n            window.counts += 1\n            ask_buffer.splice(ask_buffer.length,0,code_x+'\\n'+code_do)\n            window.ask_buffer = ask_buffer\n          }\n          ask_buffer = window.ask_buffer\n          let code_posle = ask_buffer[ask_buffer.length-1]\n          runCode(code_posle)\n        }\n      }\n      if(name == 'ReferenceError'){\n        value = value.substring(name.length+2,value.length)\n        let knows_name = value.substring(0,value.search(' is'))\n        get_from_4d(knows_name);\n      }else if(name == 'TypeError'){\n        let text_x = 'TypeError: Cannot set property -'\n        value = value.substring(text_x.length,value.length)\n        value = value.substring(0,value.search(\"of\")-2)\n        let ask_buffer = jetpack.read('G:/Games/ask_buffer.json','json')\n        if(ask_buffer ==''){\n          var arr_search1 = editor.getValue();\n        }else{\n          var arr_search1 = ask_buffer[0]\n          }\n        arr_search1 = arr_search1.substring(0,arr_search1.search(value)-1)\n        arr_search1 = reverse(arr_search1);\n        arr_search1 = arr_search1.substring(0,arr_search1.search(' '))\n        arr_search1 = reverse(arr_search1);\n        get_from_4d(arr_search1);\n      }else{\n        alert(name)\n      }\n    };\n    ////////////////////////////////////////////////////////////\n    auto_fix_undefined_code(e.name,e.stack);\n  }\n}\n\n////////////////////////////////////////////////////////////////////////////\nfunction window_close(time){\n  let robot = require('robotjs')\n  let sec = 0\n  let iid = setInterval(int_timer, 1000);\n  function int_timer(){\n    sec+=1\n    if(time < sec){\n      let cl = require('electron').remote.BrowserWindow.fromId(zzz)\n      clearInterval(iid)\n      windowManager.sharedData.set('x_command',0)\n      windowManager.sharedData.set('x_com_time',1);\n      cl.close()\n    }\n  }   \n}\n/////////////////////////////////////////////////////////////////////\n\nvar jetpack = require('F:/ajr/aspirin/node_modules/fs-jetpack')\nvar robot = require('robotjs')\nlet com = windowManager.sharedData.fetch('x_command');\n\nrunCode(com)\n//if(delay == undefined){ let delay = 2}\n//try{\nlet delay = windowManager.sharedData.fetch('x_com_time');\nwindow_close(delay)\n//}catch(err){\n//window_close(2)\n}"
+  ],
+  [
+    "Кнопки",
+    "Кнопки = function(){\nsleep(2)\nlet a = this_real_time()\nwindowManager.sharedData.set('runcode_buffer',a)\n}",
+    42.333333333333336,
+    38.666666666666664,
+    43.666666666666664,
+    54.666666666666664,
+    37,
+    59,
+    59.333333333333336
+  ],
+  [
+    "this_real_time",
+    "this_real_time = function(){\n  var objData = new Date();\n  var year = objData.getFullYear()\n  var month = objData.getMonth();\n  var date = objData.getDate();\n  var hours = objData.getHours();\n  var minutes = objData.getMinutes();\n  return [year,month+1,date,hours,minutes]\n}",
+    37.333333333333336
+  ],
+  [
+    "aska",
+    "aska = function(text){\nvar audio = document.getElementById('audio');\n  var url = 'https://tts.voicetech.yandex.net/generate?'+\n      'key=ddf051c8-8d90-4912-bccb-9fd85f0e21db'+\n      '&text='+encodeURI(text)+\n      '&format=mp3'+\n      '&lang=ru-RU'+\n      '&topic=queries'+\n      'speed=2'+\n      '&robot=1'+\n      '&emotion=evil';\n  audio.src = url;\n  audio.load();\n  audio.onloadeddata = function () {\n    audio.play();\n  } \n}",
+    21,
+    35.333333333333336,
+    33
+  ],
+  [
+    "A4DName_json",
+    "A4DName_json = function(adress,v){\n  var arr_json = jetpack.read('F:/ajr/JSON/'+adress+'.json','json');\n  let arr_json_last\n  if(v == undefined){\n    if(arr_json == undefined || arr_json == \"\"){\n      arr_json = []\n      let a = [2016,11,17,13,30]\n      arr_json.push(a)\n      arr_json_last = arr_json[arr_json.length-1]\n      jetpack.write('F:/ajr/JSON/'+adress+'.json',arr_json);\n    }else{\n      arr_json_last = arr_json[arr_json.length-1]\n    }\n  }else{\n    arr_json_last = arr_json[arr_json.length-1]\n    if(arr_json_last[0] == v[0] &&\n       arr_json_last[1] == v[1] &&\n       arr_json_last[2] == v[2] &&\n       arr_json_last[3] == v[3] &&\n       arr_json_last[4] == v[4]\n      ){}else{\n      arr_json.push(v)\n      jetpack.write('F:/ajr/JSON/'+adress+'.json',arr_json);\n    }\n  }\n  return arr_json_last\n}"
+  ],
+  [
+    "New3",
+    "New3 = ''\naska[0] = 'Я живая, ура';\n\n\ndocument.getElementById('run').innerHTML += \n'<audio src=\"\" id=\"audio\"><audio/>';\n\n\nvar audio = document.getElementById('audio');\n  var url = 'https:/tts.voicetech.yandex.net/generate?'+\n      'key=ddf051c8-8d90-4912-bccb-9fd85f0e21db'+\n      '&text='+encodeURI(aska[0])+\n      '&format=mp3'+\n      '&lang=ru-RU'+\n      '&topic=queries'+\n      'speed=2'+\n      '&robot=1'+\n      '&emotion=evil';\n  audio.src = url;\n  audio.load();\n  audio.onloadeddata = function () {\n    audio.play();\n};\n\n\n\n",
+    34.333333333333336
+  ],
+  [
+    "Собрать_сестре_комп",
+    "Собрать_сестре_комп = function(){\n code_run_time(5)\n aska('Собери своей систре хороший компьютер');\n}",
+    48,
+    47.666666666666664
+  ],
+  [
+    "aska_speech_recording4",
+    "aska_speech_recording4 = function(this_name){\n  const {BrowserWindow} = require('electron').remote\n  var gw = new BrowserWindow({ width: 300, height: 600, x:800, y:400,movable:true,alwaysOnTop:true, transparent: true,skipTaskbar:true, frame: false });\n  gw.on('closed', function() {\n    gw = null;\n  });\n  gw.loadURL('F:/ajr/chat/index.html');\n  gw.show();\n  code_run_time(6)\n}\n\n\n\n"
+  ],
+  [
+    "Постирать_платки_true",
+    "Постирать_платки_true = function(this_name){\nre_name_code(this_name)\nsleep(10)\n};"
+  ],
+  [
+    "all_arr_rainergnet",
+    "all_arr_rainergnet = function(){\nrequest = require('request')\nurl = \"http://lab.rainerg.net/php-crud-api/api.php/simple\"\n\n\nonResult = (data)=>{\n  da = data.simple.records\n    .map(v=>[v[0], (`${v[1]}`)].join('\\n'))\n    .join('\\n')\n  justShowResult(da)\n}\n\nrequest\n.get({url, json:true})\n.on('response', function(response) {\n  res = response;\n  console.log(response.statusCode) // 200 \n  console.log(response.headers['content-type']) // 'image/png' \n  res.setEncoding('utf8');\n  let rawData = '';\n  res.on('data', (chunk) =>rawData += chunk);\n  res.on('end', () => {\n    try {\n      let parsedData = JSON.parse(rawData);\n      onResult(parsedData);\n    } catch (e) {\n      console.log(e.message);\n    }\n  });\n})\n//null\njustShowResult(da)\n}",
+    38
+  ],
+  [
+    "put_arr_rainergnet",
+    "put_arr_rainergnet = function(){\ngot = require('got');\n//id = 0;\nid++;\nurl = \"http://lab.rainerg.net/php-crud-api/api.php/simple/\"+id;\na = {\n  id,\n  name:'aspirin',\n  value: aska.toString()\n};\n\n//got.get(url)\n//got.put\n//got.post\ngot.delete(url,{body:a, json:true})\n.then(r=>r.body)\n.then(JSON.parse)\n.then(van_dump)\n.then(justShowResult)\n}\n",
+    38,
+    40
+  ],
+  [
+    "arr_md5_to_int",
+    "arr_md5_to_int = function(){\ngot = require('got');\njj = jetpack.read(just.file,'json')\n\nres = Object.keys(jj)\n.map(k=>({id:md5(jj[k]),name:k, value: jj[k]}))\n.map(v=>parseInt(v.id.slice(0,8), 16))\n\n/*\nurl = \"http://lab.rainerg.net/php-crud-api/api.php/simple/\"//+id;\na = {\n  id:0,\n  name:'aspirin',\n  value: 'aska.toString()'\n/*\nres.map((d)=>got\n        .post(url,{body:d, json:true})\n        .then(r=>r.body)\n        .then(JSON.parse)\n        .then(van_dump)\n        .then(justShowResult))\n/**/\n}"
+  ],
+  [
+    "get_arr_Rainerg",
+    "get_arr_Rainerg = function(){\nrequest = require('request')\nurl = \"http://lab.rainerg.net/php-crud-api/api.php/simple\"\n//+\"?filter[]=name,cs,ask\"\n\n\nonResult = (data)=>{\n  da = data.simple.records\n  .map(v=>[v[0], (`${v[1]}`)].join('\\t\\t'))\n  .join('\\n')\n  justShowResult(da)\n  //jLog(da)\n}\n\nrequest\n.get({url, json:true})\n.on('response', function(response) {\n  res = response;\n  console.log(response.statusCode) // 200 \n  console.log(response.headers['content-type']) // 'image/png' \n  res.setEncoding('utf8');\n  let rawData = '';\n  res.on('data', (chunk) =>rawData += chunk);\n  res.on('end', () => {\n    try {\n      let parsedData = JSON.parse(rawData);\n      onResult(parsedData);\n    } catch (e) {\n      console.log(e.message);\n    }\n  });\n})\n//null\njustShowResult(da)\n}\n"
+  ],
+  [
+    "md5_to_int",
+    "md5_to_int = function(str){\n  str = str.slice(0,11)\n  return parseInt(str,16)\n}"
+  ],
+  [
+    "code_to_A4Did",
+    "code_to_A4Did = function(this_name){\n  let A4D = jetpack.read('F:/ajr/ASKA_4D.json', 'json')\n  let code\n  A4D.map((v,index)=>{if(v[0]== this_name){\n    code = A4D[index][1]\n  }})\n  let yui = md5_to_int(md5(code))\n  console.log(yui)\n  return yui\n}\n\n"
+  ],
+  [
+    "erorre_animetion",
+    "erorre_animetion = function(){\n  const {BrowserWindow} = require('electron').remote\n  gw = new BrowserWindow({ width: 1500, height: 1301, x:2000, y:0,movable:true,alwaysOnTop:true, transparent: true,skipTaskbar:true, frame: false });\n  gw.on('closed', function() {\n    gw = null;\n  });\n  gw.loadURL('F:/ajr/aspirin/windows/aska_test03.html');\n  gw.show();\n}"
+  ],
+  [
+    "sleep",
+    "sleep = function(t){\n  windowManager.sharedData.set('x_com_time',t)\n}",
+    40.666666666666664,
+    37.666666666666664,
+    43.666666666666664,
+    26.666666666666668
+  ],
+  [
+    "getValue_drygoiim9",
+    "getValue_drygoiim9 = function(){\nw = getWin('editor_aska_New3')\nfn = (arr)=>{\n  res = arr.split('\\n\\n\\n')\n  console.log(res)\n}\nw.object.webContents.executeJavaScript('editor.getValue()',fn)\n}"
+  ],
+  [
+    "edit_3d_window",
+    "edit_3d_window = ()=>{\n var robot = require('robotjs');\n let posD = robot.getMousePos();\n let win = createEditor();\n win.object.setPosition(posD.x,posD.y)\n let jstext = `\nonChosenFileToOpen(path.resolve('F:/ajr/aspirin/editor/','D3_interface_window.html'))\n`\n let winid = win.object.id\n var yw = BrowserWindow.fromId(winid)\n yw.webContents.executeJavaScript(jstext)\n}"
+  ],
+  [
+    "voice_music",
+    "voice_music = function(sec,track){\n  document.getElementById('run').innerHTML += \n    '<audio src=\"\" id=\"sound\"><audio/>'\n\n  var sound = document.getElementById('sound');\n  if(track==undefined){track = ''}\n  var url = 'F:/ajr/round_interface/voice_music'+track+'.mp3'\n  sound.src = url;\n  sound.load();\n  sound.onloadeddata = function () {\n    setTimeout(function(){\n      sound.play();\n    }, sec*100);\n  } \n}"
+  ],
+  [
+    "play_gif",
+    "play_gif = function(v){\n  let pr = 'C:/Users/ASKA/Desktop/aska_gif'\n  let alist = jetpack.list(pr)\n  if(v == undefined){\n    let rrr = Math.random()*alist.length|0\n    var textall = alist[rrr]\n    var gif_name = alist[rrr]\n  }else{\n    var gif_name = alist[v]\n    var textall = alist[v]\n  }\n\n  let text1 = textall.substring(0,textall.search('.gif'))\n  let text2 = text1.substring(text1.search('_')+1,text1.length)\n  let text3 = text2.substring(text2.search('_')+1,text2.length)\n  let text2_2 = text2.substring(0,text2.search('_'))\n  \n  document.getElementById('run').innerHTML = \n    '<img style=\"padding-top:'+text2_2+'px; padding-left: '+text3+'px;position: fixed;\"'+\n    'src=\"file:///'+pr+'/'+gif_name+'\"'+\n    '>'\n}"
+  ],
+  [
+    "ignore_mouse_ivents",
+    "ignore_mouse_ivents = function(){\n let zzz3 = windowManager.sharedData.fetch('x_code_get_id');\n let cl = require('electron').remote.BrowserWindow.fromId(zzz3)\n cl.setIgnoreMouseEvents(true)\n}"
+  ],
+  [
+    "test_01",
+    "test_01 = function(){\n  var gw = new BrowserWindow({enableLargerThanScreen: true,\n                              plugins: true,\n                              x:2500,\n                              y:300,\n                              movable: true,\n                              alwaysOnTop: true,\n                              transparent: true,\n                              resizable: true,\n                              skipTaskbar: true,\n                              frame: false ,\n                              center: true,\n                              show: false\n                             });\n  gw.loadURL('F:/ajr/aspirin/windows/aska_test04.html');\n   //gw.loadURL('F:/ajr/chat/index.html');\n  let  jstext = `\nvar zzz = ${gw.id};\n`\n  gw.webContents.executeJavaScript(jstext)\n  gw.webContents.once('did-finish-load',function() {\n    gw.setSize(300,600)\n    gw.showInactive(); \n  });\n}"
+  ],
+  [
+    "New42",
+    "new_code28",
+    29.333333333333332
+  ],
+  [
+    "new_code83",
+    "new_code83 = function(){\ngw = new BrowserWindow({enableLargerThanScreen: true,\n                        plugins: true,\n                        x:0,\n                        y:0,\n                        movable: true,\n                        alwaysOnTop: true,\n                        transparent: true,\n                        resizable: true,\n                        skipTaskbar: true,\n                        frame: false ,\n                        center: true,\n                        show: false\n                       });\n//gw.on('closed', function() {\n//  gw = null;\n//});\ngw.loadURL('https://vk.com/audios19273780');\n\ngw.webContents.once('did-finish-load',function() {\n  gw.setSize(300,600)\n   gw.setPosition(0,0)\n  gw.showInactive();\n  \n});\n\nvar robot = require('robotjs');\nsetTimeout(function(){\nrobot.moveMouse(210,200);robot.mouseClick();\n}, 2000);\n}",
+    43
+  ],
+  [
+    "new957",
+    "new957 = function(){\nvar gw = new BrowserWindow({ width: 1500, height: 1301, x:2000, y:0,movable:true,alwaysOnTop:true, transparent: true,skipTaskbar:true, frame: false });\ngw.loadURL('F:/ajr/aspirin/windows/aska_test03.html');\ngw.show();\n}"
+  ],
+  [
+    "Голосовое_управление",
+    "Голосовое_управление = function(this_name){\n  aska('Спроси меня, о чем не будь')\n  sleep(30)\n  ignore_mouse_ivents()\n  /////////////////////////////////////////////////////////////////////////\n  var streamer = new ya.speechkit.SpeechRecognition();\n  var jetpack = require('fs-jetpack'); \n  function aska_speech_recording(){\n    window.ya.speechkit.settings.apikey = 'ddf051c8-8d90-4912-bccb-9fd85f0e21db';\n    streamer.start({\n      format: ya.speechkit.FORMAT.PCM44,\n      initCallback: function () {\n        console.log(\"Началась запись звука.\");\n      },\n      dataCallback: function (text, done, merge, time) {\n        if(done == true){\n          text = text.substring(0,text.length-1);\n          document.getElementById('run').innerHTML += '<h2>'+text+'</h2>'\n          set_to_run(text)\n        }\n      },\n      errorCallback: function (err) {\n        console.log(\"Возникла ошибка: \" + err);\n      },\n      infoCallback: function (sent_bytes, sent_packages, processed, format) {\n      },\n      stopCallback: function () {\n        console.log(\"Запись звука прекращена.\");\n      },\n      particialResults: false,\n      utteranceSilence: 15\n    })\n  };\n  setTimeout(function(){\n    aska_speech_recording()\n  }, 1000);\n};",
+    40.666666666666664
+  ],
+  [
+    "aska_ai",
+    "aska_ai = function(sleep,text){\n var arr_ttt = [text,sleep]\n  jetpack.write('F:/ajr/aspirin/windows/aska_test03_buffer.json',arr_ttt);\n  //jetpack.read();\n  var monitorW = 1920+900\n  var monitorH = 1080\n  var winW = 800\n  var winH = 600\n  var kw = new BrowserWindow({enableLargerThanScreen: true,\n                              plugins: true,\n                              x:2300,\n                              y:100,\n                              movable: true,\n                              alwaysOnTop: false,\n                              transparent: true,\n                              resizable: true,\n                              skipTaskbar: true,\n                              frame: false ,\n                              center: true,\n                              show: false\n                             });\n  windowManager.sharedData.set('x_code_get_id',kw.id);\n  kw.loadURL('F:/ajr/aspirin/windows/aska_test03.html');\n \n  kw.webContents.once('did-finish-load',function() {\n    kw.setSize(winW,winH)\n    //kw.setIgnoreMouseEvents(true)\n    kw.showInactive(); \n  });\n}"
+  ],
+  [
+    "Когда_отжимался_от_пола",
+    "Когда_отжимался_от_пола = function(this_name){\n  ///////////////////////////////////////////////////////\n  let a = this_real_time()\n  a.push(this_name)\n  if(windowManager.sharedData.fetch('runcode_buffer') != undefined){\n    let aa = windowManager.sharedData.fetch('runcode_buffer');\n    if(a[0]==aa[0]&&a[1]==aa[1]&&a[2]==aa[2]&&a[3]==aa[3]&&a[4]==aa[4]&&a[5]==aa[5]){\n      b = A4DName_json(this_name,a)\n      let c = jetpack.read('F:/ajr/JSON/'+this_name+'.json','json');\n      aska('Молодец, за всё время, сделал '+c.length+' подходов');\n      ignore_mouse_ivents()\n    }else{\n      windowManager.sharedData.set('runcode_buffer',a)\n      let b = A4DName_json(this_name)\n      //play_gif()\n      ignore_mouse_ivents()\n      aska('Последний раз отжимался от пола '+calc_time(b)+' назад');\n    }\n  }else{\n    windowManager.sharedData.set('runcode_buffer',a)\n  }\n  grafics(this_name)\n  play_gif()\n  voice_music(47)\n  sleep(6)\n}"
+  ],
+  [
+    "Спорт",
+    "Спорт = function(this_name){\n  ///////////////////////////////////////////////////////\n  let a = this_real_time()\n  a.push(this_name)\n  if(windowManager.sharedData.fetch('runcode_buffer') != undefined){\n    let aa = windowManager.sharedData.fetch('runcode_buffer');\n    if(a[0]==aa[0]&&a[1]==aa[1]&&a[2]==aa[2]&&a[3]==aa[3]&&a[4]==aa[4]&&a[5]==aa[5]){\n      b = A4DName_json(this_name,a)\n      let c = jetpack.read('F:/ajr/JSON/'+this_name+'.json','json');\n      aska('Молодец, за всё время, бегал уже '+c.length+' раз');\n      \n    }else{\n      windowManager.sharedData.set('runcode_buffer',a)\n      let b = A4DName_json(this_name)\n   \n      aska('Последний раз выходил на пробежку '+calc_time(b)+' назад');\n    }\n  }else{\n    windowManager.sharedData.set('runcode_buffer',a)\n  }\n  play_gif()\n  voice_music(47)\n  sleep(6)\n}",
+    55.333333333333336
+  ],
+  [
+    "run_x_code_win",
+    "run_x_code_win = function(){\n  var  jw = new BrowserWindow({ width: 1920, height: 1080, x:0, y:0,movable:true,alwaysOnTop:true, transparent: true,skipTaskbar:true, frame: false });\n    jw.on('closed', function() {\n      jw = null;\n    });\n    windowManager.sharedData.set('x_code_get_id',jw.id)\n    jw.loadURL('F:/ajr/round_interface/run_x_code.html');\n    jw.setSize(1920+10,1080+10)\n    jw.show();\n  }",
+    62,
+    63.666666666666664,
+    62.333333333333336,
+    62.666666666666664,
+    63,
+    63.333333333333336,
+    61.666666666666664
+  ],
+  [
+    "set_to_run",
+    "set_to_run = function(text){\n  var A4D = jetpack.read('F:/ajr/ASKA_4D.json','json')\n  let arr_a = all_links4D(A4D,'Голосовое_управление','Кнопки')\n  let arr_b = arr_a\n  let arr_c = []\n  //alert(arr_b)\n  let ggg = arr_a.map(v=>all_links4D(A4D,'Кнопки',v))\n  //alert(ggg)\n  ggg.map((v,i)=>{v!='' && arr_b.push(ggg[i][0]) || v})\n  //console.log(arr_b)\n\n  arr_b.map((v,i)=>{v!='' && arr_c.push(v.toLowerCase().split('_').join(' ')) || v})\n\n  //console.log(arr_c)\n  arr_c.map((v,index)=>{\n    if(text.search(v) != -1){\n      windowManager.sharedData.set('x_command',['Кнопки',arr_b[index]])\n      run_x_code_win();\n    }})\n}"
+  ],
+  [
+    "search4D",
+    "search4D = function(arr,name){\n  arr.map((v,index)=>{\n    if(v[0] == name){name=index}\n  })\n  if(isNaN(name)){\n    aska('ненашла имя')\n    name = 0;\n  }\n  return name\n}"
+  ],
+  [
+    "all_links4D",
+    "all_links4D = function(arr,a,b){\n    let d = reflect4D(arr,a,b)\n    d = d.map((v)=>{if(arr[v]){\n      return v = arr[v][0]\n    }})\n    d = clear_null_in_names(d)\n    return d\n  }"
+  ],
+  [
+    "reflect4D",
+    "reflect4D = function(arr,a,b){\n    let c = 0\n    a = search4D(arr,a)\n    b = search4D(arr,b)\n    let n = [];\n    arr[b].filter((v)=>{n.push(calc4D(v,a,b))})\n    n = clear_null_in_numbers(n)\n    return n\n}"
+  ],
+  [
+    "clear_null_in_names",
+    "clear_null_in_names = function(n){\n    n = n.filter((v)=>{if(isFinite(v)){}else{return v}})\n    return n\n  }"
+  ],
+  [
+    "clear_null_in_numbers",
+    "clear_null_in_numbers = function(n){\n  n = n.filter((v)=>{if(isNaN(v)){}else{return v}})\n  return n\n}"
+  ],
+  [
+    "calc4D",
+    "calc4D = function(link,a,b){\n  return link = (link*3)-(a+b)\n}"
+  ],
+  [
+    "Red_color",
+    "Red_color = function(){\nsleep(2)\nlet a = this_real_time()\nwindowManager.sharedData.set('runcode_buffer',a)\n}"
+  ],
+  [
+    "grafics",
+    "grafics = function(adress){\n  var arr_json = jetpack.read('F:/ajr/JSON/'+adress+'.json','json');\n  var arr_json2 = jetpack.read('F:/ajr/JSON/'+adress+'.json','json');\n  if(arr_json == undefined || arr_json == \"\"){\n    alert('файл '+adress+' ненайден')\n  }else{\n  let arr_x = []\n    for(i=0;i<arr_json.length-1;i++){\n     arr_x.push(calc_time_difference(arr_json[i],arr_json2[i+1]))\n    }\n    arr_x.push(calc_time_difference(arr_json[arr_json.length-1],this_real_time()))\n    var data = {\n      labels: arr_x,\n      datasets: [\n        {\n          label: adress,\n          fill: true,\n          lineTension: 0.1,// угол сглаживания линии\n          backgroundColor: \"rgba(150,60,60,0.5)\",// цвет столбцов\n          borderColor: \"rgba(192,75,75,1)\",// цвет линии\n          borderCapStyle: 'butt',\n          borderDash: [],\n          borderDashOffset: 0.0,\n          borderJoinStyle: 'miter',\n          pointBorderColor: \"rgba(192,75,75,1)\",// цвет точек\n          pointBackgroundColor: \"#111\",// цвет в центре точки\n          pointBorderWidth: 1,// толшина линии на круге\n          pointHoverRadius: 1,\n          pointHoverBackgroundColor: \"rgba(75,192,192,1)\",\n          pointHoverBorderColor: \"rgba(200,200,200,0.1)\",\n          pointHoverBorderWidth: 10,\n          pointRadius: 10,// размер точек\n          pointHitRadius: 10,\n          data: arr_x,\n          spanGaps: false,\n        }\n      ]\n    };\n    var options2 = {\n      title: {\n            display: true,\n            text: adress,\n            padding: 80\n        },\n      scales: {\n        yAxes: [{\n          stacked: true\n        }]\n      }\n    }\n    var Chart = require('F:/ajr/aspirin/node_modules/chart.js/src/chart.js')\n    var ctx2 = document.getElementById('myChart')\n    var myLineChart = new Chart(ctx2, {\n      type: 'line',\n      data: data,\n      options: options2\n    });\n  }\n}\n"
+  ],
+  [
+    "int_day_in_month4_EEE",
+    "int_day_in_month4_EEE = function(iu){\n    let arr_month = [0,0,31,59,90,120,151,181,212,243,273,304,334,365]\n    var ii = 0\n    arr_month.map((v,index)=>{if(index == iu){ ii = v}})\n    return ii\n  }"
+  ],
+  [
+    "int_day_in_year4_EEE",
+    "int_day_in_year4_EEE = function(v){\n    switch(v) {\n      case 2016:  v = 0; break;\n      case 2017:  v = 365; break;\n      case 2018:  v = 365+365; break;\n      case 2019:  v = 365+365+365; break;\n      case 2020:  v = 365+365+365+365; break;\n    }\n    return v\n  }"
+  ],
+  [
+    "Обезболивающие",
+    "Обезболивающие = function(this_name){\n  ///////////////////////////////////////////////////////\n  let min = 6\n  sleep(min)\n // play_gif()\n  let a = this_real_time()\n  a.push(this_name)\n\n  if(windowManager.sharedData.fetch('runcode_buffer') != undefined){\n\n    let aa = windowManager.sharedData.fetch('runcode_buffer');\n    if(a[0]==aa[0]&&a[1]==aa[1]&&a[2]==aa[2]&&a[3]==aa[3]&&a[4]==aa[4]&&a[5]==aa[5]){\n      b = A4DName_json(this_name,a)\n      let c = jetpack.read('F:/ajr/JSON/'+this_name+'.json','json');\n      aska('Зайка, за всё время, випил таблетку уже '+c.length+' раз');\n\n    }else{\n      windowManager.sharedData.set('runcode_buffer',a)\n      let b = A4DName_json(this_name)\n      aska('Последний раз пил Обезболивающие '+calc_time(b)+' назад');\n    }\n  }else{\n    let ga = this_real_time()\n    windowManager.sharedData.set('runcode_buffer',ga)\n  }\n  ignore_mouse_ivents()\n  voice_music(min*10-13)\n  grafics(this_name)\n}\n"
+  ],
+  [
+    "Антибиотики",
+    "Антибиотики = function(this_name){\n  ///////////////////////////////////////////////////////\n  let min = 6\n  sleep(min)\n // play_gif()\n  let a = this_real_time()\n  a.push(this_name)\n\n  if(windowManager.sharedData.fetch('runcode_buffer') != undefined){\n\n    let aa = windowManager.sharedData.fetch('runcode_buffer');\n    if(a[0]==aa[0]&&a[1]==aa[1]&&a[2]==aa[2]&&a[3]==aa[3]&&a[4]==aa[4]&&a[5]==aa[5]){\n      b = A4DName_json(this_name,a)\n      let c = jetpack.read('F:/ajr/JSON/'+this_name+'.json','json');\n      aska('Зайка, за всё время, випил таблетку уже '+c.length+' раз');\n\n    }else{\n      windowManager.sharedData.set('runcode_buffer',a)\n      let b = A4DName_json(this_name)\n      aska('Последний раз пил Антибиотики '+calc_time(b)+' назад');\n    }\n  }else{\n    let ga = this_real_time()\n    windowManager.sharedData.set('runcode_buffer',ga)\n  }\n  ignore_mouse_ivents()\n  voice_music(min*10-13)\n  play_gif()\n  //grafics(this_name)\n}\n",
+    65.33333333333333
+  ],
+  [
+    "New49",
+    "new_code49"
+  ]
+]

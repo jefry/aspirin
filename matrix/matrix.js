@@ -25,6 +25,7 @@ module.exports.getDb = function () {
 
 module.exports.run = function (key, opt) {
   key = {key: key};
+
   function onFind(err, doc) {
     eval(doc.source)
   }

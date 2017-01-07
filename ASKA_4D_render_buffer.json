@@ -1,0 +1,933 @@
+{
+  "name": "A4D",
+  "previous_name": "A4D",
+  "earlier_name": "A4D",
+  "fontsize": 16,
+  "size": 130,
+  "color": "FFD700",
+  "children": [
+    {
+      "name": "x_code_run",
+      "previous_name": "A4D",
+      "earlier_name": "A4D",
+      "fontsize": 16,
+      "size": 28,
+      "color": "dd9400",
+      "coments": "x_code_run = function(text){\naska('');\n}\n",
+      "coments3": 41,
+      "children": [
+        {
+          "name": "calc_time",
+          "previous_name": "x_code_run",
+          "earlier_name": "A4D",
+          "fontsize": 16,
+          "size": 28,
+          "color": "bb4466",
+          "coments": "calc_time = function(arr_time){\n  int_day_in_month",
+          "coments2": " = function(iu){\n  let arr_month = [0,0,31,59,90,1",
+          "coments3": 2158,
+          "children": [
+            {
+              "name": "this_real_time",
+              "previous_name": "calc_time",
+              "earlier_name": "x_code_run",
+              "fontsize": 16,
+              "size": 28,
+              "color": "bb4466",
+              "coments": "this_real_time = function(){\n  var objData = new D",
+              "coments2": "ate();\n  var year = objData.getFullYear()\n  var mo",
+              "coments3": 274,
+              "children": [
+                {
+                  "name": "A4DName_json",
+                  "previous_name": "this_real_time",
+                  "earlier_name": "calc_time",
+                  "fontsize": 16,
+                  "size": 28,
+                  "color": "bb4466",
+                  "coments": "A4DName_json = function(adress,v){\n  var arr_json ",
+                  "coments2": "= jetpack.read('F:/ajr/JSON/'+adress+'.json','json",
+                  "coments3": 811,
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "code_to_A4Did",
+              "previous_name": "calc_time",
+              "earlier_name": "x_code_run",
+              "fontsize": 16,
+              "size": 28,
+              "color": "bb4466",
+              "coments": "code_to_A4Did = function(this_name){\n  let A4D = j",
+              "coments2": "etpack.read('F:/ajr/ASKA_4D.json', 'json')\n  let c",
+              "coments3": 248,
+              "children": [
+                {
+                  "name": "md5_to_int",
+                  "previous_name": "code_to_A4Did",
+                  "earlier_name": "calc_time",
+                  "fontsize": 16,
+                  "size": 28,
+                  "color": "bb4466",
+                  "coments": "md5_to_int = function(str){\n  str = str.slice(0,11",
+                  "coments2": ")\n  return parseInt(str,16)\n}",
+                  "coments3": 79,
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "calc_time_difference",
+              "previous_name": "calc_time",
+              "earlier_name": "x_code_run",
+              "fontsize": 16,
+              "size": 28,
+              "color": "bb4466",
+              "coments": "calc_time_difference = function(arr_time_x,arr_rea",
+              "coments2": "l_time){\n  // var real_time = this_real_time()\n  i",
+              "coments3": 1082,
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "aska",
+          "previous_name": "x_code_run",
+          "earlier_name": "A4D",
+          "fontsize": 16,
+          "size": 28,
+          "color": "bb4466",
+          "coments": "aska = function(text){\nvar audio = document.getEle",
+          "coments2": "mentById('audio');\n  var url = 'https://tts.voicet",
+          "coments3": 429,
+          "children": [
+            {
+              "name": "audio",
+              "previous_name": "aska",
+              "earlier_name": "x_code_run",
+              "fontsize": 16,
+              "size": 28,
+              "color": "bb4466",
+              "coments": "audio = function(){\ndocument.getElementById('conte",
+              "coments2": "nt').innerHTML += \n'<audio src=\"\" id=\"audio\"><audi",
+              "coments3": 115,
+              "children": [
+                {
+                  "name": "voice_music",
+                  "previous_name": "audio",
+                  "earlier_name": "aska",
+                  "fontsize": 16,
+                  "size": 28,
+                  "color": "bb4466",
+                  "coments": "voice_music = function(sec,track){\n  document.getE",
+                  "coments2": "lementById('run').innerHTML += \n    '<audio src=\"\"",
+                  "coments3": 410,
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "aska_ai",
+              "previous_name": "aska",
+              "earlier_name": "x_code_run",
+              "fontsize": 16,
+              "size": 28,
+              "color": "bb4466",
+              "coments": "aska_ai = function(sleep,text){\n var arr_ttt = [te",
+              "coments2": "xt,sleep]\n  jetpack.write('F:/ajr/aspirin/windows/",
+              "coments3": 1081,
+              "children": []
+            },
+            {
+              "name": "play_gif",
+              "previous_name": "aska",
+              "earlier_name": "x_code_run",
+              "fontsize": 16,
+              "size": 28,
+              "color": "bb4466",
+              "coments": "play_gif = function(v){\n  let pr = 'C:/Users/ASKA/",
+              "coments2": "Desktop/aska_gif'\n  let alist = jetpack.list(pr)\n ",
+              "coments3": 720,
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "sleep",
+          "previous_name": "x_code_run",
+          "earlier_name": "A4D",
+          "fontsize": 16,
+          "size": 28,
+          "color": "aa3355",
+          "coments": "sleep = function(t){\n  windowManager.sharedData.se",
+          "coments2": "t('x_com_time',t)\n}",
+          "coments3": 69,
+          "children": [
+            {
+              "name": "run_x_code_win",
+              "previous_name": "sleep",
+              "earlier_name": "x_code_run",
+              "fontsize": 16,
+              "size": 28,
+              "color": "bb4466",
+              "coments": "run_x_code_win = function(){\n  var  jw = new Brows",
+              "coments2": "erWindow({ width: 1920, height: 1080, x:0, y:0,mov",
+              "coments3": 403,
+              "children": [
+                {
+                  "name": "search4D",
+                  "previous_name": "run_x_code_win",
+                  "earlier_name": "sleep",
+                  "fontsize": 16,
+                  "size": 28,
+                  "color": "bb4466",
+                  "coments": "search4D = function(arr,name){\n  arr.map((v,index)",
+                  "coments2": "=>{\n    if(v[0] == name){name=index}\n  })\n  if(isN",
+                  "coments3": 168,
+                  "children": []
+                },
+                {
+                  "name": "calc4D",
+                  "previous_name": "run_x_code_win",
+                  "earlier_name": "sleep",
+                  "fontsize": 16,
+                  "size": 28,
+                  "color": "bb4466",
+                  "coments": "calc4D = function(link,a,b){\n  return link = (link",
+                  "coments2": "*3)-(a+b)\n}",
+                  "coments3": 61,
+                  "children": []
+                },
+                {
+                  "name": "all_links4D",
+                  "previous_name": "run_x_code_win",
+                  "earlier_name": "sleep",
+                  "fontsize": 16,
+                  "size": 28,
+                  "color": "bb4466",
+                  "coments": "all_links4D = function(arr,a,b){\n    let d = refle",
+                  "coments2": "ct4D(arr,a,b)\n    d = d.map((v)=>{if(arr[v]){\n    ",
+                  "coments3": 178,
+                  "children": []
+                },
+                {
+                  "name": "reflect4D",
+                  "previous_name": "run_x_code_win",
+                  "earlier_name": "sleep",
+                  "fontsize": 16,
+                  "size": 28,
+                  "color": "bb4466",
+                  "coments": "reflect4D = function(arr,a,b){\n    let c = 0\n    a",
+                  "coments2": " = search4D(arr,a)\n    b = search4D(arr,b)\n    let",
+                  "coments3": 204,
+                  "children": []
+                },
+                {
+                  "name": "clear_null_in_names",
+                  "previous_name": "run_x_code_win",
+                  "earlier_name": "sleep",
+                  "fontsize": 16,
+                  "size": 28,
+                  "color": "bb4466",
+                  "coments": "clear_null_in_names = function(n){\n    n = n.filte",
+                  "coments2": "r((v)=>{if(isFinite(v)){}else{return v}})\n    retu",
+                  "coments3": 108,
+                  "children": []
+                },
+                {
+                  "name": "clear_null_in_numbers",
+                  "previous_name": "run_x_code_win",
+                  "earlier_name": "sleep",
+                  "fontsize": 16,
+                  "size": 28,
+                  "color": "bb4466",
+                  "coments": "clear_null_in_numbers = function(n){\n  n = n.filte",
+                  "coments2": "r((v)=>{if(isNaN(v)){}else{return v}})\n  return n\n",
+                  "coments3": 101,
+                  "children": []
+                },
+                {
+                  "name": "set_to_run",
+                  "previous_name": "run_x_code_win",
+                  "earlier_name": "sleep",
+                  "fontsize": 16,
+                  "size": 28,
+                  "color": "bb4466",
+                  "coments": "set_to_run = function(text){\n  var A4D = jetpack.r",
+                  "coments2": "ead('F:/ajr/ASKA_4D.json','json')\n  let arr_a = al",
+                  "coments3": 619,
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "ignore_mouse_ivents",
+              "previous_name": "sleep",
+              "earlier_name": "x_code_run",
+              "fontsize": 16,
+              "size": 28,
+              "color": "aa3355",
+              "coments": "ignore_mouse_ivents = function(){\n let zzz3 = wind",
+              "coments2": "owManager.sharedData.fetch('x_code_get_id');\n let ",
+              "coments3": 191,
+              "children": []
+            },
+            {
+              "name": "grafics",
+              "previous_name": "sleep",
+              "earlier_name": "x_code_run",
+              "fontsize": 16,
+              "size": 28,
+              "color": "aa3355",
+              "coments": "grafics = function(adress){\n  var arr_json = jetpa",
+              "coments2": "ck.read('F:/ajr/JSON/'+adress+'.json','json');\n  v",
+              "coments3": 1851,
+              "children": []
+            },
+            {
+              "name": "Вода_сходи_набери",
+              "previous_name": "sleep",
+              "earlier_name": "x_code_run",
+              "fontsize": 16,
+              "size": 28,
+              "color": "aa3355",
+              "coments": "Вода_сходи_набери = function(){\n  sleep(30)\n  let ",
+              "coments2": "jw = new BrowserWindow({ width: 1000, height: 500,",
+              "coments3": 422,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Мои_дела",
+      "previous_name": "A4D",
+      "earlier_name": "A4D",
+      "fontsize": 16,
+      "size": 28,
+      "color": "dd9400",
+      "coments": "Мои_дела = function(v){\n  var xname ='Мои_дела'\n  ",
+      "coments2": "let a = [2016,11,17,16,30]\n  let b = [2016,11,18,1",
+      "coments3": 263,
+      "children": [
+        {
+          "name": "Отключиться_от_второго_интернета",
+          "previous_name": "Мои_дела",
+          "earlier_name": "A4D",
+          "fontsize": 16,
+          "size": 28,
+          "color": "dd9400",
+          "coments": "Отключиться_от_второго_интернета = function(){\nsle",
+          "coments2": "ep(6)//0800210000\naska('Отключись от второго интер",
+          "coments3": 153,
+          "children": []
+        },
+        {
+          "name": "Голосовое_управление",
+          "previous_name": "Мои_дела",
+          "earlier_name": "A4D",
+          "fontsize": 16,
+          "size": 28,
+          "color": "dd9400",
+          "coments": "Голосовое_управление = function(this_name){\n  aska",
+          "coments2": "('Спроси меня, о чем не будь')\n  sleep(30)\n  ignor",
+          "coments3": 1222,
+          "children": [
+            {
+              "name": "Кнопки",
+              "previous_name": "Голосовое_управление",
+              "earlier_name": "Мои_дела",
+              "fontsize": 16,
+              "size": 28,
+              "color": "3399aa",
+              "coments": "Кнопки = function(){\nsleep(2)\nlet a = this_real_ti",
+              "coments2": "me()\nwindowManager.sharedData.set('runcode_buffer'",
+              "coments3": 105,
+              "children": [
+                {
+                  "name": "Когда_чистил_зубы",
+                  "previous_name": "Кнопки",
+                  "earlier_name": "Голосовое_управление",
+                  "fontsize": 16,
+                  "size": 28,
+                  "color": "3399aa",
+                  "coments": "Когда_чистил_зубы = function(this_name){\n  ///////",
+                  "coments2": "////////////////////////////////////////////////\n ",
+                  "coments3": 928,
+                  "children": []
+                },
+                {
+                  "name": "Поливал_кусты",
+                  "previous_name": "Кнопки",
+                  "earlier_name": "Голосовое_управление",
+                  "fontsize": 16,
+                  "size": 28,
+                  "color": "3399aa",
+                  "coments": "Поливал_кусты = function(this_name){\n  ///////////",
+                  "coments2": "////////////////////////////////////////////\n  let",
+                  "coments3": 893,
+                  "children": []
+                },
+                {
+                  "name": "Когда_последний_раз_курил",
+                  "previous_name": "Кнопки",
+                  "earlier_name": "Голосовое_управление",
+                  "fontsize": 16,
+                  "size": 28,
+                  "color": "3399aa",
+                  "coments": "Когда_последний_раз_курил = function(this_name){\n ",
+                  "coments2": " /////////////////////////////////////////////////",
+                  "coments3": 898,
+                  "children": []
+                },
+                {
+                  "name": "Спорт",
+                  "previous_name": "Кнопки",
+                  "earlier_name": "Голосовое_управление",
+                  "fontsize": 16,
+                  "size": 28,
+                  "color": "3399aa",
+                  "coments": "Спорт = function(this_name){\n  ///////////////////",
+                  "coments2": "////////////////////////////////////\n  let a = thi",
+                  "coments3": 824,
+                  "children": [
+                    {
+                      "name": "Когда_отжимался_от_пола",
+                      "previous_name": "Спорт",
+                      "earlier_name": "Кнопки",
+                      "fontsize": 16,
+                      "size": 28,
+                      "color": "3399aa",
+                      "coments": "Когда_отжимался_от_пола = function(this_name){\n  /",
+                      "coments2": "//////////////////////////////////////////////////",
+                      "coments3": 927,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Написал_еще_немного_кода",
+                  "previous_name": "Кнопки",
+                  "earlier_name": "Голосовое_управление",
+                  "fontsize": 16,
+                  "size": 28,
+                  "color": "3399aa",
+                  "coments": "Написал_еще_немного_кода = function(this_name){\n  ",
+                  "coments2": "//////////////////////////////////////////////////",
+                  "coments3": 938,
+                  "children": []
+                },
+                {
+                  "name": "Обезболивающие",
+                  "previous_name": "Кнопки",
+                  "earlier_name": "Голосовое_управление",
+                  "fontsize": 16,
+                  "size": 28,
+                  "color": "3399aa",
+                  "coments": "Обезболивающие = function(this_name){\n  //////////",
+                  "coments2": "/////////////////////////////////////////////\n  le",
+                  "coments3": 933,
+                  "children": []
+                },
+                {
+                  "name": "Антибиотики",
+                  "previous_name": "Кнопки",
+                  "earlier_name": "Голосовое_управление",
+                  "fontsize": 16,
+                  "size": 28,
+                  "color": "3399aa",
+                  "coments": "Антибиотики = function(this_name){\n  /////////////",
+                  "coments2": "//////////////////////////////////////////\n  let m",
+                  "coments3": 942,
+                  "children": [
+                    {
+                      "name": "New49",
+                      "previous_name": "Антибиотики",
+                      "earlier_name": "Кнопки",
+                      "fontsize": 16,
+                      "size": 28,
+                      "color": "3399aa",
+                      "coments": "new_code49",
+                      "coments3": 10,
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Отложил_дела",
+      "previous_name": "A4D",
+      "earlier_name": "A4D",
+      "fontsize": 16,
+      "size": 28,
+      "color": "dd9400",
+      "coments": "Отложил_дела = function(){\n code_run_time(5)\n aska",
+      "coments2": "('Собери своей систре хороший компьютер');\n}",
+      "coments3": 94,
+      "children": [
+        {
+          "name": "Сегодня_к_родителям",
+          "previous_name": "Отложил_дела",
+          "earlier_name": "A4D",
+          "fontsize": 16,
+          "size": 28,
+          "color": "dd9400",
+          "coments": "Сегодня_к_родителям = function(){\n aska('Заежал до",
+          "coments2": "мой, 16 числа');\n}",
+          "coments3": 68,
+          "children": []
+        },
+        {
+          "name": "Постирать_платки_false",
+          "previous_name": "Отложил_дела",
+          "earlier_name": "A4D",
+          "fontsize": 16,
+          "size": 28,
+          "color": "dd9400",
+          "coments": "Постирать_платки_false = function(this_name){\nre_n",
+          "coments2": "ame_code(this_name)\ncode_run_time(3)\n};",
+          "coments3": 89,
+          "children": []
+        },
+        {
+          "name": "Собрать_сестре_комп",
+          "previous_name": "Отложил_дела",
+          "earlier_name": "A4D",
+          "fontsize": 16,
+          "size": 28,
+          "color": "dd9400",
+          "coments": "Собрать_сестре_комп = function(){\n code_run_time(5",
+          "coments2": ")\n aska('Собери своей систре хороший компьютер');\n",
+          "coments3": 101,
+          "children": [
+            {
+              "name": "int_day_in_year4_EEE",
+              "previous_name": "Собрать_сестре_комп",
+              "earlier_name": "Отложил_дела",
+              "fontsize": 16,
+              "size": 28,
+              "color": "dd9400",
+              "coments": "int_day_in_year4_EEE = function(v){\n    switch(v) ",
+              "coments2": "{\n      case 2016:  v = 0; break;\n      case 2017:",
+              "coments3": 266,
+              "children": []
+            },
+            {
+              "name": "int_day_in_month4_EEE",
+              "previous_name": "Собрать_сестре_комп",
+              "earlier_name": "Отложил_дела",
+              "fontsize": 16,
+              "size": 28,
+              "color": "dd9400",
+              "coments": "int_day_in_month4_EEE = function(iu){\n    let arr_",
+              "coments2": "month = [0,0,31,59,90,120,151,181,212,243,273,304,",
+              "coments3": 198,
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "Постирать_платки_true",
+          "previous_name": "Отложил_дела",
+          "earlier_name": "A4D",
+          "fontsize": 16,
+          "size": 28,
+          "color": "dd9400",
+          "coments": "Постирать_платки_true = function(this_name){\nre_na",
+          "coments2": "me_code(this_name)\nsleep(10)\n};",
+          "coments3": 81,
+          "children": []
+        },
+        {
+          "name": "Вытрусить_пылесос",
+          "previous_name": "Отложил_дела",
+          "earlier_name": "A4D",
+          "fontsize": 16,
+          "size": 28,
+          "color": "dd9400",
+          "coments": "Вытрусить_пылесос = function(){\n aska('выниси и вы",
+          "coments2": "труси пылисос, пожалуста');\n}",
+          "coments3": 79,
+          "children": []
+        },
+        {
+          "name": "разобрать_холодильник",
+          "previous_name": "Отложил_дела",
+          "earlier_name": "A4D",
+          "fontsize": 16,
+          "size": 28,
+          "color": "dd9400",
+          "coments": "разобрать_холодильник = function(t){\n  voice_music",
+          "coments2": "(27)\n  aska('разобрать холодильник и приготовить к",
+          "coments3": 166,
+          "children": []
+        },
+        {
+          "name": "Купить",
+          "previous_name": "Отложил_дела",
+          "earlier_name": "A4D",
+          "fontsize": 16,
+          "size": 28,
+          "color": "dd9400",
+          "coments": "Купить = function(){\n  voice_music(0,4)\n  aska('пр",
+          "coments2": "идумай что еще купить:'+\n       'сахар,'+\n       '",
+          "coments3": 186,
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "ttttt",
+      "previous_name": "A4D",
+      "earlier_name": "A4D",
+      "fontsize": 16,
+      "size": 28,
+      "color": "dd9400",
+      "coments": "ttttt = function(){\n  aska('15')\n}",
+      "coments3": 34,
+      "children": [
+        {
+          "name": "this_new542",
+          "previous_name": "ttttt",
+          "earlier_name": "A4D",
+          "fontsize": 16,
+          "size": 28,
+          "color": "dd9400",
+          "coments": "this_new542 = function(){\n  console.log()\n}\n\n",
+          "coments3": 45,
+          "children": [
+            {
+              "name": "edit_editor",
+              "previous_name": "this_new542",
+              "earlier_name": "ttttt",
+              "fontsize": 16,
+              "size": 28,
+              "color": "dd9400",
+              "coments": "edit_editor = ()=>{\n let posD = robot.getMousePos(",
+              "coments2": ");\n let win = createEditor();\n win.object.setPosit",
+              "coments3": 316,
+              "children": []
+            },
+            {
+              "name": "Управление",
+              "previous_name": "this_new542",
+              "earlier_name": "ttttt",
+              "fontsize": 16,
+              "size": 28,
+              "color": "dd9400",
+              "coments": "Управление = function(){\nwindowManager.sharedData.",
+              "coments2": "set('x_com_time',10)\naska('Сейчас я розкажу, о упр",
+              "coments3": 205,
+              "children": []
+            },
+            {
+              "name": "erorre_animetion",
+              "previous_name": "this_new542",
+              "earlier_name": "ttttt",
+              "fontsize": 16,
+              "size": 28,
+              "color": "dd9400",
+              "coments": "erorre_animetion = function(){\n  const {BrowserWin",
+              "coments2": "dow} = require('electron').remote\n  gw = new Brows",
+              "coments3": 357,
+              "children": []
+            },
+            {
+              "name": "Red_color",
+              "previous_name": "this_new542",
+              "earlier_name": "ttttt",
+              "fontsize": 16,
+              "size": 28,
+              "color": "dd9400",
+              "coments": "Red_color = function(){\nsleep(2)\nlet a = this_real",
+              "coments2": "_time()\nwindowManager.sharedData.set('runcode_buff",
+              "coments3": 108,
+              "children": []
+            },
+            {
+              "name": "test_01",
+              "previous_name": "this_new542",
+              "earlier_name": "ttttt",
+              "fontsize": 16,
+              "size": 28,
+              "color": "dd9400",
+              "coments": "test_01 = function(){\n  var gw = new BrowserWindow",
+              "coments2": "({enableLargerThanScreen: true,\n                  ",
+              "coments3": 896,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "New42",
+      "previous_name": "A4D",
+      "earlier_name": "A4D",
+      "fontsize": 16,
+      "size": 28,
+      "color": "dd9400",
+      "coments": "new_code28",
+      "coments3": 10,
+      "children": [
+        {
+          "name": "Root_path",
+          "previous_name": "New42",
+          "earlier_name": "A4D",
+          "fontsize": 16,
+          "size": 28,
+          "color": "dd9400",
+          "coments": "Root_path = function(){\n  let yui = `\n  <meta http",
+          "coments2": "-equiv=\"content-type\" content=\"text/html; charset=",
+          "coments3": 442,
+          "children": [
+            {
+              "name": "edit_interface",
+              "previous_name": "Root_path",
+              "earlier_name": "New42",
+              "fontsize": 16,
+              "size": 28,
+              "color": "dd9400",
+              "coments": "edit_interface = ()=>{\n var robot = require('robot",
+              "coments2": "js');\n let posD = robot.getMousePos();\n let win = ",
+              "coments3": 360,
+              "children": [
+                {
+                  "name": "edit_run_x_code",
+                  "previous_name": "edit_interface",
+                  "earlier_name": "Root_path",
+                  "fontsize": 16,
+                  "size": 28,
+                  "color": "dd9400",
+                  "coments": "edit_run_x_code = ()=>{\n var robot = require('robo",
+                  "coments2": "tjs');\n let posD = robot.getMousePos();\n let win =",
+                  "coments3": 360,
+                  "children": [
+                    {
+                      "name": "d3_render_level",
+                      "previous_name": "edit_run_x_code",
+                      "earlier_name": "edit_interface",
+                      "fontsize": 16,
+                      "size": 28,
+                      "color": "dd9400",
+                      "coments": "d3_render_level = function(){\n jetpack.write('F:/a",
+                      "coments2": "jr/ASKA_4D_buffer.json',6);\n}",
+                      "coments3": 79,
+                      "children": [
+                        {
+                          "name": "aska_speech_recording4",
+                          "previous_name": "d3_render_level",
+                          "earlier_name": "edit_run_x_code",
+                          "fontsize": 16,
+                          "size": 28,
+                          "color": "dd9400",
+                          "coments": "aska_speech_recording4 = function(this_name){\n  co",
+                          "coments2": "nst {BrowserWindow} = require('electron').remote\n ",
+                          "coments3": 381,
+                          "children": []
+                        },
+                        {
+                          "name": "all_arr_rainergnet",
+                          "previous_name": "d3_render_level",
+                          "earlier_name": "edit_run_x_code",
+                          "fontsize": 16,
+                          "size": 28,
+                          "color": "dd9400",
+                          "coments": "all_arr_rainergnet = function(){\nrequest = require",
+                          "coments2": "('request')\nurl = \"http://lab.rainerg.net/php-crud",
+                          "coments3": 737,
+                          "children": [
+                            {
+                              "name": "get_arr_Rainerg",
+                              "previous_name": "all_arr_rainergnet",
+                              "earlier_name": "d3_render_level",
+                              "fontsize": 16,
+                              "size": 28,
+                              "color": "dd9400",
+                              "coments": "get_arr_Rainerg = function(){\nrequest = require('r",
+                              "coments2": "equest')\nurl = \"http://lab.rainerg.net/php-crud-ap",
+                              "coments3": 773,
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "name": "put_arr_rainergnet",
+                          "previous_name": "d3_render_level",
+                          "earlier_name": "edit_run_x_code",
+                          "fontsize": 16,
+                          "size": 28,
+                          "color": "dd9400",
+                          "coments": "put_arr_rainergnet = function(){\ngot = require('go",
+                          "coments2": "t');\n//id = 0;\nid++;\nurl = \"http://lab.rainerg.net",
+                          "coments3": 341,
+                          "children": [
+                            {
+                              "name": "arr_md5_to_int",
+                              "previous_name": "put_arr_rainergnet",
+                              "earlier_name": "d3_render_level",
+                              "fontsize": 16,
+                              "size": 28,
+                              "color": "dd9400",
+                              "coments": "arr_md5_to_int = function(){\ngot = require('got');",
+                              "coments2": "\njj = jetpack.read(just.file,'json')\n\nres = Object",
+                              "coments3": 497,
+                              "children": []
+                            },
+                            {
+                              "name": "getValue_drygoiim9",
+                              "previous_name": "put_arr_rainergnet",
+                              "earlier_name": "d3_render_level",
+                              "fontsize": 16,
+                              "size": 28,
+                              "color": "dd9400",
+                              "coments": "getValue_drygoiim9 = function(){\nw = getWin('edito",
+                              "coments2": "r_aska_New3')\nfn = (arr)=>{\n  res = arr.split('\\n\\",
+                              "coments3": 191,
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "name": "code_for_A4D",
+                          "previous_name": "d3_render_level",
+                          "earlier_name": "edit_run_x_code",
+                          "fontsize": 16,
+                          "size": 28,
+                          "color": "dd9400",
+                          "coments": "function search4D(arr,name){\n  arr.map((v,index)=>",
+                          "coments2": "{\n    if(v[0] == name){name=index}\n  })\n  if(isNaN",
+                          "coments3": 3442,
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "roundEvent",
+                      "previous_name": "edit_run_x_code",
+                      "earlier_name": "edit_interface",
+                      "fontsize": 16,
+                      "size": 28,
+                      "color": "dd9400",
+                      "coments": "roundEvent = function(){\nif(window.position == und",
+                      "coments2": "efined){\n  window.position = []\n}\n\nlast_position =",
+                      "coments3": 1421,
+                      "children": [
+                        {
+                          "name": "Набор_robotjs_кода",
+                          "previous_name": "roundEvent",
+                          "earlier_name": "edit_run_x_code",
+                          "fontsize": 16,
+                          "size": 28,
+                          "color": "dd9400",
+                          "coments": "Набор_robotjs_кода = function(){\n  aska('Примеры к",
+                          "coments2": "ода, робот дже ес')\n\n  remote = require('electron'",
+                          "coments3": 1187,
+                          "children": [
+                            {
+                              "name": "coub_gif",
+                              "previous_name": "Набор_robotjs_кода",
+                              "earlier_name": "roundEvent",
+                              "fontsize": 16,
+                              "size": 28,
+                              "color": "dd9400",
+                              "coments": "coub_gif = function(){ \nvar robot = require('robot",
+                              "coments2": "js');\nvar mouse = robot.getMousePos();\nvar p1 = pa",
+                              "coments3": 1611,
+                              "children": []
+                            },
+                            {
+                              "name": "New_magic",
+                              "previous_name": "Набор_robotjs_кода",
+                              "earlier_name": "roundEvent",
+                              "fontsize": 16,
+                              "size": 28,
+                              "color": "dd9400",
+                              "coments": "New_magic = function(){\nnode.append(\"text\")\n      ",
+                              "coments2": "  .attr(\"dy\", 50)\n        .attr(\"style\", function(",
+                              "coments3": 283,
+                              "children": []
+                            },
+                            {
+                              "name": "fix_runCode_erorre",
+                              "previous_name": "Набор_robotjs_кода",
+                              "earlier_name": "roundEvent",
+                              "fontsize": 16,
+                              "size": 28,
+                              "color": "dd9400",
+                              "coments": "fix_runCode_erorre = function(){\nfunction reverse(",
+                              "coments2": "s){\n  return s.split(\"\").reverse().join(\"\");\n}\n///",
+                              "coments3": 3739,
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "new_code83",
+                      "previous_name": "edit_run_x_code",
+                      "earlier_name": "edit_interface",
+                      "fontsize": 16,
+                      "size": 28,
+                      "color": "dd9400",
+                      "coments": "new_code83 = function(){\ngw = new BrowserWindow({e",
+                      "coments2": "nableLargerThanScreen: true,\n                     ",
+                      "coments3": 859,
+                      "children": [
+                        {
+                          "name": "new957",
+                          "previous_name": "new_code83",
+                          "earlier_name": "edit_run_x_code",
+                          "fontsize": 16,
+                          "size": 28,
+                          "color": "dd9400",
+                          "coments": "new957 = function(){\nvar gw = new BrowserWindow({ ",
+                          "coments2": "width: 1500, height: 1301, x:2000, y:0,movable:tru",
+                          "coments3": 240,
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "New3",
+                      "previous_name": "edit_run_x_code",
+                      "earlier_name": "edit_interface",
+                      "fontsize": 16,
+                      "size": 28,
+                      "color": "dd9400",
+                      "coments": "New3 = ''\naska[0] = 'Я живая, ура';\n\n\ndocument.get",
+                      "coments2": "ElementById('run').innerHTML += \n'<audio src=\"\" id",
+                      "coments3": 530,
+                      "children": [
+                        {
+                          "name": "edit_3d_window",
+                          "previous_name": "New3",
+                          "earlier_name": "edit_run_x_code",
+                          "fontsize": 16,
+                          "size": 28,
+                          "color": "dd9400",
+                          "coments": "edit_3d_window = ()=>{\n var robot = require('robot",
+                          "coments2": "js');\n let posD = robot.getMousePos();\n let win = ",
+                          "coments3": 367,
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

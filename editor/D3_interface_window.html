@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+  <head id = "hy">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script type="text/javascript" src="../app/super.js"></script>
+    <script>
+      var appPath = remote.app.aspirinRoot;
+      var d3 = require(appPath+'/node_modules/d3/d3.js')</script>
+    <script> var robot = require('robotjs')</script>
+    <style>
+      ::-webkit-scrollbar { width: 0 !important }
+      html, body {
+        height: 100%; 
+      }
+      body {
+        background: rgba(3, 3, 3, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div id='wid'></div>
+    <div id='content'></div>
+  </body>
+</html>
+<script>
+  document.getElementById('hy')//Toolbar.listKnows(this)
+    .innerHTML += `<link href="G:/js/main/style.css" rel="stylesheet">`
+  //////////////////////////////////////////////////////////////////////////////
+  function Aska_d3_render(){
+    d3.json("F:/ajr/editor_d3/ASKA_4D_d3.json", function(error, json) {
+      if (error) throw error;
+      svg.selectAll(".link").remove(".link")
+      svg.selectAll(".node").remove(".node")
+      var nodes = tree.nodes(json),
+          links = tree.links(nodes);
+      var link = svg.selectAll("path.link")
+      .data(links)
+      .enter().append("path")
+      .attr("class", "link")
+      .attr("d", diagonal)
+      var node = svg.selectAll("g.node")
+      .data(nodes)
+      .enter().append("g")
+      .attr("id", function(d) { return  "wid"})//d.name
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
+
+      node.append("circle")
+        .attr("r", function(d) { return d.size; })
+      node.append("text")
+        .attr("dx", function(d) { return d.children ? -16 : -16; })
+        .attr("dy", -2)
+        .attr("id", function(d) { return  d.name})//d.name
+
+
+        .attr("style", function(d){
+        if(d.name == window.run_color){
+          d.color = '99dd00'
+        }
+        let ti = "stroke:#"+d.color+";font: "+d.fontsize+"px Verdana, Arial, sans-serif;";
+        return ti
+      })
+        .attr( "onclick",function(d) {
+        return "aska('"+d.name+"','"+d.previous_name+"','"+d.earlier_name+"')" 
+      })
+        .attr( "oncontextmenu",function(d) { return "aska_speech_config('"+d.name+"','"+d.previous_name+"','"+d.earlier_name+"');" })  //aska_redactor('"+d.name+"'); just.run('${name}', this)
+      //.attr("text-anchor", function(d) { return d.children ? "end" : "start"; })
+        .text(function(d) { return d.name})
+    });
+  }
+
+
+  var width = 200, height = 300;
+  var tree = d3.layout.tree()
+  .size([height,width]);
+
+  var diagonal = d3.svg.diagonal()
+  .projection(function(d) { return [d.y, d.x]; });
+
+  var svg = d3.select("body").append("svg")
+  .attr("height", height )
+  .attr("width", width +100)
+  //.append("g")
+  //.attr("transform", "translate(50%,50%)", "scale(1)");
+  ///////////////////////////////////////////////////////////////////
+  Aska_d3_render();
+  //////////////////////////////////////////////////////////////
+  d3.select(self.frameElement).style("height", height + "px");
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  function run_x_code(){
+    var A4D = jetpack.read('F:/ajr/editor_d3/ASKA_4D.json','json');
+    let knows = {}
+    knows.name = A4D[3][0];
+    knows.previous_name = A4D[3][0];
+    knows.earlier_name = A4D[3][0];
+    knows.fontsize = 16;
+    knows.size = 50;
+    knows.color = 'FFD700';
+    knows.children = [];
+    jetpack.write('F:/ajr/editor_d3/ASKA_4D_render_buffer.json',[knows]);
+
+    var buffer_ren
+
+    for(iz=0;iz<A4D.length;iz++){
+      buffer_ren = jetpack.read('F:/ajr/editor_d3/ASKA_4D_render_buffer.json','json');
+      if(buffer_ren[iz] == undefined){
+        iz = 2 + A4D.length
+      }else{
+        let a1 = buffer_ren[iz].previous_name
+        let b1 = buffer_ren[iz].name
+        start_render(A4D,a1,b1)
+      }
+    }
+    buffer_ren = jetpack.read('F:/ajr/editor_d3/ASKA_4D_render_buffer.json','json');
+    let arr_name = []
+    for(ie=0;ie<buffer_ren.length;ie++){
+      let a2 = buffer_ren[ie].previous_name
+      let b2 = buffer_ren[ie].name
+      arr_name.push([a2,b2])
+    }
+    let arr_code = []
+    for(ik=0;ik<arr_name.length;ik++){
+      A4D.map((v,index)=>{if(v[0] == arr_name[ik][1]){
+        if(arr_name[ik][1] == 'A4D'){arr_code.push(A4D[index][0])}else{
+          let joi
+          if(window.test_mo == undefined){window.test_mo = 0}
+          arr_code.map((v,index)=>{if(v == arr_name[ik][0]) joi = index})
+          if(window.test_mo == arr_name[ik][0]){
+            arr_code.splice(joi+3,0,A4D[index][0])
+            if(A4D[index].length > 3){
+              arr_code.splice(joi+4,0,'}')
+              arr_code.splice(joi+4,0,'}else{')
+            }
+            //alert(arr_code)
+          }else{
+            arr_code.splice(joi+1,0,A4D[index][0])
+            if(A4D[index].length > 3){
+              arr_code.splice(joi+2,0,'}')
+              arr_code.splice(joi+2,0,'}else{')
+            }
+          }
+          window.test_mo = arr_name[ik][0]
+        }
+      }})
+    }
+    for(im=0;im<arr_code.length;im++){
+      A4D.map((v,index)=>{if(v[0]==arr_code[im])arr_code.splice(im,1,A4D[index][1])})
+    }
+    let code_gener = ''
+    for(it=0;it<arr_code.length;it++){
+      code_gener +=arr_code[it]+'\n//\n'
+    }
+    console.log(code_gener)
+    let w = BrowserWindow.fromId(parent_id)
+    let code = encodeURI(code_gener)
+    windowManager.sharedData.set('d3_win_code',code)
+    w.webContents.executeJavaScript(`
+editor.setValue(decodeURI(windowManager.sharedData.fetch('d3_win_code')))`)
+  }
+  ///////////////////////////////////////////////////////////////////////////////
+  function aska(c,b,a){
+    let new_arr = window.date_to_delete_link
+    if(new_arr != 0 && new_arr != undefined){
+      let a_del = new_arr[0]
+      let b_del = new_arr[1]
+      let c_del = new_arr[2]
+      window.date_to_delete_link = [a,b,c]
+      window.buffer_d3 = c
+      if(a_del == a && b_del == b && c_del == c){
+        window.date_to_delete_link = 0
+        window.buffer_d3 = 0
+        windowManager.sharedData.set('x_command',[b,c])
+        run_x_code();
+      }
+    }else{
+      window.date_to_delete_link = [a,b,c]
+      window.buffer_d3 = c
+    }
+    reload4D();
+    Aska_d3_render();
+  }
+  function aska_speech_config(c,b,a){
+    var A4D = jetpack.read('F:/ajr/editor_d3/ASKA_4D.json','json')
+    if(windowManager.sharedData.fetch('d3_windows_copy') == undefined){
+      windowManager.sharedData.set('d3_windows_copy',[0,0,0])
+    }
+    let know_from_enather_win = windowManager.sharedData.fetch('d3_windows_copy');
+    let ewin_a = know_from_enather_win[0]
+    let ewin_b = know_from_enather_win[1]
+    let ewin_c = know_from_enather_win[2]
+    if(ewin_a != 0 && ewin_b != 0 && ewin_c != 0){
+      windowManager.sharedData.set('d3_windows_copy',[0,0,0])
+      var A4Dmain = jetpack.read('F:/ajr/ASKA_4D.json','json')
+      let d_codex
+      A4Dmain.map((v,index)=>{if(v[0] == ewin_c)d_codex = index})
+      d_codex = A4Dmain[d_codex][1]
+      createNew(b,c,ewin_c,d_codex)
+      reload4D();
+      Aska_d3_render();
+      //alert(ewin_a+' '+ewin_b+' '+ewin_c)
+    }else{
+      let new_arr = window.date_to_delete_link
+      if(new_arr != 0 && new_arr != undefined){
+
+        let a_del = new_arr[0]
+        let b_del = new_arr[1]
+        let c_del = new_arr[2]
+
+        if(a_del == a && b_del == b && c_del == c){
+          let c_name = Math.random()*100|0
+          c_name = 'New'+c_name
+          let d_code = Math.random()*100|0
+          d_code = 'new_code'+d_code
+          createNew(b,c,c_name,d_code)
+        }else{
+
+          let arr_calc = all_links4D(A4D,b_del,c_del)
+          A4D = delete_all_link4D(A4D,c_del)
+          if(arr_calc != ''){
+            for(ig=0;ig<arr_calc.length;ig++){
+              A4D = linked4D(A4D,c,c_del,arr_calc[ig])
+            }
+          }
+          A4D = delete_link4D(A4D,a_del,b_del,c_del)
+          A4D = linked4D(A4D,b,c,c_del)
+
+          jetpack.write('F:/ajr/editor_d3/ASKA_4D.json',A4D)
+        }
+        window.buffer_d3 = 0
+        window.date_to_delete_link = 0
+        reload4D();
+        Aska_d3_render();
+
+      }else{
+        window.date_to_delete_link = 0
+        createEditor('editor_aska_'+c, 'ASKA4D_GO_inwin',c);
+      }
+    }
+  }
+  ///////////////////////////////////////////////
+  function createNew(a,b,c,c2){
+    let arr = jetpack.read('F:/ajr/editor_d3/ASKA_4D.json','json');
+    arr = save_new_code4D(arr,c,c2)
+    arr = linked4D(arr,a,b,c)
+    jetpack.write('F:/ajr/editor_d3/ASKA_4D.json',arr)
+  }
+  /////////////////////////////////////////////
+  function search4D(arr,name){
+    arr.map((v,index)=>{
+      if(v[0] == name){name=index}
+    })
+    if(isNaN(name)){
+      aska('ненашла имя')
+      name = 0;
+    }
+    return name
+  }
+  //////////////////////////////////////
+  function save4D(arr,a,b,c){
+    a = search4D(arr,a)
+    b = search4D(arr,b)
+    c = search4D(arr,c)
+    let d = (a+b+c)/3
+    return d
+  }
+  //////////////////////////////////////
+  function linked4D(arr,a,b,c){
+    let link = save4D(arr,a,b,c)
+    b = search4D(arr,b)
+    arr[b].push(link)
+    return arr
+  }
+  //////////////////////////////////////
+  function delete_link4D(arr,a,b,c){
+    a = search4D(arr,a)
+    b = search4D(arr,b)
+    c = search4D(arr,c)
+    let i = 0
+    let linker = arr[b]
+    linker.map((v,index)=>{
+      if(index > 1){
+        if(calc4D(v,b,c) == a){ i = index}
+      }
+    })
+    linker.splice(i,1)
+    arr[b] = linker
+    return arr
+  }
+  //////////////////////////////////////
+  function delete_all_link4D(arr,b){
+    b = search4D(arr,b)
+    let linker = [arr[b][0],arr[b][1]]
+    arr[b] = linker
+    return arr
+  }
+  //////////////////////////////////////
+  function calc4D(link,a,b){
+    return link = (link*3)-(a+b)
+  }
+  //////////////////////////////////////
+  function clear_null_in_numbers(n){
+    n = n.filter((v)=>{if(isNaN(v)){}else{return v}})
+    return n
+  }
+  //////////////////////////////////////
+  function clear_null_in_names(n){
+    n = n.filter((v)=>{if(isFinite(v)){}else{return v}})
+    return n
+  }
+  //////////////////////////////////////
+  function reflect4D(arr,a,b){
+    let c = 0
+    a = search4D(arr,a)
+    b = search4D(arr,b)
+    let n = [];
+    arr[b].filter((v)=>{n.push(calc4D(v,a,b))})
+    n = clear_null_in_numbers(n)
+    return n
+  }
+  //////////////////////////////////////
+  function all_links4D(arr,a,b){
+    //console.log(a)
+    //console.log(b)
+    let d = reflect4D(arr,a,b)
+    //console.log(d)
+    d = d.map((v)=>{if(arr[v]){
+      return v = arr[v][0]
+    }})
+    d = clear_null_in_names(d)
+    return d
+  }
+  //////////////////////////////////////
+  function start_render(arr,a,b){
+    let buffer_render = jetpack.read('F:/ajr/editor_d3/ASKA_4D_render_buffer.json','json');
+    let pep = all_links4D(arr,a,b)
+    let know = []
+    let kok = 0
+    let obj
+
+    pep.map((v)=>{obj = {};
+                  obj.name = v;
+                  obj.previous_name = b;
+                  obj.earlier_name = a;
+                  if(v == window.buffer_d3){
+                    obj.fontsize = 12;
+                    obj.size = 80;
+                    obj.color = 'B22222';
+                  }else{
+                    obj.fontsize = 10;
+                    obj.size = 10;
+                    obj.color = 'dd9400';
+                    if(b=='x_code_run'||a=='x_code_run'){obj.color = 'aa3355';}
+                    if(v=='Кнопки'||b=='Кнопки'||a=='Кнопки'){obj.color = '3399aa';}
+                  }
+                  arr.map((m,index)=>{if(m[0] == v){kok = index}})
+                  kok = arr[kok][1]
+                  if(kok.length > 50){
+                    obj.coments = kok.substring(0,50)
+                    if(kok.length > 100){
+                      obj.coments2 = kok.substring(50,100)
+                    }else{
+                      obj.coments2 = kok.substring(50,kok.length);
+                    }
+                  }else{
+                    obj.coments = kok
+                  }
+                  obj.coments3 = kok.length
+                  obj.children = [];
+                  buffer_render.push(obj);
+                 })
+    jetpack.write('F:/ajr/editor_d3/ASKA_4D_render_buffer.json',buffer_render);
+    return
+  }
+  //////////////////////////////////////
+  function save_new_code4D(arr,name,code){
+    let count = 0
+    arr.map((v,index)=>{if(v[0]==name){count +=1; arr[index][1] = code}})
+    if(count == 0)arr.push([name,code])
+    return arr
+  }
+  /////////////////////////////////////////////////////////////////////
+  function reload4D(){
+    var A4D = jetpack.read('F:/ajr/editor_d3/ASKA_4D.json','json');
+    let knows = {}
+    knows.name = A4D[3][0];
+    knows.previous_name = A4D[3][0];
+    knows.earlier_name = A4D[3][0];
+    knows.fontsize = 16;
+    knows.size = 50;
+    knows.color = 'FFD700';
+    knows.children = [];
+    jetpack.write('F:/ajr/editor_d3/ASKA_4D_render_buffer.json',[knows]);
+
+    var buffer_ren
+
+    for(iz=0;iz<A4D.length;iz++){
+      buffer_ren = jetpack.read('F:/ajr/editor_d3/ASKA_4D_render_buffer.json','json');
+      if(buffer_ren[iz] == undefined){
+        iz = 2 + A4D.length
+      }else{
+        let a1 = buffer_ren[iz].previous_name
+        let b1 = buffer_ren[iz].name
+        start_render(A4D,a1,b1)
+      }
+    }
+
+    buffer_ren = jetpack.read('F:/ajr/editor_d3/ASKA_4D_render_buffer.json','json');
+    for(ie=buffer_ren.length-1;ie>0;ie--){
+      let a2 = buffer_ren[ie].previous_name
+      let b2 = buffer_ren[ie].name
+      let ass = 'w'
+      buffer_ren.map((v,index)=>{if(v.name == a2){ass = index}})
+      let knowz = buffer_ren[ass]
+      knowz.children.unshift(buffer_ren[ie])
+      buffer_ren[ass] = knowz
+      buffer_ren.splice(ie,1)
+      jetpack.write('F:/ajr/editor_d3/ASKA_4D_render_buffer.json',buffer_ren);
+    }
+    buffer_ren = jetpack.read('F:/ajr/editor_d3/ASKA_4D_render_buffer.json','json');
+    buffer_ren = buffer_ren[0]
+    jetpack.write('F:/ajr/editor_d3/ASKA_4D_render_buffer.json',buffer_ren);
+    jetpack.write('F:/ajr/editor_d3/ASKA_4D_d3.json',buffer_ren)
+  }
+  ///////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////  
+</script>

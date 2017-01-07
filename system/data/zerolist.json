@@ -1,0 +1,3 @@
+{"key":0,"source":"\"The first Item\"","_id":"6nrG5ejLVXGQg8fj"}
+{"key":"zeron","source":"\"The zero item\"","_id":"s60zkgP37y267YqR"}
+{"key":"zero","source":"let key = 'zero';\nlet zerolist = DNO.open('zerolist');\nmeta.save_zero = ()=>{\n  zerolist.save(key, editor.getValue())  \n}\n\nmeta.edit_zero = ()=>{\n  zerolist.findOne({key}).then(v=>editor.setValue(v.source))  \n}\n\nmeta.s_zero = ()=>{\n  zerolist.save(key, '\"The zero item\"')  \n}\n\n\nlet htmlsrc = `<span>zerolist.run('zero')</span> <span>: </span>` \n  + `<button class=\"btn btn-mini btn-default\" onclick=\"meta.edit_zero()\">Edit</button>`\n  + `<button class=\"btn btn-mini btn-default\" onclick=\"meta.save_zero()\">Save</button>`\n;\n\nhtmlsrc","_id":"xIGB2FMgRoJjvFuo"}

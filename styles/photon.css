@@ -7,7 +7,7 @@
  * v0.1.2 designed by @connors.
  * =====================================================
  */
-
+::-webkit-scrollbar { width: 0 !important }
 @charset "UTF-8";
 audio,
 canvas,

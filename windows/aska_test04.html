@@ -1,0 +1,91 @@
+<script type="text/javascript" src="https://webasr.yandex.net/jsapi/v1/webspeechkit.js" ></script>
+<script>
+  remote = require('electron').remote;
+  windowManager = remote.require('electron-window-manager');
+</script>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  </head>
+  <style>
+    ::-webkit-scrollbar { width: 0 !important }
+
+    body {
+      width:90%;
+      background: rgba(245, 80, 80, 0.1);
+      color: white;
+    }
+  </style> 
+  <body id="run" >
+  </body>
+</html>
+<script type="text/javascript">
+  //////////////////////////////////////////////////////////////////////////
+  function askaka(text){
+    document.getElementById('run').innerHTML += '<h2>'+text+'</h2>'
+    if(text.search('отжимался') != -1){
+      let zzz = windowManager.sharedData.fetch('x_code_get_id');
+      alert(zzz)
+    }
+  }
+  /////////////////////////////////////////////////////////////////////////
+  var streamer = new ya.speechkit.SpeechRecognition();
+
+  var jetpack = require('fs-jetpack'); 
+  function aska_speech_recording(){
+    window.ya.speechkit.settings.apikey = 'ddf051c8-8d90-4912-bccb-9fd85f0e21db';
+    streamer.start({
+      format: ya.speechkit.FORMAT.PCM44,
+      initCallback: function () {
+        console.log("Началась запись звука.");
+      },
+
+      dataCallback: function (text, done, merge, time) {
+        if(done == true){
+          text = text.substring(0,text.length-1);
+          askaka(text)
+          //new_bozon(1, 5, text);
+          // document.getElementById('run').innerHTML += '<br>'+text+'</br>'
+        }
+      },
+      // Вызывается при возникновении ошибки (например, если передан неверный API-ключ).
+      errorCallback: function (err) {
+        console.log("Возникла ошибка: " + err);
+        //new_bozon(1, 5, 'возникла ошибка');
+      },
+
+      infoCallback: function (sent_bytes, sent_packages, processed, format) {
+      },
+      stopCallback: function () {
+        console.log("Запись звука прекращена.");
+      },
+      particialResults: false,
+      // Длительность промежутка тишины (в сантисекундах),
+      // при наступлении которой API начнет преобразование
+      // промежуточных результатов в финальный текст.
+      utteranceSilence: 7
+    })
+  };
+  /*
+  function window_close(time){
+    let sec = 0
+    let iid = setInterval(int_timer, 1000);
+    function int_timer(){
+      sec+=1
+      if(time < sec){
+        //let zzz = windowManager.sharedData.fetch('x_code_get_id');
+        let cl = require('electron').remote.BrowserWindow.fromId(zzz)
+        clearInterval(iid)
+        cl.close()
+      }
+    }   
+  }
+  var text3 = jetpack.read('F:/ajr/aspirin/windows/aska_test03_buffer.json','json'); 
+  let delay = text3[1]
+  window_close(delay)
+  */
+  setTimeout(function(){
+    aska_speech_recording()
+  }, 1000);
+</script>

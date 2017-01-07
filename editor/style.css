@@ -70,7 +70,7 @@ button {
 
 #composite_wrap {
     margin: 0px 0 0px 29px;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 .result big {
