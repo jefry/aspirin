@@ -3,6 +3,14 @@ body {
     padding: 0;
     /*margin-top: 5px;*/
     /*overflow: hidden;*/
+    /*
+    font-family: 'Operator Mono', 'Source Sans Pro', Menlo, Monaco, Consolas, Courier New, monospace;
+    */
+}
+
+.CodeMirror.cm-s-lesser-dark {
+    font-family: 'Operator Mono', 'Source Sans Pro', Menlo, 
+                  Monaco, Consolas, Courier New, monospace;
 }
 
 button {
@@ -64,6 +72,40 @@ button {
     background: #333;
 }
 
+#result pre {
+    /*-webkit-user-select: initial;*/
+    background: #222222;
+}
+
+#result section {
+    position: relative;
+    /* top: 0; */
+    height: 1600px;
+    /* overflow-y: visible; */
+
+}
+
+#result samp {
+    position: absolute;
+    z-index: 100;
+    padding: 0 1em;
+    background: #111;
+    white-space: pre;
+}
+
+#result .inpre {
+    position: absolute;
+    top: 0;
+    padding-top: 1em;
+    height: 1600px;
+    overflow-y: visible;
+}
+
+#result .inpre pre {
+    /*overflow: auto;*/
+    padding: 0 1em;
+}
+
 #composite.joinY .bar {
     max-height: 50px;
 }
@@ -88,7 +130,7 @@ button {
     color: #111111;
 }
 
-.result table td{
+.result table td {
     border-bottom: 1px solid;
 }
 
@@ -134,9 +176,11 @@ button {
     /*background: rgba(77, 77, 77, 0.8);*/
     /*background: rgba(57, 68, 76, 0.9);*/
 }
+
 .toolbar-mini > * {
     opacity: 1;
 }
+
 #composite .toolbar {
     margin: 2px 0;
     border-left: #20E9E9 1px solid;
@@ -197,8 +241,19 @@ button {
     /*height: 23px;*/
     left: 0;
     right: 0;
-    -webkit-app-region: drag;
+   
     position: relative;
+}
+
+.select-text {
+    -webkit-user-select: text;
+}
+.select-text * {
+    -webkit-user-select: text;
+}
+
+.drag {
+    -webkit-app-region: drag ;
 }
 
 .toolbar-mini {

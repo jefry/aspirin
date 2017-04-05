@@ -25,15 +25,17 @@ function van_dump(sval) {
   return JSON.stringify(sval, null, 2);
 }
 
+var _cur_data;
 var textMode = false;
 
 function setData(value) {
-  textMode ? setText(value) : setContent(value);
+  _cur_data = value || _cur_data;
+  textMode ? setText(_cur_data) : setContent(_cur_data);
 }
 
 function setText(value) {
   setContent(`<pre id="context"></pre>`);
-  document.getElementById('context').innerText = value;
+  document.getElementById('context').innerHTML = value;
 }
 
 function setContent(value) {
@@ -58,8 +60,26 @@ function require_clear (file = module.id) {
 //}
 //
 
+function colfix(result, opt) {
+  let text = colf(result, opt);
+  text = '<section><samp>'
+    + text.replace('\n', '</samp><div class="inpre"><pre>')
+    + '</pre></div></section>';
+  return text;
+}
 
+var el_isText;
+function isText_toggler(){
+  if (el_isText = document.getElementById('isText')) {
+    el_isText.onclick = function () {
+      textMode = !textMode;
+      el_isText.innerText = textMode ? '[T]' : '[H]';
+      if(_cur_data) setData(_cur_data);
+    };
+  }
+}
 
+window.onload = isText_toggler;
 
 var runed = {};
 

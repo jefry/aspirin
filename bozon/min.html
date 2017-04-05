@@ -38,9 +38,11 @@
             text-align: center;
             color: #fff;
         }
-        .boz-header>span {
+
+        .boz-header > span {
             -webkit-app-region: no-drag;
         }
+
         .wrap {
             overflow: scroll;
             position: relative;
@@ -59,6 +61,30 @@
         #content pre {
             -webkit-user-select: initial;
             background: #222222;
+        }
+
+        #content samp {
+            position: absolute;
+            z-index: 100;
+            padding: 0 1em;
+            background: #111;
+            white-space: pre;
+        }
+
+        #context {
+            margin: 0;
+        }
+
+        .inpre {
+            position: absolute;
+            top: 0;
+            padding-top: 2.3em;
+            overflow-y: scroll;
+            height: 100%;
+        }
+
+        .inpre pre {
+            padding: 0 1em;
         }
 
         .blueprint {
