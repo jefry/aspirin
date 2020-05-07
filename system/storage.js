@@ -1,4 +1,5 @@
 const _isnode = !(process.type == 'renderer');
+const path = require('path');
 const nedb = require('nedb');
 
 var dbs = {};
@@ -19,7 +20,7 @@ class Storage {
   constructor(name, opts = {}){
     this.name = name;
     this.opts = opts;
-    this.filename = __dirname + '/data/' + this.name + '.json';
+    this.filename = path.resolve(__dirname + '/data/' + this.name + '.json');
     this.load();
   }
 

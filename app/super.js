@@ -18,6 +18,9 @@ var Matrix = require(appRoot + '/matrix/matrix');
 var DNO = require(appRoot + '/system/dno');
 var jade = require('jade');
 var colf = require('columnify');
+
+var require6 = require('esm')(module)
+
 //UTILS
 
 function van_dump(sval) {
@@ -48,6 +51,11 @@ function getContent(value) {
 function require_c (file) {
   delete require.cache[require.resolve(file)];
   return require(file)
+};
+
+function require6_c (file) {
+  delete require6.cache[require6.resolve(file)];
+  return require6(file)
 };
 
 function require_clear (file = module.id) {

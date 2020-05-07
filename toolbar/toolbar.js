@@ -35,7 +35,7 @@ Toolbar.listKnows = function () {
   dw = giveWindow(name);
   dw.execute(`Knows.run('${name}')`)
   dw.object.setBounds({
-    "x": 1460,
+    "x": 1160,
     "y": 30,
     "width": 150,
     "height": 275

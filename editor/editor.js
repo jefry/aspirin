@@ -141,8 +141,8 @@ function handleNewButton() {
 }
 
 function handleOpenButton() {
-  dialog.showOpenDialog({properties: ['openFile']}, function (filename) {
-    onChosenFileToOpen(filename.toString());
+  dialog.showOpenDialog({properties: ['openFile']}).then(function (filenames) {
+    onChosenFileToOpen(filenames.filePaths[0]);
   });
 }
 
@@ -150,9 +150,10 @@ function handleSaveButton() {
   if (fileEntry && hasWriteAccess) {
     writeEditorToFile(fileEntry);
   } else {
-    dialog.showSaveDialog(null, null, function (filename) {
+    dialog.showSaveDialog().then(function (result) {
       // console.log(filename);
-      onChosenFileToSave(filename.toString(), true);
+      if(result.filePath)
+        onChosenFileToSave(result.filePath, true);
 
     });
     // console.log(sf);

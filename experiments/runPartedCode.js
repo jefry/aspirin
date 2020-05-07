@@ -35,7 +35,7 @@ once('init', function(){
 
 var n = 0
 o = ''
-for (var i = 0; cwindow = windowManager.get('bozon_' + i) i++) {
+for (var i = 0; cwindow = windowManager.get('bozon_' + i); i++) {
   o += i + ' '
 
   

@@ -23,6 +23,8 @@ defaultWindowSetup:
   frame: false
   hasShadow: false
   webPreferences:
+    webSecurity: false
+    nodeIntegration: true
     scrollBounce: true
     "experimental-features": true
     "experimental-canvas-features": true
@@ -43,6 +45,8 @@ editorWindowSetup:
   frame: false
   hasShadow: false
   webPreferences:
+    webSecurity: false
+    nodeIntegration: true
     scrollBounce: true
     "experimental-features": true
     "experimental-canvas-features": true
@@ -55,7 +59,7 @@ toolbarWindowSetup:
   transparent: true
   acceptFirstMouse: true
   enableLargerThanScreen: true
-  alwaysOnTop: true
+  alwaysOnTop: false
   webSecurity: false
   zoomFactor: 1
   show: true
@@ -64,6 +68,8 @@ toolbarWindowSetup:
   frame: false
   hasShadow: false
   webPreferences:
+    webSecurity: false
+    nodeIntegration: true
     "experimental-features": true
     "experimental-canvas-features": true
     "subpixel-font-scaling": true
@@ -85,6 +91,8 @@ minWindowSetup:
   frame: false
   hasShadow: false
   webPreferences:
+    webSecurity: false
+    nodeIntegration: true
     "experimental-features": true
     "experimental-canvas-features": true
     "subpixel-font-scaling": true
@@ -97,7 +105,7 @@ browserWindowSetup:
   acceptFirstMouse: true
   enableLargerThanScreen: true
   alwaysOnTop: true
-  webSecurity: false
+  webSecurity: true
   zoomFactor: 0.86
   titleBarStyle: "hidden"
   show: true
@@ -106,7 +114,7 @@ browserWindowSetup:
   frame: true
   hasShadow: false
   webPreferences:
-    preload: "/Users/rainerg/ajr/Aspirin/source/inject2"
+    "nodeIntegration": false
     "experimental-features": true
     "experimental-canvas-features": true
     "subpixel-font-scaling": true
