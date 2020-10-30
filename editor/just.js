@@ -81,10 +81,10 @@ just.render = function () {
   $('#second_toolbar').html(text);
 };
 
-just.run = function (name, btn) {
+just.run = function (name, runOptions) {
   $('#second_toolbar .active').removeClass('active');
   $(arguments[1]).addClass('active');
-  just.funcs[name](name, btn);
+  just.funcs[name](name, runOptions);
 };
 
 just.edit = function (name, btn) {
@@ -100,7 +100,7 @@ just.file = appPath + '/editor/justFunc.json';
 
 
 just.compile = function (rawFunc, name) {
-  return just.funcs[name] = new Function(rawFunc);
+  return just.funcs[name] = new Function('name', 'runOptions', rawFunc);
 };
 
 just.toStr = function (name) {
@@ -109,7 +109,7 @@ just.toStr = function (name) {
 }
 just.raw = function (func) {
   var fb = String(func);
-  return fb.substr(23, fb.length - 25);
+  return fb.slice(39, -2);
 };
 
 just.load = function () {

@@ -129,9 +129,9 @@ function createBozon() {
 var n = 0;
 function createBrowser(url, name) {
   name = name || 'bro_' + nm++;
-  var w = !!(windowManager.windows.hasOwnProperty(name))
-    ? windowManager.get(name)
-    : windowManager.createNew(name, 'Bro', url, 'bro');
+  var w = windowManager.get(name)
+  if (!w)
+    w = windowManager.createNew(name, 'Bro', url, 'bro');
   w.open();
   return w;
 }
@@ -140,9 +140,9 @@ function createBrowser(url, name) {
 var nm = 0;
 function createMin(name) {
   name = name || 'min_' + nm++;
-  var w = !!(windowManager.windows.hasOwnProperty(name))
-    ? windowManager.get(name)
-    : windowManager.createNew(name, 'Min', _wpaths.min, 'min');
+  var w = windowManager.get(name)
+  if (!w)
+    w = windowManager.createNew(name, 'Min', _wpaths.min, 'min');
   w.open();
   w.execute(`document.querySelector('.boz-header .param').innerText = '${name}'`);
   return w;
@@ -151,9 +151,9 @@ function createMin(name) {
 
 function createEditor(name, command, opt) {
   name = name || 'editor_' + remote.app._enm++;
-  var w = !!(windowManager.windows.hasOwnProperty(name))
-    ? windowManager.get(name)
-    : windowManager.createNew(name, 'Editor', _wpaths.editor, 'editor');
+  var w = windowManager.get(name)
+  if (!w)
+    w = windowManager.createNew(name, 'Editor', _wpaths.editor, 'editor');
   w.open();
   if (command)
     w.execute(`Knows.run('${command}', '${opt}')`);
@@ -198,3 +198,4 @@ function genDataHtmlUrl(content){
 //
 //util.inherits(newTransparentWindow, events.EventEmitter);
 //exports.newTransparentWindow = newTransparentWindow;
+

@@ -146,7 +146,10 @@ function handleOpenButton() {
   });
 }
 
+saveCodeOverride = false;
 function handleSaveButton() {
+  if(saveCodeOverride)
+    return saveCodeOverride();
   if (fileEntry && hasWriteAccess) {
     writeEditorToFile(fileEntry);
   } else {
@@ -224,7 +227,8 @@ function initContextMenu() {
 _currentEditorHeight = 0;
 
 scrollPosLimit = function (tryPos) {
-  return _.sortBy([(screen.availTop - _currentEditorHeight + 50), tryPos, 1000])[1];
+  const posLimits = [(screen.availTop - _currentEditorHeight + 50), tryPos, screen.availHeight- 50];
+  return _.sortBy(posLimits)[1];
 }
 onload = function () {
 
@@ -326,31 +330,39 @@ _scrl1 = function (e) {
 }
 wheelBuffer = 0;
 
-_scrl = function (e) {
-  let TOP = 37+screen.availTop;
+_scrl = (insideScrollPriority=false)=>function (e) {
+  const _gap = 60;
+  const TOP = 37 + screen.availTop;
 
   var el = e.currentTarget;
   //console.log((e.wheelDeltaY < 0) && ((el.offsetTop + window.screenTop)<60))
   //console.log((el.scrollHeight - el.scrollTop - el.offsetHeight))
   //console.log([composite.scrollHeight, composite.scrollTop, composite.offsetHeight , composite.offsetTop ,screenTop, document.body.offsetHeight])
   //console.log(composite.offsetHeight + composite.offsetTop + screenTop - screen.height)
-  
+
+  const L_1080 = Math.min(window.outerHeight / 2 | 0, 1080);
 
   if (e.wheelDeltaY == 0) {
     e.stopImmediatePropagation();
     return false;
   } else if ((e.wheelDeltaY < 0)
-    && ((el.offsetTop + window.screenTop) < TOP)
+    && (insideScrollPriority
+          || ((el.offsetTop + window.screenTop) < TOP)
+          || (L_1080 < (window.screenTop + window.outerHeight - _gap)))
     && (el.scrollHeight - el.scrollTop - el.offsetHeight) > 0) { //up
 
-//         console.log('up')
+        //console.log('up', el.offsetTop)
     e.stopImmediatePropagation();
     return true;
   } else if ((e.wheelDeltaY >= 0)
-    && (screen.height - (el.offsetHeight + el.offsetTop + 23+window.screenTop-screen.availTop)) < 60
+    && (insideScrollPriority
+          || (screen.height - (el.offsetHeight + el.offsetTop + window.screenTop)) < 60
+      || (L_1080 > (window.screenTop + window.outerHeight + _gap)))
+      && (window.outerHeight + window.screenTop + _gap) > 0
     && (el.scrollTop > 0)) { //down
+    // && (screen.height - (el.offsetHeight + el.offsetTop + 23+window.screenTop-screen.availTop)) < 60
 
-//         console.log('down')
+        //console.log('down', el.scrollTop)
     e.stopImmediatePropagation();
     return true;
   }
@@ -387,7 +399,8 @@ _sy =function () {
 
   if (resultsHeight >= 1000) {
     resultsHeight = 1000;
-    results.onmousewheel = _scrl;
+    results.onmousewheel = _scrl(!true);
+    results.style.maxHeight = '1000px';
 
   } else {
     results.onmousewheel = false;
@@ -395,10 +408,10 @@ _sy =function () {
 
   //console.log('si senior', composite.offsetHeight)
 
-  if (composite.offsetHeight >= 2500) {
-    composite_wrap.style.maxHeight = '900px';
+  if (composite.offsetHeight >= 750) {
+    composite_wrap.style.maxHeight = '750px';
     //resultsHeight = 200;
-    composite_wrap.onmousewheel = _scrl;
+    composite_wrap.onmousewheel = _scrl(true);
 
   } else {
     composite_wrap.style.maxHeight = 'none';

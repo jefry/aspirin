@@ -44,22 +44,21 @@ class Dno {
       .exec((err, doc)=> err ? reject(err) : resolve(doc));
     }))
   }
-  
-  run (key, opt) {
+
+  run(key, runOptions) {
     return this.findOne({key})
-    .then(doc=>eval(doc.source))
+        .then(doc => eval(doc.source))
   }
   
   save (key, val) {
     let k = {key};
     let doc = {key, source: val};
-
-    function onUpdate(err, doc) {
-      //justShowResult(van_dump(doc.source))
-    }
-
-    this.db.update(k, doc, {upsert: true}, onUpdate);
+    const db = this.db;
+    return new Promise((resolve => {
+      db.update(k, doc, {upsert: true}, resolve);
+    }))
   };
+
   rawData (){
     return this.db.getAllData();
   }

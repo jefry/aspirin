@@ -10,8 +10,8 @@ function calcPosition(bounds) {
 }
 
 Toolbar.openWindow = function () {
-  createMin();
-
+  // createMin();
+  createEditor();
 };
 
 Toolbar.createMatrix = function () {
@@ -29,25 +29,8 @@ Toolbar.createKnows = function () {
   }, true);
 };
 
-Toolbar.listKnows = function () {
-  var dw, name;
-  name = 'listknows';
-  dw = giveWindow(name);
-  dw.execute(`Knows.run('${name}')`)
-  dw.object.setBounds({
-    "x": 1160,
-    "y": 30,
-    "width": 150,
-    "height": 275
-  }, true);
-};
-
-Toolbar.showAppDir = function () {
-  Knows.run('showAppDir')
-};
 
 Toolbar.addtool = 1111;
-
 
 Knows.run('toolbar_scroll_handler');
 
@@ -66,3 +49,5 @@ Person = (function () {
 })();
 
 module.exports = Toolbar;
+
+
