@@ -19,18 +19,41 @@ if (!JSON.parse(localStorage.Knows)[1] || !JSON.parse(localStorage.Knows)[1].sou
   currentKnows(dob, 1)
 }
 
+var _forceJKid = Object.fromEntries([...(new URL(document.location).searchParams)])?.asLocalKnows || null;
+console.log(window.location.href, _forceJKid)
+var _forceJKrender = () => setTimeout(()=>(document.querySelector('#update span').innerText = _forceJKid), 10);
+if (_forceJKid)
+  _forceJKrender();
+var jGoKid = (id)=>window.location = document.location.origin+document.location.pathname+(id?'?asLocalKnows='+id:'');
+
 var justData = currentKnows();
 
-function currentKnows(data, id) {
-  id = id || cw.id;
+function just_getKnowById(id) {
+  const dk = JSON.parse(localStorage.Knows);
+  id = id || _forceJKid || cw.id;
+
+  console.log(id);
+
+  return dk[id];
+}
+
+function currentKnows(data, id, clear=false) {
+  id = id || _forceJKid || cw.id;
 
   var dk = JSON.parse(localStorage.Knows);
-  if (data) {
+  if(clear){
+    delete dk[id];
+    localStorage.Knows = JSON.stringify(dk);
+
+  }else if (data && data.sourceText ) {
     dk[id] = data;
     localStorage.Knows = JSON.stringify(dk);
   }
 
-  return dk[cw.id] || {};
+  let obj = dk[id];
+  if (!obj || typeof obj !== "object")
+    obj = {};
+  return obj;
 }
 
 
@@ -57,7 +80,7 @@ just.syncOptions = function (data) {
 };
 
 just.options = just.syncOptions();
-
+just.options.isLocalSaveActive = false;
 
 just.set = function (name, func) {
   just.compile(func, name);
@@ -329,15 +352,109 @@ function justRestore(el) {
 
 }
 
-function justUpdate(el) {
+function just_storeCode(id) {
+  id = id || _forceJKid || cw.id;
+  var ed = editor.getValue();
+  const jD = just_getKnowById(id) || {};
+  if (ed.trim()) {
+    jD.sourceText = ed;
+    currentKnows(jD, id);
+  }
+}
+
+function handleLocalSaveBtn(el, {isInConflict} = {}) {
+  if (isInConflict) {
+    el.classList.toggle('btn-default', false)
+    el.classList.toggle('btn-primary', false)
+    el.classList.toggle('btn-negative', true)
+  } else {
+    let lsa = just.options.isLocalSaveActive;
+    el.classList.toggle('btn-default', !lsa)
+    el.classList.toggle('btn-primary', lsa)
+    el.classList.toggle('btn-negative', false)
+  }
+}
+
+let inConflict = 0;
+
+function setInConflict(isInConflict = 0) {
+  inConflict = isInConflict;
+  handleLocalSaveBtn(document.getElementById('update'), {isInConflict});
+
+
+}
+
+function justUpdate(el, isManual) {
+  _forceJKrender();
+  if (isManual) {
+    if(inConflict){
+      if(inConflict === 1){
+        alert('Last alert! You have code collision! Make sure that it fixed and Press one more time to apply changes!');
+        inConflict = 2;
+      }else if(inConflict === 2) {
+        setInConflict(0);
+        just_storeCode();
+        alert('Local Code updated')
+      }
+      return;
+    }
+
+    if (!just.options.isLocalSaveActive) {
+      const knw = just_getKnowById() || {};
+      let lc = knw && knw.sourceText || '';
+      let cc = editor.getValue();
+
+      jlc = lc;
+      jcc = cc;
+
+      just.options.isLocalSaveActive = !just.options.isLocalSaveActive;
+      handleLocalSaveBtn(el);
+      just.syncOptions(just.options);
+
+      //no current
+      if (lc.trim() && !cc.trim()) {
+        editor.setValue(lc);
+        return;
+      }
+      //no local
+      if (!lc.trim() && cc.trim()) {
+        just_storeCode()
+        return;
+      }
+
+      if (cc === lc) return;
+
+      if (lc.trim()) {
+        alert('Merge conflict: codes will be concatenated, local first, editor second');
+        console.log('MERGE CODES', cc, '----', lc)
+        setInConflict(1);
+        const text = '//LOCAL CODE\n/*\n' + lc + '\n/**/\n//CURRENT CODE\n\n' + cc;
+        editor.setValue(text);
+        return;
+      }
+
+      return;
+    }
+
+    just.options.isLocalSaveActive = !just.options.isLocalSaveActive;
+    handleLocalSaveBtn(el);
+    just.syncOptions(just.options);
+  }
+
+  if (!just.options.isLocalSaveActive)
+    return;
 
   var ed = editor.getValue();
 
   if (ed.trim()) {
     justData.sourceText = ed;
   }
+  const jd = currentKnows(justData);
 
-  editor.setValue(currentKnows(justData).sourceText);
+  const text = jd.sourceText && jd.sourceText;
+  console.log('aaaaa', _forceJKid)
+  if (text)
+    editor.setValue(text);
 }
 
 function justMoveUpwin(e, db) { // from down window

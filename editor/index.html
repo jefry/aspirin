@@ -28,7 +28,12 @@
         .CodeMirror-gutter-wrapper .CodeMirror-foldgutter-folded {
           /*z-index: 1000000;         */
           color: #999;
-        }    
+        }
+        .CodeMirror-hints {
+            max-height: 90vh;
+            bottom: 0;
+            margin-top: -2rem;
+        }
     </style>
     <link rel="stylesheet" href="../styles/photon.css">
     <link rel="stylesheet" href="style.css">
@@ -95,17 +100,19 @@
             <button id="wsx" class="btn btn-mini btn-primary" onclick="just.run('clr');">
                 <span class="icon icon-cc-zero"></span>
             </button>
-            <button id="update" class="btn btn-mini btn-default" onclick="justUpdate(this)">
-                <span class="icon icon-magnet icon-text">  </span>
+            <button id="update" class="btn btn-mini btn-default" title="AutoSave code to localStorage"
+                    onclick="justUpdate(this, true)">
+                <span class="icon icon-magnet icon-text"> - </span>
             </button>
             <button class="btn btn-mini btn-positive" onclick="justInfo(this)">
                 <span class="icon icon-window icon-text"></span>
-                <span id="wid" class="icon icon-text"></span>
+
             </button>
             <button class="btn btn-mini " onclick="runFile(this)">
                 <span class="icon icon-traffic-cone">  </span>
                 <span id="title"></span>
             </button>
+            <span id="wid" class=""></span>
             <button id="isotop" class="btn btn-mini btn-isotop "
                     onclick="var b_isotop = !cw.isAlwaysOnTop();cw.setAlwaysOnTop(b_isotop);this.classList.toggle('active',b_isotop);">
                 <span class="icon icon-eye"></span>

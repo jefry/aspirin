@@ -41,6 +41,7 @@
     "stylus": "^0.54.5",
     "tsv": "^0.2.0",
     "underscore": "^1.8.3",
+    "underscore.string": "^3.3.5",
     "webmonkeys": "^1.6.1"
   },
   "devDependencies": {

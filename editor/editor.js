@@ -1,5 +1,5 @@
 var CodeMirror = require('codemirror');
-
+var _levenshtein = require("underscore.string/levenshtein");
 require('codemirror/addon/edit/matchbrackets')
 require('codemirror/addon/comment/comment')
 require('codemirror/addon/comment/continuecomment')
@@ -172,13 +172,56 @@ function handleRunButton() {
   syncSizeLines();
 }
 
+let cpInHt;
+let pleaseCheck = 0;
+
+function saveCodeLocal(code) {
+  if (just.options.isLocalSaveActive) {
+    if (!cpInHt)
+      cpInHt = document.getElementById('update').innerHTML;
+    const knw = just_getKnowById() || {};
+    let lc = knw && knw.sourceText || '';
+
+    let lr = _levenshtein(code, lc);
+    const ratio = lr / code.length;
+
+    if (lr > 0)
+      document.getElementById('update').innerHTML = cpInHt + (ratio*100|0)+'%('+lr+')';//'∆'+
+    else
+      document.getElementById('update').innerHTML = cpInHt;
+
+
+    if(!pleaseCheck && ratio>0.3)
+      pleaseCheck = 1;//2
+
+    if(pleaseCheck===3){
+      //alert(122)
+    } else if(pleaseCheck===2){
+      alert('Warning! More 30% of Code was changed! Please check before local_save! Next run(save) will apply as is!');
+      pleaseCheck = 1;
+    } else{
+      just_storeCode();
+      pleaseCheck = 0
+    }
+  }
+}
+
+function markLocalCodeAsWorking(code, isWorking) {
+  console.info('Latest run code is working?:',isWorking)
+  //just.options.isBarActive = isBarActive;
+  //just.syncOptions(just.options);
+
+}
+
 var isresultHTML = false;
 function runCode(code) {
   isCallShowResult = false;
+  saveCodeLocal(code);
   try {
     var result = evalFN(code);
     //document.querySelector('header').style.background = 'rgba(41, 120, 177, 0.5)';
     document.querySelector('header').style.background = 'rgba(84, 193, 23, 0.7)';
+    markLocalCodeAsWorking(code, true);
     if (!isCallShowResult) {
       if (result && typeof result == "object") {
         justShowResult(JSON.stringify(result, null, 2));
@@ -188,6 +231,7 @@ function runCode(code) {
     }
 
   } catch (e) {
+    markLocalCodeAsWorking(code, false);
     document.querySelector('header').style.background = 'rgba(225, 60, 47, 1)';
 
     justShowResult(`<span class="evalerror"> ${e.name}: ${e.message} ${e.stack}</span>`, true);
@@ -235,6 +279,7 @@ onload = function () {
   document.getElementById("wid").innerHTML = '&nbsp;' + remote.getCurrentWindow().id;
 
   document.body.onmousewheel = function (me) {
+    if (me.toElement.classList.contains('CodeMirror-hint')) return;
     var p = cw.getPosition();
     var sp = me.wheelDeltaY / 3 | 0;
     cw.setPosition(p[0], scrollPosLimit(p[1] + sp));
@@ -293,7 +338,13 @@ onload = function () {
     justToggleBar('#just');
   }
 
+  if (just.options.isLocalSaveActive) {
+    handleLocalSaveBtn(document.getElementById('update'));
+    justUpdate();
+  }
+
   // onChosenFileToOpen(remote.app.getAppPath()+'/experiments/testRun3.js');
+
   newFile();
   editor.on("update", function () {
     // console.log(arguments)

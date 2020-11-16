@@ -61,7 +61,7 @@ app.on 'ready', ->
   we.open()
 #  we.toggleDevTools()
   #we.move 'bottomRight'
-  we.execute 'justUpdate()'
+  #we.execute 'justUpdate()'
   #
   # wb = windowManager.createNew('bozon', 'Bozon', 'file://' + __dirname + '/bozon/index.html')
   # wb.open();

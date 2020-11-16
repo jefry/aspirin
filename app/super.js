@@ -152,8 +152,9 @@ function createMin(name) {
 function createEditor(name, command, opt) {
   name = name || 'editor_' + remote.app._enm++;
   var w = windowManager.get(name)
-  if (!w)
+  if (!w) {
     w = windowManager.createNew(name, 'Editor', _wpaths.editor, 'editor');
+  }
   w.open();
   if (command)
     w.execute(`Knows.run('${command}', '${opt}')`);
