@@ -3,7 +3,8 @@
 *.tmlanguage.cache
 *.tmPreferences.cache
 *.stTheme.cache
-
+plugin_packages/
+TEMP_111/
 # workspace files are user-specific
 *.sublime-workspace
 

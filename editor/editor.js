@@ -42,7 +42,7 @@ CodeMirror.keyMap.macDefault["Cmd-D"] = function(cm){
 /*//START BLOCK: ADD BLOCKCOMMENT KEY COMMAND
 CodeMirror.keyMap.macDefault["Cmd-/"] = function(cm){
     var sl = cm.doc.listSelections()[0];
-    if (sl.anchor.line == sl.head.line)  
+    if (sl.anchor.line == sl.head.line)
     cm.doc.blockComment(sl.anchor, sl.head);
 
     // get a position of a current cursor in a current cell
@@ -165,6 +165,7 @@ function handleSaveButton() {
 
 runCodeOverride = false;
 evalFN = eval;
+// evalFN = async function(src){return await eval(src)};
 function handleRunButton() {
   if (runCodeOverride)
     return runCodeOverride();
@@ -206,35 +207,57 @@ function saveCodeLocal(code) {
   }
 }
 
+const url = [
+  `${window.location.origin}/gun`,
+  'http://core.rainerg.net:5055/gun'
+];
+let _gun;
+
+const getGun = () => {
+  if (!_gun) _gun = require("gun/gun")(url);
+  return _gun;
+}
+
+
+
 function markLocalCodeAsWorking(code, isWorking) {
-  console.info('Latest run code is working?:',isWorking)
+  //console.info('Latest run code is working?:',isWorking)
   //just.options.isBarActive = isBarActive;
   //just.syncOptions(just.options);
 
 }
-
+var addReturn = (code)=>{
+  const cc = code.trimRight().split('\n')
+  cc[cc.length-1] = 'return ' + cc[cc.length-1]
+  const text = cc.join('\n')
+  // console.log("CC", text)
+  return text
+}
 var isresultHTML = false;
-function runCode(code) {
+async function runCode(code) {
   isCallShowResult = false;
   saveCodeLocal(code);
   try {
-    var result = evalFN(code);
+    var result = await evalFN(`(async function(){\n${addReturn(code)}\n})() `);
+    // var result = await evalFN(code);
     //document.querySelector('header').style.background = 'rgba(41, 120, 177, 0.5)';
     document.querySelector('header').style.background = 'rgba(84, 193, 23, 0.7)';
-    markLocalCodeAsWorking(code, true);
+    //markLocalCodeAsWorking(code, true);
     if (!isCallShowResult) {
       if (result && typeof result == "object") {
-        justShowResult(JSON.stringify(result, null, 2));
+        justShowResult(JSON.stringify(result, null, 2), isresultHTML);
       } else {
         justShowResult(result, isresultHTML);
       }
     }
 
   } catch (e) {
-    markLocalCodeAsWorking(code, false);
+    //markLocalCodeAsWorking(code, false);
     document.querySelector('header').style.background = 'rgba(225, 60, 47, 1)';
 
-    justShowResult(`<span class="evalerror"> ${e.name}: ${e.message} ${e.stack}</span>`, true);
+    //${e.name}: ${e.message}
+    let msg = `<span class="evalerror">${escapeHtml_byDiv(e.stack)}</span>`;
+    justShowResult(msg, true);
   }
 
 
@@ -245,20 +268,23 @@ function initContextMenu() {
   menu.append(new MenuItem({
     label: 'Copy',
     click: function () {
-      clipboard.writeText(editor.getSelection(), 'copy');
+      cw.webContents.copy();
+      //clipboard.writeText(editor.getSelection(), 'copy');
     }
   }));
   menu.append(new MenuItem({
     label: 'Cut',
     click: function () {
-      clipboard.writeText(editor.getSelection(), 'copy');
-      editor.replaceSelection('');
+      cw.webContents.cut();
+      //clipboard.writeText(editor.getSelection(), 'copy');
+      //editor.replaceSelection('');
     }
   }));
   menu.append(new MenuItem({
     label: 'Paste',
     click: function () {
-      editor.replaceSelection(clipboard.readText('copy'));
+      cw.webContents.paste();
+      //editor.replaceSelection(clipboard.readText('copy'));
     }
   }));
 

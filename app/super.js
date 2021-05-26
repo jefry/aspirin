@@ -22,6 +22,23 @@ var colf = require('columnify');
 var require6 = require('esm')(module)
 
 //UTILS
+function escapeHtml_byRepl(unsafe) {
+  return unsafe
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+}
+
+function escapeHtml_byDiv(unsafeText) {
+  let div = document.createElement('div');
+  div.innerText = unsafeText;
+  return div.innerHTML;
+}
+let group_toObj = fns => arr => fns.reduce((m, f) => ({...m, [f]: arr.map(f),}), {});
+let group_toArr = fns => arr => arr.map(v => fns.reduce((m, f) => ({...m, [f]: f(v),}), {}));
+
 
 function van_dump(sval) {
   //arguments

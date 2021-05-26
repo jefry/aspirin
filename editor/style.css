@@ -67,6 +67,10 @@ button {
     border-left: #91a327 1px solid;
 }
 
+#result * {
+    user-select: text;
+}
+
 #result tt {
     position: fixed;
     background: #333;
@@ -149,6 +153,10 @@ button {
     background: rgba(77, 77, 77, 0.8);
     /*background: rgba(41, 120, 177, 0.5);*/
     color: #dedede;
+}
+
+.toolbar.bar.result * {
+    user-select: text;
 }
 
 .meta-section {

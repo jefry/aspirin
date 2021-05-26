@@ -31,9 +31,6 @@ var justData = currentKnows();
 function just_getKnowById(id) {
   const dk = JSON.parse(localStorage.Knows);
   id = id || _forceJKid || cw.id;
-
-  console.log(id);
-
   return dk[id];
 }
 
@@ -243,7 +240,7 @@ var customFunk = function (from, code) {
     document.querySelector('header').style.background = 'rgba(84, 193, 23, 0.7)';
     if (!isCallShowResult) {
       if (result && typeof result == "object") {
-        justShowResult(JSON.stringify(result, null, 2));
+        justShowResult(JSON.stringify(result, null, 2), isresultHTML);
       } else {
         justShowResult(result, isresultHTML);
       }
@@ -268,9 +265,10 @@ var isCallShowResult = false;
 function justShowResult(result, isHTML) {
   isCallShowResult = true;
   var resEl = document.getElementById('result');
-  isHTML
-    ? resEl.innerHTML = result
-    : resEl.innerText = result;
+  if (isHTML)
+    resEl.innerHTML = result;
+  else
+    resEl.textContent = result;
 
   syncSizeLines();
   return result;

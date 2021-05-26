@@ -1,0 +1,237 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+svg
+{
+	z-index: 100;
+}
+:root
+{
+	--padding: 10vmin;
+	--color-background: #D0CBC7;
+	
+	--font-size-large: 8vw;
+	--font-size-medium: 4vw;
+	--font-size-normal: 2vw;
+	
+	@media only screen and (min-width: 800px) {
+		--font-size-large: 64px;
+		--font-size-medium: 32px;
+		--font-size-normal: 16px;
+	}
+	
+	@media only screen and (max-width: 500px) {
+		--font-size-large: 40px;
+		--font-size-medium: 20px;
+		--font-size-normal: 14px;
+	}
+}
+
+a
+{
+	color: white;
+}
+
+ul
+{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+li
+{
+	margin-top: 10px;
+}
+
+html, body
+{
+	margin: 0;
+	// overflow: hidden;
+	min-height: 100%;
+	min-width: 100%;
+	font-family: 'Libre Baskerville', serif;
+	background-color: var(--color-background);
+	font-weight: 400;
+	font-size: var(--font-size-normal);
+	overflow-x: hidden;
+}
+
+canvas
+{
+	position: fixed;
+	z-index: 10;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	pointer-events: none;
+	
+	visibility: hidden;
+	opacity: 0;
+}
+
+
+.solid
+{
+	clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.wireframe
+{
+	clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+}
+
+.content
+{
+	position: relative;
+	z-index: 1;
+	
+	
+	.trigger
+	{
+		position: absolute;
+		top: 0;
+		height: 100%;
+	}
+	
+	.section
+	{
+		position: relative;
+		padding: var(--padding);
+		--pad2: calc(var(--padding) * 2);
+		width: calc(100vw - var(--pad2));
+		height: calc(100vh - var(--pad2));
+		// min-height: 400px;
+		margin: 0 auto;
+		z-index: 2;
+		
+		&.dark
+		{
+			color: white;
+			background-color: black;
+		}
+		
+		&.right
+		{
+			text-align: right;
+		}
+		
+		
+	}
+	
+	.blueprint
+	{
+		position: relative;
+		background-color:#131C2A;
+		background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
+		linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+		background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
+		background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px;
+		background-attachment: fixed;
+		
+		svg
+		{
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			stroke: white;
+			pointer-events: none;
+			visibility: hidden;
+		}
+		
+		.dark
+		{
+			background-color: transparent;
+		}
+	}
+	
+	.ground-container
+	{
+		position: relative;
+		overflow: hidden;
+		// perspective: 2px;
+		
+		.parallax
+		{
+			position:absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: -100px;
+			background-repeat: no-repeat;
+			background-position: top center; 
+  			background-size: cover;
+			transform-origin: top center;
+		}
+		
+		.ground
+		{
+			z-index: -1;
+			background-image: url("https://assets.codepen.io/557388/background-reduced.jpg"); 	
+		}
+		
+		.clouds
+		{
+			z-index: 2;
+			background-image: url("https://assets.codepen.io/557388/clouds.png");
+		}
+	}
+	
+	
+	.scroll-cta, .credits
+	{
+		position: absolute;
+		bottom: var(--padding);
+	}	
+	
+	.scroll-cta
+	{
+		font-size: var(--font-size-medium);
+		opacity: 0;
+	}
+	
+	.sunset
+	{
+		background: url("https://assets.codepen.io/557388/sunset-reduced.jpg") no-repeat top center; 
+  		background-size: cover;
+		transform-origin: top center;
+	}
+	
+	h1, h2
+	{
+		font-size: var(--font-size-large);
+		margin: 0vmin 0 2vmin 0 ;
+		font-weight: 700;
+		display: inline;
+	}
+	
+	h3,
+	{
+		font-size: var(--font-size-medium);
+		font-weight: 400;
+		margin: 0;
+	}
+	
+	.end h2
+	{
+		margin-bottom: 50vh;
+	}
+	
+	.loading
+	{
+		position: fixed;
+		width: 100vw;
+		height: 100vh;
+		top: 0;
+		left: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: var(--font-size-medium);
+	}
+	
+}
+
