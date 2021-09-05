@@ -2,6 +2,7 @@ html, body {
     padding: 0;
     margin: 0;
 }
+
 body {
     background: rgba(37, 37, 37, 0.71);
     color: #ddd;
@@ -37,3 +38,15 @@ body {
     padding-left: 1px;
 }
 
+.extra-msg {
+    position: absolute;
+    bottom: 0px;
+    padding-left: 2px;
+    background: #c6152f;
+    min-width: 100%;
+    line-height: 1em;
+    word-break: break-all;
+    letter-spacing: -0.1em;
+    text-rendering: geometricPrecision;
+    font-size: 11px;
+}

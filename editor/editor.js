@@ -208,7 +208,8 @@ function saveCodeLocal(code) {
 }
 
 const url = [
-  `${window.location.origin}/gun`,
+  // `${window.location.origin}/gun`,
+  "http://localhost:5050/gun",
   'http://core.rainerg.net:5055/gun'
 ];
 let _gun;
@@ -226,13 +227,17 @@ function markLocalCodeAsWorking(code, isWorking) {
   //just.syncOptions(just.options);
 
 }
-var addReturn = (code)=>{
-  const cc = code.trimRight().split('\n')
-  cc[cc.length-1] = 'return ' + cc[cc.length-1]
-  const text = cc.join('\n')
-  // console.log("CC", text)
-  return text
+var addReturn = (code, n = 100) => {
+  const ins = (text, str, pos)=>text.substring(0, pos) + str + text.substring(pos);
+  const re = /^[\s\w]*\w/;
+  let li = code.length;
+  while (n-- > 0 && (li = code.lastIndexOf("\n", li - 1)) >= 0) {
+    const isOK = code.substr(li + 1).search(re) === 0;
+    if (isOK)
+      return ins(code, "return ", li + 1);
+  }
 }
+
 var isresultHTML = false;
 async function runCode(code) {
   isCallShowResult = false;

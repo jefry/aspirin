@@ -366,3 +366,16 @@ button {
 .info label {
     font-weight: bold;
 }
+
+.extra-msg {
+    position: absolute;
+    top: 25px;
+    right: 3px;
+    padding: 0 2px;
+    background: #c6152f;
+    line-height: 1em;
+    word-break: break-all;
+    letter-spacing: -0.1em;
+    text-rendering: geometricPrecision;
+    font-size: 11px;
+}

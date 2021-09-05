@@ -15,6 +15,7 @@
     "frame": false,
     "hasShadow": false,
     "webPreferences": {
+      "webviewTag": true,
       "webSecurity": false,
       "nodeIntegration": true,
       "scrollBounce": true,
@@ -40,6 +41,7 @@
     "frame": false,
     "hasShadow": false,
     "webPreferences": {
+      "webviewTag": true,
       "webSecurity": false,
       "nodeIntegration": true,
       "scrollBounce": true,
@@ -51,7 +53,7 @@
   },
   "toolbarWindowSetup": {
     "width": 60,
-    "height": 421,
+    "height": 480,
     "backgroundColor": "#00FFFFFF",
     "transparent": true,
     "acceptFirstMouse": true,
@@ -89,6 +91,7 @@
     "frame": false,
     "hasShadow": false,
     "webPreferences": {
+      "webviewTag": true,
       "webSecurity": false,
       "nodeIntegration": true,
       "experimental-features": true,

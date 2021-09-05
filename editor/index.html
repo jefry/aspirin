@@ -38,9 +38,36 @@
     <link rel="stylesheet" href="../styles/photon.css">
     <link rel="stylesheet" href="style.css">
 
-    <script type="text/javascript" src="../app/super.js"></script>
+    <script src="../app/super.js"></script>
     <script src="just.js"></script>
+    
+    <!-- <script>
+        let supModVar;
+        let myVar12 = "fomindex-asd";
+        let asdfg = "fromindex";
+        const asdfg222 = "constfromindex222";
 
+        let var222 = "fromindex@222";
+    </script> -->
+    <!-- <script type="module" src="super_module.js"></script> -->
+    <!-- <script type="module">
+        import * as sup_mod from "./super_module.js";
+        console.log("INDEX->sup_mod", sup_mod);
+        supModVar = sup_mod;
+        var var111 = "fromindex@111";
+    </script>
+     -->
+
+    <script>
+        let superOptions = { a: "A" };
+    </script>
+    <script type="module">
+        import * as sup_mod from "./super_module.js";
+        console.log("INDEX->sup_mod", sup_mod);
+        window.supModVar = sup_mod;
+        // supModVar.test1();
+    </script>
+    
     <!-- <script src="../node_modules/codemirror/mode/css/css.js"></script> -->
     <!-- <script src="../node_modules/codemirror/mode/xml/xml.js"></script> -->
     <!-- <script src="../node_modules/codemirror/mode/javascript/javascript.js"></script> -->
@@ -49,6 +76,8 @@
     <!--<script src="zepto.min.js"></script>-->
 
     <script src="editor.js"></script>
+    <!-- <script src="../node_modules/gun/gun.js"></script>
+    <script src="../node_modules/gun/sea.js"></script> -->
 
 </head>
 <body>
@@ -118,7 +147,7 @@
                 <span class="icon icon-eye"></span>
             </button>
         </div>
-
+        <div class="extra-msg"></div>
     </div>
 </header>
 <div id="main">

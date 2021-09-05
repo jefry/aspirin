@@ -18,13 +18,21 @@ if (!JSON.parse(localStorage.Knows)[1] || !JSON.parse(localStorage.Knows)[1].sou
   }
   currentKnows(dob, 1)
 }
+var windowQueryParams = Object.fromEntries([...(new URL(document.location).searchParams)]);
+var _forceJKid = windowQueryParams?.asLocalKnows || null;
 
-var _forceJKid = Object.fromEntries([...(new URL(document.location).searchParams)])?.asLocalKnows || null;
-console.log(window.location.href, _forceJKid)
+//console.log(window.location.href, windowQueryParams, _forceJKid)
+
 var _forceJKrender = () => setTimeout(()=>(document.querySelector('#update span').innerText = _forceJKid), 10);
 if (_forceJKid)
   _forceJKrender();
 var jGoKid = (id)=>window.location = document.location.origin+document.location.pathname+(id?'?asLocalKnows='+id:'');
+
+if (windowQueryParams.asMatrixFn) {
+  setTimeout(
+    () => DNO.open('dno').run('openMatrixInEditor', { key: windowQueryParams.asMatrixFn }),
+    50);
+}
 
 var justData = currentKnows();
 
@@ -172,7 +180,6 @@ meta.render = function () {
   DNO
     .open('zerolist')
     .run('zero')
-    .then(v=>$('#meta_toolbar').html(v));
 };
 
 //-----------

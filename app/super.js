@@ -40,9 +40,19 @@ let group_toObj = fns => arr => fns.reduce((m, f) => ({...m, [f]: arr.map(f),}),
 let group_toArr = fns => arr => arr.map(v => fns.reduce((m, f) => ({...m, [f]: f(v),}), {}));
 
 
-function van_dump(sval) {
-  //arguments
-  return JSON.stringify(sval, null, 2);
+function van_dump(sval, circular_mark="") {
+  var cache = [];
+  return JSON.stringify(sval, (key, value) => {
+    if (typeof value === 'object' && value !== null) {
+      // Duplicate reference found, discard key
+      if (cache.includes(value)) return circular_mark;
+
+      // Store value in our collection
+      cache.push(value);
+    }
+    return value;
+  }, 2);
+  cache = null;
 }
 
 var _cur_data;
@@ -168,9 +178,12 @@ function createMin(name) {
 
 function createEditor(name, command, opt) {
   name = name || 'editor_' + remote.app._enm++;
+  var epath = (opt?.uriQuery)
+    ? _wpaths.editor + opt.uriQuery
+    : _wpaths.editor;
   var w = windowManager.get(name)
   if (!w) {
-    w = windowManager.createNew(name, 'Editor', _wpaths.editor, 'editor');
+    w = windowManager.createNew(name, 'Editor', epath, 'editor');
   }
   w.open();
   if (command)

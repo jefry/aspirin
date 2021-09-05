@@ -47,15 +47,16 @@
         .wrap {
             overflow: scroll;
             position: relative;
+            top: 20px;
             width: 100%;
-            height: 100%;
+            height: calc(100% - 20px);
         }
 
         .wrap .inner {
             position: absolute;
             min-width: 100%;
             min-height: 100%;
-            padding-top: 20px;
+            /* width: 100%; */
         }
 
         /*text-shadow: 1px 1px 1px #222;*/
@@ -122,6 +123,7 @@
     <span id="isText" class="active-hid">[H]</span>
     <span class="active-hid" onclick="document.getElementById('content').classList.toggle('lettercell')">[√]</span>
     <span class="param">-</span>
+    <span class="extra-msg"></span>
 </header>
 <div class="wrap">
     <div id="content" class="inner">œ∑´®†¥åß∂ƒ</div>
